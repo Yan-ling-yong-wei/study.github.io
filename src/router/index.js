@@ -1,45 +1,45 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home/Home.vue'
-
+import Vue from "vue"
+import VueRouter from "vue-router"
+import Home from "../views/Home/Home.vue"
+import myRoutes from "../views/My/router"
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/',
-    redirect:'/home'
+    path: "/",
+    redirect: "/home",
   },
   {
-    path:'/main',
-    name:'main',
-    component:()=>import('../views/Home/main.vue'),
-    children:[
+    path: "/main",
+    name: "main",
+    component: () => import("../views/Home/main.vue"),
+    children: [
       {
-        path:'/home',
-        name:'home',
-        component:Home,
+        path: "/home",
+        name: "home",
+        component: Home,
       },
       {
-        path:'/course',
-        name:'course',
-        component:()=>import('../views/Home/Course.vue')
+        path: "/course",
+        name: "course",
+        component: () => import("../views/Home/Course.vue"),
       },
       {
-        path:'/record',
-        name:'record',
-        component:()=>import('../views/Home/Record.vue'),
+        path: "/record",
+        name: "record",
+        component: () => import("../views/Home/Record.vue"),
       },
       {
-        path:'/practice',
-        name:'practice',
-        component:()=>import('../views/Home/Practice.vue'),
+        path: "/practice",
+        name: "practice",
+        component: () => import("../views/Home/Practice.vue"),
       },
       {
-        path:'/my',
-        name:'my',
-        component:()=>import('../views/Home/My.vue'),
+        path: "/my",
+        name: "my",
+        component: () => import("../views/Home/My.vue"),
       },
-    ]
+    ],
   },
   {
     path:'/login',
@@ -50,16 +50,15 @@ const routes = [
     path:'/Register',
     name:'Register',
     component:()=>import('../views/Register/Register')
-  }
-  
+  },
+  ...myRoutes,
 ]
-
 const router = new VueRouter({
-  routes
+  routes,
 })
-const originalPush = VueRouter.prototype.push;
+const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch((err) => err);
-};
+  return originalPush.call(this, location).catch((err) => err)
+}
 
 export default router
