@@ -22,7 +22,7 @@ body,
   height: 100%;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 0.4rem;
@@ -39,6 +39,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
   span {
     display: flex;
     align-items: center;
