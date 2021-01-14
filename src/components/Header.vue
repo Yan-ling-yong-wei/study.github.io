@@ -1,34 +1,65 @@
 <template>
   <div id="header">
-    <h3>特色课</h3>
-    <search theme="outline" size="24" fill="#595959" />
+    <div v-if="back">
+      <left theme="two-tone" size="24" :fill="['#000', '#fff']" @click.native="$router.back()" />
+    </div>
+    <div v-else></div>
+    <div class="tittle">{{ title }}</div>
+    <div v-if="search" class="search">
+      <search theme="outline" size="24" fill="#595959" @click.native="searchClick" />
+    </div>
+    <div v-else></div>
   </div>
 </template>
 <script>
-import { Search  } from "@icon-park/vue";
+import { Search, Left } from "@icon-park/vue"
 export default {
-    components:{
-        Search,
-    }
+  props: {
+    title: {
+      type: String,
+      default: "主页",
+    },
+    back: {
+      type: Boolean,
+      default: false,
+    },
+    search: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  components: {
+    Search,
+    Left,
+  },
 }
 </script>
 <style lang="scss" scoped>
 #header {
   width: 100%;
   height: 0.9rem;
-  h3 {
-    color: #595959;
-    font-size: 0.38rem;
-    position: absolute;
-    left: 50%;
-    line-height: 0.9rem;
-    transform: translateX(-50%);
+  display: flex;
+  padding: 0 0.2rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.36rem;
+  background-color: #fff;
+  .tittle {
+    text-align: center;
   }
-  .i-icon-search {
-    position: absolute;
-    right: 0.2rem;
+  .search {
     display: flex;
-    margin-top: 0.2rem;
+    justify-content: flex-end;
+  }
+  div {
+    height: 100%;
+    width: 33%;
+    line-height: 0.9rem;
+    span {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
   }
 }
 </style>
