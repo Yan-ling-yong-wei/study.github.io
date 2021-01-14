@@ -1,14 +1,16 @@
 <template>
   <div id="header">
     <div v-if="back">
-      <left theme="two-tone" size="24" :fill="['#000', '#fff']" @click.native="$router.back()" />
+      <left theme="two-tone" size="22" :fill="['#000', '#fff']" @click.native="$router.back()" />
     </div>
     <div v-else></div>
     <div class="tittle">{{ title }}</div>
-    <div v-if="search" class="search">
-      <search theme="outline" size="24" fill="#595959" @click.native="searchClick" />
+    <div v-if="right" class="search">
+      <search theme="outline" size="22" fill="#595959" @click.native="$emit('rightClick')" />
     </div>
-    <div v-else></div>
+    <div v-else>
+      <slot/>
+    </div>
   </div>
 </template>
 <script>
@@ -23,7 +25,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    search: {
+    right: {
       type: Boolean,
       default: false,
     },

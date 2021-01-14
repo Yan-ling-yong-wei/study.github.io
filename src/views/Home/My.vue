@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="mine">
-          <div class="my-study item">
+          <div class="my-study item" @click="$router.push('/myStudy')">
             <p class="count">0</p>
             <p class="name">我的特色课</p>
             <p class="note">已购特色课程的学习</p>

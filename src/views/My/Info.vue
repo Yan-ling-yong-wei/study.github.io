@@ -1,23 +1,23 @@
 <template>
   <div class="info">
-    <header-nav back title="个人信息" />
+    <header-nav back title="个人信息" rigth/>
     <ul>
       <li>
-        <span>头像</span><span><img src="../assets/img/avatar.jpg" alt=""/></span>
+        <span>头像</span><span><img src="@/assets/img/avatar.jpg" alt=""/></span>
       </li>
-      <li><span>昵称</span><span></span></li>
-      <li><span>手机号</span><span></span></li>
-      <li><span>性别</span><span></span></li>
-      <li><span>出生日期</span><span></span></li>
-      <li><span>所在城市</span><span></span></li>
-      <li><span>学科</span><span></span></li>
-      <li><span>年级</span><span></span></li>
+      <li><span>昵称</span><span>18538100192</span></li>
+      <li><span>手机号</span><span>185****0192</span></li>
+      <li><span>性别</span><span>保密</span></li>
+      <li><span>出生日期</span><span>1999-02-05</span></li>
+      <li><span>所在城市</span><span>北京，北京市，昌平区</span></li>
+      <li><span>学科</span><span>信息技术</span></li>
+      <li><span>年级</span><span>高三</span></li>
     </ul>
   </div>
 </template>
 
 <script>
-import headerNav from "../components/Header.vue"
+import headerNav from "@/components/Header.vue"
 export default {
   components: { headerNav },
 }
@@ -61,11 +61,16 @@ export default {
         height: 1px;
         background-color: #f5f5f5;
       }
-      span:first-child {
-        font-size: 0.28rem;
+      &:last-child::after {
+        display: none;
       }
+      font-size: 0.28rem;
+
+      // span:first-child {
+      // }
       span:last-child {
         margin-right: 0.5rem;
+        color: #8c8c8c;
         img {
           width: 0.74rem;
           height: 0.74rem;
