@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <router-view />
-    <van-tabbar route>
+    <van-tabbar route style="z-index:none;">
       <van-tabbar-item icon="home-o" to="/home">首页</van-tabbar-item>
       <van-tabbar-item icon="search" to="/course">课程</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="/record">约课记录</van-tabbar-item>
