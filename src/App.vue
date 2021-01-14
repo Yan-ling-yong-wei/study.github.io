@@ -66,13 +66,14 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 1;
   span {
     display: flex;
     align-items: center;
   }
 }
   .image_box_container {
+    z-index: 2;
     width: 100%;
     height: 100%;
     position: absolute;
