@@ -878,6 +878,14 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@icon-park/vue@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@icon-park/vue/-/vue-1.2.1.tgz#e81a89b341b8d6b1656d1c463b4c56c130ce1726"
+  integrity sha512-aXfPv8AhHrVMQFRSp58oU4i3GLjrK4RTff3oTapBUhMXIVTiz5+DG03zdF1FsTgudzSKG1L6RKrVOVLnwsWgQw==
+  dependencies:
+    "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
+    csstype "^3.0.3"
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.npm.taobao.org/@intervolga/optimize-cssnano-plugin/download/@intervolga/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
@@ -1821,6 +1829,13 @@ aws4@^1.8.0:
   version "1.11.0"
   resolved "https://registry.npm.taobao.org/aws4/download/aws4-1.11.0.tgz?cache=0&sync_timestamp=1604101244098&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faws4%2Fdownload%2Faws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha1-1h9G2DslGSUOJ4Ta9bCUeai0HFk=
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 babel-loader@^8.1.0:
   version "8.2.2"
@@ -2938,6 +2953,11 @@ csso@^4.0.2:
   dependencies:
     css-tree "^1.1.2"
 
+csstype@^3.0.3:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.6.tgz#865d0b5833d7d8d40f4e5b8a6d76aea3de4725ef"
+  integrity sha512-+ZAmfyWMT7TiIlzdqJgjMb7S4f1beorDbWbsocyK4RaiqA5RTX3K14bnBWmmA9QEM0gRdsjyyrEmcyga8Zsxmw==
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.npm.taobao.org/currently-unhandled/download/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -3725,10 +3745,10 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.13.1"
-  resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.13.1.tgz?cache=0&sync_timestamp=1607916846877&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
-  integrity sha1-X2m4Ezds7k/QR0o6uoNd8Eq3Y7c=
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
+  integrity sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
 
 for-in@^1.0.2:
   version "1.0.2"
