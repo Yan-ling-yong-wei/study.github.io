@@ -9,21 +9,64 @@
               <h4>年级</h4>
               <div class="tmk-item">
                 <ul>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>初一</li>
+                  <li>初二</li>
+                  <li>初三</li>
+                  <li>高一</li>
+                  <li>高二</li>
                 </ul>
               </div>
             </div>
+            <div class="tm-kind">
+              <h4>学科</h4>
+              <div class="tmk-item">
+                <ul>
+                  <li>语文</li>
+                  <li>数学</li>
+                  <li>英语</li>
+                  <li>物理</li>
+                  <li>化学</li>
+                </ul>
+              </div>
+            </div>
+            <div class="seach-btn">
+              <button>重置</button>
+              <button>确定</button>
+            </div>
           </div>
         </van-dropdown-item>
-        <van-dropdown-item title="筛选" ref="item"></van-dropdown-item>
-        <van-dropdown-item title="筛选" ref="item"></van-dropdown-item>
+        <van-dropdown-item title="排序" ref="item">
+          <div class="list">
+            <ul>
+              <li>综合排序</li>
+              <li>最新</li>
+              <li>最热</li>
+              <li>价格从低到高</li>
+              <li>价格从高到低</li>
+            </ul>
+          </div>
+        </van-dropdown-item>
+        <van-dropdown-item title="筛选" ref="item">
+          <div class="filter-box">
+            <ul>
+              <li>全部</li>
+              <li>大班课</li>
+              <li>小班课</li>
+              <li>公开课</li>
+              <li>点播课</li>
+              <li>面授课</li>
+              <li>音频课</li>
+              <li>系统课</li>
+              <li>图文课</li>
+              <li>会员课</li>
+            </ul>
+          </div>
+        </van-dropdown-item>
       </van-dropdown-menu>
     </div>
     <div class="cont">
       <div class="page">
-        <div class="dv">
+        <div class="dv" v-for="(item,index) in 10" :key="index">
           <h4>李老师16号到22号地理大课堂开课啦</h4>
           <p>
             <time theme="outline" size="24" fill="#595959" />
@@ -40,7 +83,6 @@
             <span class="sp2">免费</span>
           </div>
         </div>
-        <div class="dv"></div>
       </div>
     </div>
   </div>
@@ -67,35 +109,110 @@ export default {
   }
   .parent-box {
     width: 100%;
-    height: 7rem;
+    height: 6.6rem;
+    padding: 0 0.1rem;
     background: white;
     .tm-kind {
       width: 100%;
       height: 2.6rem;
-      background: #eee;
-      border-top: 0.02rem solid #f1f1f1;
+      border-top: 0.01rem solid #f1f1f1;
       padding-left: 0.4rem;
       h4 {
         font-size: 0.26rem;
         padding: 0.3rem 0 0.2rem;
         color: #595959;
       }
-    }
-    .tmk-item {
-      width: 100%;
-      height: 1.7rem;
-      ul {
+      .tmk-item {
         width: 100%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        li {
-          width: 1.4rem;
-          height: 0.6rem;
+        height: 1.7rem;
+        ul {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          align-content: flex-start;
+          li {
+            width: 1.38rem;
+            height: 0.66rem;
+            background: #f5f5f5;
+            border-radius: 0.05rem;
+            margin: 0 0.4rem 0.2rem 0;
+            color: #646464;
+            font-size: 0.3rem;
+            text-align: center;
+            line-height: 0.7rem;
+            &:nth-child(4) {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+    .seach-btn {
+      width: 100%;
+      height: 1.4rem;
+      border-top: 0.01rem solid #f1f1f1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      button {
+        width: 3.4rem;
+        height: 50%;
+        border: none;
+        border-radius: 0.1rem;
+        font-size: 0.3rem;
+        &:nth-child(1) {
+          border: 0.02rem solid #d9d9d9;
           background: white;
-          border-radius: 0.2rem;
-          margin: 0 0.3rem 0.2rem 0;
+        }
+        &:nth-child(2) {
+          background: #eb6100;
+          color: white;
+        }
+      }
+    }
+  }
+  .list {
+    width: 100%;
+    height: 5.2rem;
+    ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      li {
+        width: 100%;
+        line-height: 1rem;
+        flex: 1;
+        border-top: 0.02rem solid #eee;
+        text-align: center;
+        font-size: 0.28rem;
+        color: #595959;
+      }
+    }
+  }
+  .filter-box {
+    width: 100%;
+    height: 3.4rem;
+    padding: 0.2rem 0 0 0.2rem;
+    ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      li {
+        width: 1.38rem;
+        height: 0.66rem;
+        background: #f5f5f5;
+        border-radius: 0.05rem;
+        margin: 0 0.4rem 0.2rem 0;
+        color: #646464;
+        font-size: 0.3rem;
+        text-align: center;
+        line-height: 0.7rem;
+        &:nth-child(4) {
+          margin: 0;
         }
       }
     }
@@ -104,9 +221,11 @@ export default {
     width: 100%;
     height: calc(100% - 1.8rem);
     background: #f0f2f5;
+    overflow: hidden;
     .page {
       width: 100%;
       height: 100%;
+      overflow: scroll;
       display: flex;
       padding: 0.3rem;
       flex-direction: column;
