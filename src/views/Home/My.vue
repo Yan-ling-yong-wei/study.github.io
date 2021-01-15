@@ -29,13 +29,13 @@
           </div>
           <div class="my-plan item">
             <p class="count">0</p>
-            <p class="name">我的特色课</p>
-            <p class="note">已购特色课程的学习</p>
+            <p class="name">我的预约</p>
+            <p class="note">一对一老师预约</p>
           </div>
           <div class="my-period item">
             <p class="count">0</p>
-            <p class="name">我的特色课</p>
-            <p class="note">已购特色课程的学习</p>
+            <p class="name">剩余学习币</p>
+            <p class="note">查看剩余学习币</p>
           </div>
         </div>
       </div>
@@ -235,6 +235,9 @@ header {
         .note {
           color: rgb(183, 183, 183);
           font-size: 0.24rem;
+          transform: scale(0.7);
+          white-space: nowrap;
+          width: 100%;
         }
       }
     }
