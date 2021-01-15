@@ -54,12 +54,20 @@
         <p>课程相关</p>
         <div class="item">
           <div>
-            <img src="../../assets/img/img07.png" alt="" />
+            <img src="../../assets/img/img222.png"/>
+            <p>我的作业</p>
+          </div>
+          <div @click="guan">
+            <img src="../../assets/img/img07.png" />
             <p>关注的老师</p>
+          </div>  
+          <div @click="shou">
+            <img src="../../assets/img/img08.png" />
+            <p>我的收藏</p>
           </div>
           <div>
-            <img src="../../assets/img/img08.png" alt="" />
-            <p>我的收藏</p>
+            <img src="../../assets/img/img111.png" />
+            <p>我的下载</p>
           </div>
         </div>
       </li>
@@ -83,11 +91,11 @@
       <li>
         <p>我的账户</p>
         <div class="item">
-          <div>
+          <div @click="you">
             <img src="../../assets/img/img11.png" alt="" />
             <p>优惠卡</p>
           </div>
-          <div>
+          <div @click="ka">
             <img src="../../assets/img/img12.png" alt="" />
             <p>学习卡</p>
           </div>
@@ -104,7 +112,7 @@
             <img src="../../assets/img/img14.png" alt="" />
             <p>我的消息</p>
           </div>
-          <div>
+          <div @click="yi">
             <img src="../../assets/img/img15.png" alt="" />
             <p>意见反馈</p>
           </div>
@@ -126,6 +134,23 @@ export default {
   data() {
     return {
       show: false,
+    }
+  },
+  methods: {
+    shou(){
+      this.$router.push({path:'/collect'})
+    },
+    guan(){
+      this.$router.push({path:'/attention'})
+    },
+    yi(){
+      this.$router.push({path:'/opinion'})
+    },
+    ka(){
+      this.$router.push({path:'/learn'})
+    },
+    you(){
+      this.$router.push({path:'/discounts'})
     }
   },
 }
