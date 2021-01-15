@@ -37,10 +37,20 @@
                 <ul>
                   <li>
                     <comment theme="outline" size="24" fill="#595959"/>
+                    <p>点评老师</p>
                   </li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>
+                    <monitor theme="filled" size="24" fill="#3e5ae9"/>
+                    <p>查看回放</p>
+                  </li>
+                  <li>
+                    <people theme="filled" size="24" fill="#dd8740"/>
+                    <p>课后点评</p>
+                  </li>
+                  <li>
+                    <editor theme="filled" size="24" fill="#40dd54"/>
+                    <p>课后作业</p>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -58,11 +68,14 @@
 </template>
 <script>
 import Header from "@/components/Header.vue";
-import { comment } from '@icon-park/vue'
+import { Comment,Monitor,People,Editor } from '@icon-park/vue'
 export default {
   components: {
     Header,
-    comment,
+    Comment,
+    Monitor,
+    People,
+    Editor
   },
   data() {
     return {
@@ -152,6 +165,7 @@ export default {
             .foot{
               width: 100%;
               height: 40%;
+              border-top: 0.01rem solid #ccc;
               ul{
                 width: 100%;
                 height: 100%;
@@ -159,6 +173,12 @@ export default {
                 li{
                   flex: 1;
                   text-align: center;
+                  padding-top: 0.1rem;
+                  p{
+                    font-size: 0.2rem;
+                    color: #666;
+                    margin-top: 0.05rem;
+                  }
                 }
               }
             }
