@@ -10,8 +10,8 @@ export default [
         component:()=>import("./Tutorship")
     },
     {
-        path:"/Calendar",
-        name:"Calendar",
-        component:()=>import("./Calendar")
-    }
+        path:"/Famous",
+        name:"Famous",
+        component:()=>import("./Famous")
+    },
 ]
