@@ -2,6 +2,8 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Home from "../views/Home/Home.vue"
 import myRoutes from "../views/My/router"
+import LogRouter from '../views/Register/log'
+import SearchRouter from '../views/Search/sear'
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,17 +43,9 @@ const routes = [
       },
     ],
   },
-  {
-    path:'/login',
-    name:'login',
-    component:()=>import('../views/Register/login')
-  },
-  {
-    path:'/Register',
-    name:'Register',
-    component:()=>import('../views/Register/Register')
-  },
   ...myRoutes,
+  ...LogRouter,
+  ...SearchRouter,
 ]
 const router = new VueRouter({
   routes,
