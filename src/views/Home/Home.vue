@@ -128,7 +128,7 @@
                     src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
                   />
                 </div>
-                <div>杨德胜</div>
+                <div class="jshi">杨德胜</div>
               </div>
               <div class="jingpin_title_buttom">
                 <div>112人已报名</div>
@@ -152,7 +152,7 @@
                     src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
                   />
                 </div>
-                <div>杨德胜</div>
+                <div class="jshi">杨德胜</div>
               </div>
               <div class="jingpin_title_buttom">
                 <div>112人已报名</div>
@@ -205,13 +205,13 @@ export default {
         width: 100%;
         height: 2rem;
         position: absolute;
-        top: 3.1rem;
+        top: 3.2rem;
         left: 0rem;
         display: inline-flex;
         justify-content: space-around;
         align-items: center;
         div {
-          width: 24%;
+          width: 28%;
           height: 100%;
           font-size: 0.2rem;
           font-weight: 500;
@@ -235,7 +235,6 @@ export default {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 1.1rem;
       .home_herder_wrapper {
         width: 94%;
         background-color: #f0f2f5;
@@ -243,13 +242,14 @@ export default {
         //名师阵容
         .mingshi_contaoner {
           width: 100%;
-          height: 1rem;
-          display: inline-flex;
-          justify-content: flex-start;
-          align-items: center;
+          height: 0.4rem;
           font-size: 0.3rem;
           font-weight: 500;
+          margin: 0.24rem 0;
           div {
+            height: 100%;
+            line-height: 0.4rem;
+            padding-left: 0.3rem;
             border-left: 0.1rem solid #eb6100;
           }
         }
@@ -257,14 +257,14 @@ export default {
         .laoshi_container {
           width: 100%;
           .image_container {
-            margin-top: 0.2rem;
+            margin-bottom: 0.2rem;
             width: 100%;
             height: 1.7rem;
             display: inline-flex;
             justify-content: center;
             align-items: center;
             background-color: #fff;
-            border-radius: 0.2rem;
+            border-radius: 0.1rem;
             .image_left_container {
               width: 20%;
               height: 100%;
@@ -301,7 +301,7 @@ export default {
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          margin-top: 0.3rem;
+          margin: 0.14rem 0;
           .jingpin_wrpaaer {
             width: 95%;
             height: 100%;
@@ -311,10 +311,13 @@ export default {
               font-size: 0.3rem;
               font-weight: 600;
               color: #333;
-              margin-top: 0.3rem;
+              line-height: 0.4rem;
+              margin-top: 0.2rem;
             }
             .jingpin_title_tow {
+              margin-top: 0.1rem;
               font-size: 0.2rem;
+              margin-top: 0.1rem;
             }
             .jingpin_title_therr {
               width: 100%;
@@ -322,20 +325,24 @@ export default {
               display: inline-flex;
               justify-content: flex-start;
               align-items: center;
-              font-size: 0.4rem;
               color: rgba(0, 0, 0, 0.45);
-              border-bottom: 0.01rem solid #f8f8f8;
               img {
-                width: 0.7rem;
+                width: 0.6rem;
                 border-radius: 50%;
+              }
+              .jshi{
+                font-size: 0.3rem;
+                margin-left: 0.3rem;
               }
             }
             .jingpin_title_buttom {
               width: 100%;
-              display: inline-flex;
+              height: 1rem;
+              display: flex;
               justify-content: space-between;
               align-items: center;
               font-size: 0.3rem;
+              border-top: 0.01rem solid #f8f8f8;
               .greey_contianer {
                 color: greenyellow;
               }
