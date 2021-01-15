@@ -104,7 +104,7 @@ export default {
     return {
       lis: [
         { name: "待上课", id: 1 },
-        { name: "以上课", id: 2 },
+        { name: "已上课", id: 2 },
         { name: "已取消", id: 3 },
       ],
       flag: 1,
