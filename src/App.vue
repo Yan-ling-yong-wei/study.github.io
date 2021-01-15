@@ -6,7 +6,7 @@
     </div>
     <div class="image_box_container" v-show="imageShow" @click="onClickRemove">
       <img src="./assets/img/A0启动图.jpg" alt="" />
-      <div class="time_container">{{ Numberindex }}</div>
+      <div class="time_container">{{ numberIndex }}</div>
     </div>
   </div>
 </template>
@@ -19,17 +19,17 @@ export default {
   data() {
     return {
       imageShow: false,
-      Timeindex: null,
-      Numberindex: 3,
+      timeIndex: null,
+      numberIndex: 3,
     };
   },
   created() {
     // setInterval(() => {
-    //   if (this.Numberindex <= 0) {
-    //     clearInterval = this.Timeindex;
+    //   if (this.numberIndex <= 0) {
+    //     clearInterval = this.timeIndex;
     //     this.imageShow = false;
     //   } else {
-    //     this.Numberindex--;
+    //     this.numberIndex--;
     //   }
     // }, 1000);
   },
@@ -52,10 +52,9 @@ body,
   position: relative;
 }
 #app {
-  // font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 0.36rem;
+  font-size: 0.4rem;
 }
 .mailBox {
   position: fixed;
@@ -64,7 +63,7 @@ body,
   width: 1.24rem;
   height: 1.24rem;
   background-color: rgb(0, 122, 255);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 14px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 5px 14px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -80,17 +79,16 @@ body,
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 2;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     img {
       width: 100%;
       height: 100%;
     }
     .time_container {
       position: absolute;
-      top: 0rem;
-      right: 0rem;
+      top: 0;
+      right: 0;
       width: 0.5rem;
       height: 0.5rem;
       font-size: 0.2rem;

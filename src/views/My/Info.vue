@@ -1,6 +1,6 @@
 <template>
   <div class="info">
-    <header-nav back title="个人信息" rigth/>
+    <header-nav back title="个人信息" rigth />
     <ul>
       <li>
         <span>头像</span><span><img src="@/assets/img/avatar.jpg" alt=""/></span>

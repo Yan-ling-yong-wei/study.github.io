@@ -24,18 +24,18 @@
         <div class="mine">
           <div class="my-study item" @click="$router.push('/myStudy')">
             <p class="count">0</p>
-            <p class="name">我的特色课</p>
-            <p class="note">已购特色课程的学习</p>
+            <p class="name">我的课程</p>
+            <p class="note">已购课程学习</p>
           </div>
           <div class="my-plan item">
             <p class="count">0</p>
-            <p class="name">我的特色课</p>
-            <p class="note">已购特色课程的学习</p>
+            <p class="name">我的预约</p>
+            <p class="note">一对一老师预约</p>
           </div>
           <div class="my-period item">
             <p class="count">0</p>
-            <p class="name">我的特色课</p>
-            <p class="note">已购特色课程的学习</p>
+            <p class="name">剩余学习币</p>
+            <p class="note">查看剩余学习币</p>
           </div>
         </div>
       </div>
@@ -228,13 +228,13 @@ header {
           font-size: 0.48rem;
         }
         .name {
-          font-size: 14px;
+          font-size: 0.26rem;
           color: rgb(89, 89, 89);
-          margin-bottom: 0.12rem;
+          margin: 0.1rem 0 0.12rem 0;
         }
         .note {
           color: rgb(183, 183, 183);
-          font-size: 0.24rem;
+          font-size: 0.2rem;
         }
       }
     }
@@ -242,7 +242,6 @@ header {
 }
 .share {
   background-color: #fff;
-
   padding: 0.3rem;
   height: 1.18rem;
   .box {
@@ -289,7 +288,7 @@ header {
       border: none;
     }
     & > p {
-      font-size: 16px;
+      font-size: 0.32rem;
     }
     .item {
       display: flex;

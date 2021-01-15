@@ -1,6 +1,6 @@
 <template>
   <div id="course">
-    <Header right title="课程列表"></Header>
+    <Header right title="课程列表" @rightClick="$router.push('/search')"></Header>
     <div class="sele">
       <van-dropdown-menu>
         <van-dropdown-item title="分类" ref="item">
@@ -66,7 +66,7 @@
     </div>
     <div class="cont">
       <div class="page">
-        <div class="dv" v-for="(item,index) in 10" :key="index">
+        <div class="dv" v-for="(item, index) in 10" :key="index">
           <h4>李老师16号到22号地理大课堂开课啦</h4>
           <p>
             <time theme="outline" size="24" fill="#595959" />
@@ -88,12 +88,12 @@
   </div>
 </template>
 <script>
-import Header from "../../components/Header.vue";
+import Header from "../../components/Header.vue"
 export default {
   components: {
     Header,
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 #course {
