@@ -136,7 +136,7 @@ export default {
   height: 100%;
   overflow: auto;
   font-family: "PingFangSC-Medium";
-  padding-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
   background-color: #f0f2f5;
   position: relative;
 }

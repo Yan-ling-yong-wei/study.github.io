@@ -1,6 +1,6 @@
 <template>
   <div id="course">
-    <Header></Header>
+    <Header right title="课程列表"></Header>
     <div class="sele">
       <van-dropdown-menu>
         <van-dropdown-item title="分类" ref="item">
