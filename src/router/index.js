@@ -41,6 +41,7 @@ const routes = [
       },
     ],
   },
+  // 注册路由 开始
   {
     path:'/login',
     name:'login',
@@ -50,6 +51,21 @@ const routes = [
     path:'/Register',
     name:'Register',
     component:()=>import('../views/Register/Register')
+  },
+  {
+    path:'/Phone',
+    name:'Phone',
+    component:()=>import('../views/Register/Phone')
+  },
+  {
+    path:'/Retrieve',
+    name:'Retrieve',
+    component:()=>import('../views/Register/Retrieve')
+  },
+  {
+    path:'/Formation',
+    name:'Formation',
+    component:()=>import('../views/Register/Formation')
   },
   ...myRoutes,
 ]

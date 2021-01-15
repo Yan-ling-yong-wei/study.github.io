@@ -235,7 +235,7 @@ export default {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 1.1rem;
+      margin-bottom: 0.1rem;
       .home_herder_wrapper {
         width: 94%;
         background-color: #f0f2f5;
@@ -312,8 +312,10 @@ export default {
               font-weight: 600;
               color: #333;
               margin-top: 0.3rem;
+              line-height: 0.3rem;
             }
             .jingpin_title_tow {
+              margin-top: 0.1rem;
               font-size: 0.2rem;
             }
             .jingpin_title_therr {
