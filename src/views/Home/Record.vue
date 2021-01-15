@@ -21,6 +21,9 @@
             <p>还没有待上课记录哦</p>
             <button>立即约课</button>
           </div>
+          <div class="attend" v-if="aa">
+
+          </div>
         </li>
         <li v-show="flag == '2'">
             <div class="dv" v-if="aa">
@@ -29,7 +32,7 @@
             <button>立即约课</button>
           </div>
           <div class="attend" v-else>
-            <div class="nav">
+            <div class="nav" v-for="item in 2" :key="item">
               <div class="top">
                 <div class="logo">
                   <img src="../../assets/img/avatar.jpg">
@@ -66,9 +69,20 @@
           </div>
         </li>
         <li v-show="flag == '3'">
-          <div class="dv">
+          <div class="dv" v-if="aa">
             <img src="../../assets/img/yueke.png" />
             <p>还没有取消上课记录哦</p>
+          </div>
+          <div class="attend" v-else>
+            <div class="cancel" v-for="item in 3" :key="item">
+              <div class="lef">
+                <img src="../../assets/img/avatar.jpg">
+              </div>
+              <div class="rig">
+                <h4>2019.05.05 10:30~11:30</h4>
+                <p>李想老师 （25分钟）</p>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
@@ -120,7 +134,8 @@ export default {
         flex: 1;
         text-align: center;
         line-height: 1rem;
-        font-size: 0.36rem;
+        font-size: 0.34rem;
+        color: #666;
       }
       .licor {
         color: red;
@@ -222,6 +237,34 @@ export default {
                     margin-top: 0.05rem;
                   }
                 }
+              }
+            }
+          }
+          .cancel{
+            width: 90%;
+            height: 1.5rem;
+            border-radius: 0.1rem;
+            border: 0.01rem solid #ccc;
+            margin: 0.3rem auto;
+            display: flex;
+            .lef{
+              flex: 1;
+              text-align: center;
+              img{
+                width: 80%;
+                margin-top: 0.18rem;
+              }
+            }
+            .rig{
+              flex: 4;
+              h4{
+                margin: 0.3rem 0 0 0.2rem;
+                font-size: 0.34rem;
+              }
+              p{
+                font-size: 0.26rem;
+                color: #999;
+                margin: 0.2rem 0 0 0.2rem;
               }
             }
           }
