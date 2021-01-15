@@ -18,20 +18,20 @@ export default {
   },
   data() {
     return {
-      imageShow: true,
+      imageShow: false,
       Timeindex: null,
       Numberindex: 3,
     };
   },
   created() {
-    setInterval(() => {
-      if (this.Numberindex <= 0) {
-        clearInterval = this.Timeindex;
-        this.imageShow = false;
-      } else {
-        this.Numberindex--;
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   if (this.Numberindex <= 0) {
+    //     clearInterval = this.Timeindex;
+    //     this.imageShow = false;
+    //   } else {
+    //     this.Numberindex--;
+    //   }
+    // }, 1000);
   },
   methods: {
     onClickRemove() {
@@ -52,7 +52,7 @@ body,
   // font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 0.4rem;
+  font-size: 0.36rem;
 }
 .mailBox {
   position: fixed;
