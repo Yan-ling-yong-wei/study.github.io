@@ -58,11 +58,11 @@
 </template>
 <script>
 import Header from "@/components/Header.vue";
-import { comment } from '@icon-park/vue'
+import { Comment } from '@icon-park/vue'
 export default {
   components: {
     Header,
-    comment,
+    Comment,
   },
   data() {
     return {

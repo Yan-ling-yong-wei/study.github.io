@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <div class="mailBox">
+    <div class="mailBox" @click="onClickEnvelope">
       <mail theme="two-tone" size="32" :fill="['rgb(0, 122, 255)', '#fff']" />
     </div>
     <div class="image_box_container" v-show="imageShow" @click="onClickRemove">
@@ -37,6 +37,9 @@ export default {
     onClickRemove() {
       this.imageShow = false;
     },
+    onClickEnvelope(){
+      this.$router.push("/Envelope")
+    }
   },
 };
 </script>
