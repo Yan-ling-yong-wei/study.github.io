@@ -18,20 +18,20 @@ export default {
   },
   data() {
     return {
-      imageShow: true,
+      imageShow: false,
       timeIndex: null,
       numberIndex: 3,
     };
   },
   created() {
-    setInterval(() => {
-      if (this.numberIndex <= 0) {
-        clearInterval = this.timeIndex;
-        this.imageShow = false;
-      } else {
-        this.numberIndex--;
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   if (this.numberIndex <= 0) {
+    //     clearInterval = this.timeIndex;
+    //     this.imageShow = false;
+    //   } else {
+    //     this.numberIndex--;
+    //   }
+    // }, 1000);
   },
   methods: {
     onClickRemove() {

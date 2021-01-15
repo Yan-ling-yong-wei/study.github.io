@@ -31,7 +31,16 @@
           <div class="attend" v-else>
             <div class="nav">
               <div class="top">
-
+                <div class="logo">
+                  <img src="../../assets/img/avatar.jpg">
+                </div>
+                <div class="miao">
+                  <h4>2019.05.05 10:30~11.30</h4>
+                  <p>李想老师 （25分钟）已上课</p>
+                </div>
+                <div class="logo">
+                  <button>下载</button>
+                </div>
               </div>
               <div class="foot">
                 <ul>
@@ -161,6 +170,39 @@ export default {
             .top{
               width: 100%;
               height: 60%;
+              display: flex;
+              .logo{
+                flex: 2;
+                text-align: center;    
+                img{
+                  width: 80%;
+                  margin-top: 0.3rem;
+                }
+                button{
+                  margin-top: 0.7rem;
+                  border: none;
+                  background: #eb6100;
+                  color: white;
+                  font-size: 0.2rem;
+                  width: 70%;
+                  height: 0.4rem;
+                  border-radius: 0.1rem;
+                }
+              }
+              .miao{
+                flex: 7;
+                padding-left: 0.2rem;
+                h4{
+                  font-size: 0.34rem;
+                  font-weight: bold;
+                  margin-top: 0.3rem;
+                }
+                p{
+                  font-size: 0.26rem;
+                  color: #ccc;
+                  margin-top: 0.2rem;
+                }
+              }
             }
             .foot{
               width: 100%;
