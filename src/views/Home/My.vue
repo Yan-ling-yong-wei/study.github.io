@@ -228,7 +228,7 @@ header {
           font-size: 0.48rem;
         }
         .name {
-          font-size: 14px;
+          font-size: 0.28rem;
           color: rgb(89, 89, 89);
           margin-bottom: 0.12rem;
         }
@@ -289,7 +289,7 @@ header {
       border: none;
     }
     & > p {
-      font-size: 16px;
+      font-size: 0.32rem;
     }
     .item {
       display: flex;
