@@ -37,5 +37,15 @@ export default [{
     path: '/discounts',
     name: "discounts",
     component:()=>import('./Discounts.vue')
+  },
+  {
+    path:'/card',
+    name:"card",
+    component:()=>import('./Card.vue')
+  },
+  {
+    path:'/svip',
+    name:'svip',
+    component:()=>import('./Svip.vue')
   }
 ]

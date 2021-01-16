@@ -10,19 +10,8 @@ export default [
         component:()=>import("./Tutorship")
     },
     {
-        path:"/Famous",
-        name:"Famous",
-        component:()=>import("./Famous")
-    },
-    {
         path:"/Details",
         name:"Details",
         component:()=>import("./Details")
     },
-    {
-        path:"/Details",
-        name:"Details",
-        component:()=>import("./Details")
-    },
-
 ]

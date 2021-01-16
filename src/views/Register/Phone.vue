@@ -70,7 +70,7 @@ export default {
       input {
         width: 100%;
         height: 1rem;
-        border: 0px;
+        border: 0;
         outline: none;
         border-radius: 3px;
         border-bottom: 1px solid #ddd;

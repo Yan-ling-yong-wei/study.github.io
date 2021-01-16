@@ -3,21 +3,8 @@
     <div class="home_one_container">
       <div class="home_swiper_container">
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-          <van-swipe-item
-            ><img
-              src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019MGNW3BtiS91569839576.jpg"
-          /></van-swipe-item>
-          <van-swipe-item
-            ><img
-              src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019LnKumseuhw1569839569.jpg"
-          /></van-swipe-item>
-          <van-swipe-item
-            ><img
-              src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20197Cxc53hktC1569839552.jpg"
-          /></van-swipe-item>
-          <van-swipe-item
-            ><img
-              src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20197Cxc53hktC1569839552.jpg"
+          <van-swipe-item v-for="(item, index) in banner" :key="index">
+            <img :src="item.banner_img"
           /></van-swipe-item>
         </van-swipe>
         <div class="nav_container">
@@ -62,6 +49,40 @@
               </div>
               <div class="image_right_container">
                 <p>杨德胜</p>
+                <p class="title_overf">
+                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
+                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
+                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
+                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
+                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
+                </p>
+              </div>
+            </div>
+            <div class="image_container">
+              <div class="image_left_container">
+                <img
+                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                />
+              </div>
+              <div class="image_right_container">
+                <p>文卫星</p>
+                <p class="title_overf">
+                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
+                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
+                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
+                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
+                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
+                </p>
+              </div>
+            </div>
+            <div class="image_container">
+              <div class="image_left_container">
+                <img
+                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                />
+              </div>
+              <div class="image_right_container">
+                <p>马学斌</p>
                 <p class="title_overf">
                   杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
                   长期从事名校理科班的数学教学和数学竞赛辅导工作。
@@ -126,14 +147,17 @@
   </div>
 </template>
 <script>
-import Vue from "vue";
-import { Swipe, SwipeItem } from "vant";
-
-Vue.use(Swipe);
-Vue.use(SwipeItem);
+// import Vue from "vue"
+// import { Swipe, SwipeItem } from "vant"
+import { getBanner } from "@/utils/api";
+// Vue.use(Swipe)
+// Vue.use(SwipeItem)
+import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      banner: [],
+    };
   },
   methods: {
     onClickFeature() {
@@ -146,7 +170,7 @@ export default {
       this.$router.push("/Calendar");
     },
     onClickFamous() {
-      this.$router.push("/Famous");
+      this.$router.push("/Details");
     },
     onClickDetails() {
       this.$router.push("/Details");
@@ -154,6 +178,12 @@ export default {
     onClickJing() {
       this.$router.push("/Details");
     },
+  },
+  created() {
+    getBanner().then((res) => {
+      console.log(res);
+      this.banner = res.data.data;
+    });
   },
 };
 </script>
