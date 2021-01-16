@@ -95,6 +95,7 @@ export default {
           height: 100%;
           border-radius: 0.1rem;
           background: #eb6100;
+          font-size: 0.3rem;
           color: white;
         }
       }

@@ -35,7 +35,7 @@
       <div class="home_herder_container">
         <div class="home_herder_wrapper">
           <!-- 名师阵容 -->
-          <div class="mingshi_contaoner" @click="onClickFamous">
+          <div class="mingshi_contaoner">
             <div>名师阵容</div>
           </div>
           <div class="laoshi_container">
@@ -148,7 +148,7 @@ export default {
   },
   created() {
     getBanner().then((res) => {
-      console.log(res)
+      // console.log(res)
       this.banner = res.data.data
     })
   },
