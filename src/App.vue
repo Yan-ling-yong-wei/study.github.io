@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <div class="mailBox">
+    <div class="mailBox" @click="onClickEnvelope">
       <mail theme="two-tone" size="32" :fill="['rgb(0, 122, 255)', '#fff']" />
     </div>
     <div class="image_box_container" v-show="imageShow" @click="onClickRemove">
@@ -18,24 +18,27 @@ export default {
   },
   data() {
     return {
-      imageShow: true,
+      imageShow: false,
       timeIndex: null,
       numberIndex: 3,
     }
   },
   created() {
-    setInterval(() => {
-      if (this.numberIndex <= 0) {
-        clearInterval = this.timeIndex
-        this.imageShow = false
-      } else {
-        this.numberIndex--
-      }
-    }, 1000)
+    // setInterval(() => {
+    //   if (this.numberIndex <= 0) {
+    //     clearInterval = this.timeIndex;
+    //     this.imageShow = false;
+    //   } else {
+    //     this.numberIndex--;
+    //   }
+    // }, 1000);
   },
   methods: {
     onClickRemove() {
       this.imageShow = false
+    },
+    onClickEnvelope() {
+      this.$router.push("/Envelope")
     },
   },
 }

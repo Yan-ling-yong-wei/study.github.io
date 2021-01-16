@@ -12,6 +12,11 @@ const routes = [
     redirect: "/home",
   },
   {
+    path: "/envelope",
+    name: "envelope",
+    component: () => import("../views/HomeFeature/Envelope.vue"),
+  },
+  {
     path: "/main",
     name: "main",
     component: () => import("../views/Home/main.vue"),

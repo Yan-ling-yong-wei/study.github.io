@@ -1,18 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue"
+import Vuex from "vuex"
 
 Vue.use(Vuex)
-import vuexPersist from "vuex-persist";
+import vuexPersist from "vuex-persist"
+
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  },
-  plugins: [
+    state: {
+        user: {},
+    },
+    mutations: {
+        setUser(state, value) {
+            state.user = value
+        },
+    },
+    actions: {},
+    modules: {},
+    plugins: [
         new vuexPersist({
             storage: window.localStorage,
         }).plugin,
