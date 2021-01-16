@@ -101,7 +101,7 @@
             <img src="../../assets/img/img12.png" alt="" />
             <p>学习卡</p>
           </div>
-          <div>
+          <div @click="hui">
             <img src="../../assets/img/img13.png" alt="" />
             <p>会员</p>
           </div>
@@ -153,12 +153,15 @@ export default {
     yi() {
       this.$router.push({ path: "/opinion" })
     },
-    ka() {
-      this.$router.push({ path: "/learn" })
+    ka(){
+      this.$router.push({path:'/card'})
     },
-    you() {
-      this.$router.push({ path: "/discounts" })
+    you(){
+      this.$router.push({path:'/discounts'})
     },
+    hui(){
+      this.$router.push({path:'/svip'})
+    }
   },
 }
 </script>
