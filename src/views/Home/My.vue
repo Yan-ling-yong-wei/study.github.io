@@ -2,16 +2,18 @@
   <div id="my">
     <header>
       <div class="person">
-        <div class="info" @click="$router.push('/info')">
+        <div class="info" @click="$router.push(`/${!user.mobile ? 'login' : 'info'}`)">
           <div class="avatar-box">
             <div class="avatar">
-              <img src="../../assets/img/avatar.jpg" alt="" class="img-avatar" />
+              <!--              {{user.mobile }}-->
+              <div class="img-avatar" v-if="!user.mobile"></div>
+              <img :src="user.avatar" alt="" class="img-avatar" v-else />
               <img src="../../assets/img/img00.png" alt="" class="img-vip" />
             </div>
           </div>
           <div class="mobile-box">
             <div class="mobile">
-              <span>185****0192</span>
+              <span>{{ !user.mobile ? "登陆/注册" : user.mobile }}</span>
             </div>
             <div class="edit">
               <img src="../../assets/img/img000.png" alt="" />
@@ -54,13 +56,13 @@
         <p>课程相关</p>
         <div class="item">
           <div>
-            <img src="../../assets/img/img222.png"/>
+            <img src="../../assets/img/img222.png" />
             <p>我的作业</p>
           </div>
           <div @click="guan">
             <img src="../../assets/img/img07.png" />
             <p>关注的老师</p>
-          </div>  
+          </div>
           <div @click="shou">
             <img src="../../assets/img/img08.png" />
             <p>我的收藏</p>
@@ -130,21 +132,26 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex"
+
 export default {
+  computed: {
+    ...mapState(["user"]),
+  },
   data() {
     return {
       show: false,
     }
   },
   methods: {
-    shou(){
-      this.$router.push({path:'/collect'})
+    shou() {
+      this.$router.push({ path: "/collect" })
     },
-    guan(){
-      this.$router.push({path:'/attention'})
+    guan() {
+      this.$router.push({ path: "/attention" })
     },
-    yi(){
-      this.$router.push({path:'/opinion'})
+    yi() {
+      this.$router.push({ path: "/opinion" })
     },
     ka(){
       this.$router.push({path:'/card'})
@@ -163,11 +170,11 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  font-family: "PingFangSC-Medium";
   padding-bottom: 0.5rem;
   background-color: #f0f2f5;
   position: relative;
 }
+
 header {
   height: 4.35rem;
   width: 100%;
@@ -175,6 +182,7 @@ header {
   background: #fff url("../../assets/img/user_bg.ab306a5c.png") no-repeat top;
   background-size: 100%;
   position: relative;
+
   .person {
     width: calc(100% - 0.6rem);
     height: 3.45rem;
@@ -183,18 +191,30 @@ header {
     bottom: 0;
     box-shadow: 0 0 3.2vw 0 rgba(0, 0, 0, 0.05);
     border-radius: 0.1rem;
+
     .info {
       height: 1.54rem;
       display: flex;
       align-items: center;
       margin: 0.3rem 0.3rem 0;
+
       .avatar {
         position: relative;
+        border-radius: 50%;
+        width: 1.18rem;
+        height: 1.18rem;
+        div.img-avatar {
+          background-color: #eee;
+          border-radius: 50%;
+        }
         .img-avatar {
-          width: 1.18rem;
-          height: 1.18rem;
+          border-radius: 50%;
+
+          width: 100%;
+          height: 100%;
           display: block;
         }
+
         .img-vip {
           width: 0.4rem;
           height: 0.4rem;
@@ -204,14 +224,17 @@ header {
           right: -0.2rem;
         }
       }
+
       .mobile-box {
         display: flex;
+
         .mobile {
           font-size: 0.32rem;
           font-weight: 400;
           margin-left: 0.25rem;
           margin-right: 0.2rem;
         }
+
         .edit {
           img {
             display: block;
@@ -220,6 +243,7 @@ header {
           }
         }
       }
+
       .to-set {
         position: absolute;
         right: 0;
@@ -234,13 +258,16 @@ header {
         justify-content: center;
       }
     }
+
     .mine {
       margin-top: 0.3rem;
       display: flex;
       text-align: center;
+
       .item {
         width: 33%;
         position: relative;
+
         &::after {
           content: "";
           display: block;
@@ -251,29 +278,38 @@ header {
           top: 50%;
           transform: translateY(-50%);
         }
+
         .count {
           color: #eb6100;
           font-size: 0.48rem;
         }
+
         .name {
           font-size: 0.26rem;
           color: rgb(89, 89, 89);
           margin: 0.1rem 0 0.12rem 0;
         }
+
         .note {
           color: rgb(183, 183, 183);
-          font-size: 0.2rem;
+          font-size: 0.24rem;
+          transform: scale(0.7);
+          white-space: nowrap;
+          width: 100%;
         }
       }
     }
   }
 }
+
 .share {
   background-color: #fff;
   padding: 0.3rem;
   height: 1.18rem;
+
   .box {
     position: relative;
+
     ::after {
       content: "";
       display: block;
@@ -286,6 +322,7 @@ header {
       right: 0.4rem;
       transform: translateY(-50%) rotate(45deg);
     }
+
     height: 0.88rem;
     background: linear-gradient(-90deg, #f2995a, #eb6100);
     border-radius: 0.44rem;
@@ -294,9 +331,11 @@ header {
     // color: ;
     font-size: 0.24rem;
     color: #fff;
+
     .sub {
       margin-top: 0.1rem;
     }
+
     img {
       width: 0.4rem;
       height: 0.36rem;
@@ -305,6 +344,7 @@ header {
     }
   }
 }
+
 .menu {
   padding: 0 0.3rem;
   background-color: #fff;
@@ -312,15 +352,19 @@ header {
   li {
     padding: 0.4rem 0;
     border-bottom: 1px solid #eee;
+
     &:last-of-type {
       border: none;
     }
+
     & > p {
       font-size: 0.32rem;
     }
+
     .item {
       display: flex;
       height: 1.2rem;
+
       div {
         width: 1.64rem;
         height: 100%;
@@ -329,9 +373,11 @@ header {
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
+
         img {
           width: 0.4rem;
         }
+
         p {
           margin-top: 0.2rem;
           font-size: 0.24rem;
@@ -341,11 +387,13 @@ header {
     }
   }
 }
+
 .van-overlay {
   display: flex;
   align-items: center;
   justify-content: center;
   height: calc(100% - 50px);
+
   img {
     width: 89%;
     display: block;

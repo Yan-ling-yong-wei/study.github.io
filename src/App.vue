@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { Mail } from "@icon-park/vue";
+import { Mail } from "@icon-park/vue"
 export default {
   components: {
     Mail,
@@ -21,7 +21,7 @@ export default {
       imageShow: false,
       timeIndex: null,
       numberIndex: 3,
-    };
+    }
   },
   created() {
     // setInterval(() => {
@@ -35,13 +35,13 @@ export default {
   },
   methods: {
     onClickRemove() {
-      this.imageShow = false;
+      this.imageShow = false
     },
-    onClickEnvelope(){
+    onClickEnvelope() {
       this.$router.push("/Envelope")
-    }
+    },
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 html,
@@ -74,28 +74,28 @@ body,
     align-items: center;
   }
 }
-  .image_box_container {
-    z-index: 2;
+.image_box_container {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  img {
     width: 100%;
     height: 100%;
+  }
+  .time_container {
     position: absolute;
     top: 0;
-    left: 0;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-    .time_container {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0.5rem;
-      height: 0.5rem;
-      font-size: 0.2rem;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 0.5rem;
-      border: 1px solid #ccc;
-    }
+    right: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 0.2rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 0.5rem;
+    border: 1px solid #ccc;
   }
+}
 </style>

@@ -3,12 +3,7 @@
     <Header title="约课记录" back></Header>
     <div class="top">
       <ul>
-        <li
-          v-for="item in lis"
-          @click="flag = item.id"
-          :class="flag == item.id ? licolor : ''"
-          :key="item.id"
-        >
+        <li v-for="item in lis" @click="flag = item.id" :class="flag == item.id ? licolor : ''" :key="item.id">
           {{ item.name }}
         </li>
       </ul>
@@ -21,12 +16,10 @@
             <p>还没有待上课记录哦</p>
             <button>立即约课</button>
           </div>
-          <div class="attend" v-if="aa">
-
-          </div>
+          <div class="attend" v-if="aa"></div>
         </li>
         <li v-show="flag == '2'">
-            <div class="dv" v-if="aa">
+          <div class="dv" v-if="aa">
             <img src="../../assets/img/yueke.png" />
             <p>还没有上课记录哦</p>
             <button>立即约课</button>
@@ -35,7 +28,7 @@
             <div class="nav" v-for="item in 2" :key="item">
               <div class="top">
                 <div class="logo">
-                  <img src="../../assets/img/avatar.jpg">
+                  <img src="../../assets/img/avatar.jpg" />
                 </div>
                 <div class="miao">
                   <h4>2019.05.05 10:30~11.30</h4>
@@ -48,19 +41,19 @@
               <div class="foot">
                 <ul>
                   <li>
-                    <comment theme="outline" size="24" fill="#595959"/>
+                    <comment theme="outline" size="24" fill="#595959" />
                     <p>点评老师</p>
                   </li>
                   <li>
-                    <monitor theme="filled" size="24" fill="#3e5ae9"/>
+                    <monitor theme="filled" size="24" fill="#3e5ae9" />
                     <p>查看回放</p>
                   </li>
                   <li>
-                    <people theme="filled" size="24" fill="#dd8740"/>
+                    <people theme="filled" size="24" fill="#dd8740" />
                     <p>课后点评</p>
                   </li>
                   <li>
-                    <editor theme="filled" size="24" fill="#40dd54"/>
+                    <editor theme="filled" size="24" fill="#40dd54" />
                     <p>课后作业</p>
                   </li>
                 </ul>
@@ -76,7 +69,7 @@
           <div class="attend" v-else>
             <div class="cancel" v-for="item in 3" :key="item">
               <div class="lef">
-                <img src="../../assets/img/avatar.jpg">
+                <img src="../../assets/img/avatar.jpg" />
               </div>
               <div class="rig">
                 <h4>2019.05.05 10:30~11:30</h4>
@@ -90,15 +83,15 @@
   </div>
 </template>
 <script>
-import Header from "@/components/Header.vue";
-import { Comment,Monitor,People,Editor } from '@icon-park/vue'
+import Header from "@/components/Header.vue"
+import { Comment, Monitor, People, Editor } from "@icon-park/vue"
 export default {
   components: {
     Header,
     Comment,
     Monitor,
     People,
-    Editor
+    Editor,
   },
   data() {
     return {
@@ -110,18 +103,18 @@ export default {
       flag: 1,
       licolor: "licor",
       aa: false,
-    };
+    }
   },
   methods: {
     qie() {},
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 #record {
   width: 100%;
   height: 100%;
-  >.top {
+  > .top {
     width: 100%;
     height: 1rem;
     border-top: 0.01rem solid #eee;
@@ -142,16 +135,16 @@ export default {
       }
     }
   }
-  >.cont {
+  > .cont {
     width: 100%;
     height: calc(100% - 1.9rem);
-    >ul {
+    > ul {
       width: 100%;
       height: 100%;
-      >li {
+      > li {
         width: 100%;
         height: 100%;
-        >.dv {
+        > .dv {
           width: 100%;
           height: 100%;
           text-align: center;
@@ -173,27 +166,27 @@ export default {
             margin-top: 0.6rem;
           }
         }
-        >.attend{
+        > .attend {
           width: 100%;
           height: 100%;
-          .nav{
+          .nav {
             width: 90%;
             height: 2.8rem;
             margin: 0.3rem auto;
             border-radius: 0.1rem;
             border: 0.01rem solid #ccc;
-            .top{
+            .top {
               width: 100%;
               height: 60%;
               display: flex;
-              .logo{
+              .logo {
                 flex: 2;
-                text-align: center;    
-                img{
+                text-align: center;
+                img {
                   width: 80%;
                   margin-top: 0.3rem;
                 }
-                button{
+                button {
                   margin-top: 0.7rem;
                   border: none;
                   background: #eb6100;
@@ -204,34 +197,34 @@ export default {
                   border-radius: 0.1rem;
                 }
               }
-              .miao{
+              .miao {
                 flex: 7;
                 padding-left: 0.2rem;
-                h4{
+                h4 {
                   font-size: 0.34rem;
                   font-weight: bold;
                   margin-top: 0.3rem;
                 }
-                p{
+                p {
                   font-size: 0.26rem;
                   color: #ccc;
                   margin-top: 0.2rem;
                 }
               }
             }
-            .foot{
+            .foot {
               width: 100%;
               height: 40%;
               border-top: 0.01rem solid #ccc;
-              ul{
+              ul {
                 width: 100%;
                 height: 100%;
-                display: flex; 
-                li{
+                display: flex;
+                li {
                   flex: 1;
                   text-align: center;
                   padding-top: 0.1rem;
-                  p{
+                  p {
                     font-size: 0.2rem;
                     color: #666;
                     margin-top: 0.05rem;
@@ -240,28 +233,28 @@ export default {
               }
             }
           }
-          .cancel{
+          .cancel {
             width: 90%;
             height: 1.5rem;
             border-radius: 0.1rem;
             border: 0.01rem solid #ccc;
             margin: 0.3rem auto;
             display: flex;
-            .lef{
+            .lef {
               flex: 1;
               text-align: center;
-              img{
+              img {
                 width: 80%;
                 margin-top: 0.18rem;
               }
             }
-            .rig{
+            .rig {
               flex: 4;
-              h4{
+              h4 {
                 margin: 0.3rem 0 0 0.2rem;
                 font-size: 0.34rem;
               }
-              p{
+              p {
                 font-size: 0.26rem;
                 color: #999;
                 margin: 0.2rem 0 0 0.2rem;
