@@ -145,6 +145,9 @@ export default {
     onClickCalendar() {
       this.$router.push("/Calendar")
     },
+    onClickFamous() {
+      this.$router.push("/Famous")
+    },
   },
   created() {
     getBanner().then((res) => {
