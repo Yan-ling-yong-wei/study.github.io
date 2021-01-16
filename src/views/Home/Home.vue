@@ -51,10 +51,10 @@
         <div class="home_herder_wrapper">
           <!-- 名师阵容 -->
           <div class="mingshi_contaoner" @click="onClickFamous">
-            <div>名师阵容</div>
+            <div @click="onClickJing">名师阵容</div>
           </div>
           <div class="laoshi_container">
-            <div class="image_container">
+            <div class="image_container" @click="onClickDetails">
               <div class="image_left_container">
                 <img
                   src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
@@ -71,46 +71,12 @@
                 </p>
               </div>
             </div>
-            <div class="image_container">
-              <div class="image_left_container">
-                <img
-                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
-                />
-              </div>
-              <div class="image_right_container">
-                <p>文卫星</p>
-                <p class="title_overf">
-                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
-                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
-                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
-                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
-                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
-                </p>
-              </div>
-            </div>
-            <div class="image_container">
-              <div class="image_left_container">
-                <img
-                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
-                />
-              </div>
-              <div class="image_right_container">
-                <p>马学斌</p>
-                <p class="title_overf">
-                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
-                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
-                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
-                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
-                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
-                </p>
-              </div>
-            </div>
           </div>
           <!-- 精品课堂 -->
           <div class="mingshi_contaoner">
-            <div>精品课堂</div>
+            <div @click="onClickJing">精品课堂</div>
           </div>
-          <div class="jingpin_container">
+          <div class="jingpin_container" @click="onClickJing">
             <div class="jingpin_wrpaaer">
               <div class="jingpin_title_container">
                 每时每课特级教师-自主招生冲刺讲座6-多元方程组与可转化为多元方程组问题
@@ -132,9 +98,9 @@
           </div>
           <!-- 推荐课程 -->
           <div class="mingshi_contaoner">
-            <div>推荐课程</div>
+            <div @click="onClickJing">推荐课程</div>
           </div>
-          <div class="jingpin_container">
+          <div class="jingpin_container" @click="onClickJing">
             <div class="jingpin_wrpaaer">
               <div class="jingpin_title_container">
                 每时每课特级教师-自主招生冲刺讲座6-多元方程组与可转化为多元方程组问题
@@ -181,6 +147,12 @@ export default {
     },
     onClickFamous() {
       this.$router.push("/Famous");
+    },
+    onClickDetails() {
+      this.$router.push("/Details");
+    },
+    onClickJing() {
+      this.$router.push("/Details");
     },
   },
 };

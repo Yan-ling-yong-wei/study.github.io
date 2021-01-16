@@ -14,4 +14,15 @@ export default [
         name:"Famous",
         component:()=>import("./Famous")
     },
+    {
+        path:"/Details",
+        name:"Details",
+        component:()=>import("./Details")
+    },
+    {
+        path:"/Details",
+        name:"Details",
+        component:()=>import("./Details")
+    },
+
 ]
