@@ -5,10 +5,10 @@
         <div class="info" @click="$router.push(`/${!user.mobile ? 'login' : 'info'}`)">
           <div class="avatar-box">
             <div class="avatar">
-<!--              {{user.mobile }}-->
+              <!--              {{user.mobile }}-->
               <div class="img-avatar" v-if="!user.mobile"></div>
-              <img :src="user.avatar" alt="" class="img-avatar" v-else/>
-              <img src="../../assets/img/img00.png" alt="" class="img-vip"/>
+              <img :src="user.avatar" alt="" class="img-avatar" v-else />
+              <img src="../../assets/img/img00.png" alt="" class="img-vip" />
             </div>
           </div>
           <div class="mobile-box">
@@ -16,7 +16,7 @@
               <span>{{ !user.mobile ? "登陆/注册" : user.mobile }}</span>
             </div>
             <div class="edit">
-              <img src="../../assets/img/img000.png" alt=""/>
+              <img src="../../assets/img/img000.png" alt="" />
             </div>
             <div class="to-set">
               去约课
@@ -44,7 +44,7 @@
     </header>
     <div class="share">
       <div class="box" @click="show = true">
-        <img src="../../assets/img/mail.png" alt=""/>
+        <img src="../../assets/img/mail.png" alt="" />
         <div>
           <p>邀请好友注册APP，享多重好礼</p>
           <p class="sub">限时特惠，多邀多得</p>
@@ -56,12 +56,20 @@
         <p>课程相关</p>
         <div class="item">
           <div>
-            <img src="../../assets/img/img07.png" alt=""/>
+            <img src="../../assets/img/img222.png" />
+            <p>我的作业</p>
+          </div>
+          <div @click="guan">
+            <img src="../../assets/img/img07.png" />
             <p>关注的老师</p>
           </div>
-          <div>
-            <img src="../../assets/img/img08.png" alt=""/>
+          <div @click="shou">
+            <img src="../../assets/img/img08.png" />
             <p>我的收藏</p>
+          </div>
+          <div>
+            <img src="../../assets/img/img111.png" />
+            <p>我的下载</p>
           </div>
         </div>
       </li>
@@ -69,15 +77,15 @@
         <p>订单相关</p>
         <div class="item">
           <div>
-            <img src="../../assets/img/img09.png" alt=""/>
+            <img src="../../assets/img/img09.png" alt="" />
             <p>课程订单</p>
           </div>
           <div>
-            <img src="../../assets/img/img09.png" alt=""/>
+            <img src="../../assets/img/img09.png" alt="" />
             <p>会员订单</p>
           </div>
           <div>
-            <img src="../../assets/img/img09.png" alt=""/>
+            <img src="../../assets/img/img09.png" alt="" />
             <p>约课订单</p>
           </div>
         </div>
@@ -85,16 +93,16 @@
       <li>
         <p>我的账户</p>
         <div class="item">
-          <div>
-            <img src="../../assets/img/img11.png" alt=""/>
+          <div @click="you">
+            <img src="../../assets/img/img11.png" alt="" />
             <p>优惠卡</p>
           </div>
-          <div>
-            <img src="../../assets/img/img12.png" alt=""/>
+          <div @click="ka">
+            <img src="../../assets/img/img12.png" alt="" />
             <p>学习卡</p>
           </div>
           <div>
-            <img src="../../assets/img/img13.png" alt=""/>
+            <img src="../../assets/img/img13.png" alt="" />
             <p>会员</p>
           </div>
         </div>
@@ -103,15 +111,15 @@
         <p>自动服务</p>
         <div class="item">
           <div>
-            <img src="../../assets/img/img14.png" alt=""/>
+            <img src="../../assets/img/img14.png" alt="" />
             <p>我的消息</p>
           </div>
-          <div>
-            <img src="../../assets/img/img15.png" alt=""/>
+          <div @click="yi">
+            <img src="../../assets/img/img15.png" alt="" />
             <p>意见反馈</p>
           </div>
           <div>
-            <img src="../../assets/img/img16.png" alt=""/>
+            <img src="../../assets/img/img16.png" alt="" />
             <p>在线客服</p>
           </div>
         </div>
@@ -119,12 +127,12 @@
     </ul>
 
     <van-overlay :show="show" @click.self="show = false">
-      <img src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png" alt=""/>
+      <img src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png" alt="" />
     </van-overlay>
   </div>
 </template>
 <script>
-import {mapState} from "vuex"
+import { mapState } from "vuex"
 
 export default {
   computed: {
@@ -134,6 +142,23 @@ export default {
     return {
       show: false,
     }
+  },
+  methods: {
+    shou() {
+      this.$router.push({ path: "/collect" })
+    },
+    guan() {
+      this.$router.push({ path: "/attention" })
+    },
+    yi() {
+      this.$router.push({ path: "/opinion" })
+    },
+    ka() {
+      this.$router.push({ path: "/learn" })
+    },
+    you() {
+      this.$router.push({ path: "/discounts" })
+    },
   },
 }
 </script>
@@ -175,7 +200,7 @@ header {
         border-radius: 50%;
         width: 1.18rem;
         height: 1.18rem;
-        div.img-avatar{
+        div.img-avatar {
           background-color: #eee;
           border-radius: 50%;
         }
