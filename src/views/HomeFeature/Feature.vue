@@ -1,6 +1,10 @@
 <template>
   <div class="feature_container">
+<<<<<<< HEAD
+    <div class="title_box_container"><Header title="特色课" right back /></div>
+=======
     <div class="title_box_container"><Header back title="特色课" right /></div>
+>>>>>>> f64196ecc211cd6290bc943617937b485bdf86d4
     <div class="sele">
       <van-dropdown-menu>
         <van-dropdown-item title="分类" ref="item">
