@@ -1,34 +1,45 @@
 <template>
   <div class="info">
-    <header-nav back title="个人信息" rigth/>
+    <header-nav back title="个人信息" rigth />
     <ul>
       <li @click="avatarShow = true">
-        <span>头像</span><span><img src="@/assets/img/avatar.jpg" alt=""/></span>
+        <span>头像</span><span><img :src="info.avatar" alt=""/></span>
       </li>
-      <li><span>昵称</span><span>18538100192</span></li>
-      <li><span>手机号</span><span>185****0192</span></li>
-      <li><span>性别</span><span>保密</span></li>
-      <li @click="birthShow = true"><span>出生日期</span><span>1999-02-05</span></li>
-      <li><span>所在城市</span><span>北京，北京市，昌平区</span></li>
+      <li>
+        <span>昵称</span><span>{{ info.nickname }}</span>
+      </li>
+      <li>
+        <span>手机号</span><span>{{ info.mobile }}</span>
+      </li>
+      <li>
+        <span>性别</span><span>{{ info.sex === 0 ? "男" : info.sex === 1 ? "女" : "保密" }}</span>
+      </li>
+      <li @click="birthShow = true">
+        <span>出生日期</span><span>{{ info.birthday }}</span>
+      </li>
+      <li @click="cityShow = true">
+        <span>所在城市</span><span>{{ info.province_name + "," + info.city_name + "," + info.district_name }}</span>
+      </li>
       <li><span>学科</span><span>信息技术</span></li>
       <li><span>年级</span><span>高三</span></li>
     </ul>
-    <van-action-sheet v-model="avatarShow" :actions="[{ name: '拍照' }, { name: '从手机相册选择' }]" cancel-text="取消"
-                      close-on-click-action/>
+    <van-action-sheet v-model="avatarShow" :actions="[{ name: '拍照' }, { name: '从手机相册选择' }]" cancel-text="取消" close-on-click-action />
 
-    <van-popup v-model="birthShow" position="bottom" :style="{ height: '47%' }">
-      <van-datetime-picker v-model="currentDate" type="date" :min-date="minDate" :max-date="maxDate"
-                           @confirm="birthShow = false" @cancel="birthShow = false"/>
+    <van-popup v-model="birthShow" position="bottom">
+      <van-datetime-picker v-model="currentDate" type="date" :min-date="minDate" :max-date="maxDate" @cancel="birthShow = false" @confirm="changeDate" />
+    </van-popup>
+
+    <van-popup v-model="cityShow" position="bottom">
+      <van-area :area-list="areaList" :value="info.district_id + ''" position="bottom" @cancel="cityShow = false" @confirm="cityChange" />
     </van-popup>
   </div>
 </template>
 
 <script>
 import headerNav from "@/components/Header.vue"
-import {userInfo} from "@/utils/api";
-
+import { userInfo } from "@/utils/api"
 export default {
-  components: {headerNav},
+  components: { headerNav },
   data() {
     return {
       avatarShow: false,
@@ -38,12 +49,20 @@ export default {
       currentDate: new Date(),
     }
   },
+
   created() {
-    userInfo().then(res => {
+    userInfo().then((res) => {
       console.log(res)
     })
   },
-  methods: {},
+  methods: {
+    onClickPersonal() {
+      this.$router.push("/Personal")
+    },
+    onClickGender() {
+      this.$router.push("/Gender")
+    },
+  },
 }
 </script>
 
@@ -105,6 +124,7 @@ export default {
         img {
           width: 0.74rem;
           height: 0.74rem;
+          border-radius: 50%;
         }
       }
     }
