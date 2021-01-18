@@ -1,18 +1,41 @@
 <template>
   <div class="personal_container">
     <div><Header title="账户" back /></div>
-    <div class="input_container"><input type="text" /></div>
-    <div class="button_contaienr"><button>保存</button></div>
+    <div class="input_container"><input type="text" v-model="name" /></div>
+    <div class="button_contaienr"><button @click="save">保存</button></div>
   </div>
 </template>
 
 <script>
-import Header from "../../../components/Header";
+import { Toast } from "vant"
+import { setInfo } from "@/utils/api"
+import Header from "../../../components/Header"
 export default {
   components: {
     Header,
   },
-};
+  data() {
+    return {
+      name: "",
+    }
+  },
+  created() {
+    this.name = this.$route.query.name
+  },
+  methods: {
+    save() {
+      setInfo({ nickname: this.name }).then((res) => {
+        // console.log(res)
+        if (res.data.code === 200) {
+          Toast.success("修改成功！")
+          setTimeout(() => {
+            this.$router.back()
+          }, 500)
+        }
+      })
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -25,6 +48,7 @@ export default {
     height: 1rem;
     background-color: #fff;
     input {
+      font-size: 0.28rem;
       width: 100%;
       height: 100%;
       background-color: #fff;

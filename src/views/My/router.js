@@ -57,4 +57,14 @@ export default [
     name: "open",
     component: () => import("./Open.vue"),
   },
+  {
+    path: "/Personal",
+    name: "Personal",
+    component: () => import("./infoModule/Personal"),
+  },
+  {
+    path: "/Gender",
+    name: "Gender",
+    component: () => import("./infoModule/Gender"),
+  },
 ]
