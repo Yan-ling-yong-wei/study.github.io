@@ -1,6 +1,6 @@
 <template>
   <div class="feature_container">
-    <div class="title_box_container"><Header title="特色课" right /></div>
+    <div class="title_box_container"><Header title="特色课" right back /></div>
     <div class="sele">
       <van-dropdown-menu>
         <van-dropdown-item title="分类" ref="item">

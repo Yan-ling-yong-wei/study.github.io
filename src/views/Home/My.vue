@@ -18,9 +18,7 @@
             <div class="edit">
               <img src="../../assets/img/img000.png" alt="" />
             </div>
-            <div class="to-set">
-              去约课
-            </div>
+            <div class="to-set">去约课</div>
           </div>
         </div>
         <div class="mine">
@@ -76,7 +74,7 @@
       <li>
         <p>订单相关</p>
         <div class="item">
-          <div>
+          <div @click="onClickCourses">
             <img src="../../assets/img/img09.png" alt="" />
             <p>课程订单</p>
           </div>
@@ -127,12 +125,15 @@
     </ul>
 
     <van-overlay :show="show" @click.self="show = false">
-      <img src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png" alt="" />
+      <img
+        src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png"
+        alt=""
+      />
     </van-overlay>
   </div>
 </template>
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 
 export default {
   computed: {
@@ -141,29 +142,32 @@ export default {
   data() {
     return {
       show: false,
-    }
+    };
   },
   methods: {
     shou() {
-      this.$router.push({ path: "/collect" })
+      this.$router.push({ path: "/collect" });
     },
     guan() {
-      this.$router.push({ path: "/attention" })
+      this.$router.push({ path: "/attention" });
     },
     yi() {
-      this.$router.push({ path: "/opinion" })
+      this.$router.push({ path: "/opinion" });
     },
-    ka(){
-      this.$router.push({path:'/card'})
+    ka() {
+      this.$router.push({ path: "/card" });
     },
-    you(){
-      this.$router.push({path:'/discounts'})
+    you() {
+      this.$router.push({ path: "/discounts" });
     },
-    hui(){
-      this.$router.push({path:'/svip'})
-    }
+    hui() {
+      this.$router.push({ path: "/svip" });
+    },
+    onClickCourses() {
+      this.$router.push("/Courses");
+    },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 #my {
