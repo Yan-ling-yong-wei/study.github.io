@@ -1,0 +1,37 @@
+export default [
+    {
+        path:'/preface',
+        name:"preface",
+        component:()=>import('./Preface.vue')
+    },
+    {
+        path:'/file',
+        name:"file",
+        component:()=>import('./File.vue')
+    },
+    {
+        path:'/xam',
+        name:'xam',
+        component:()=>import('./Exam.vue')
+    },
+    {
+        path:'/mistakes',
+        name:'mistakes',
+        component:()=>import('./Mistakes.vue')
+    },
+    {
+        path:'/appraisal',
+        name:"appraisal",
+        component:()=>import('./Appraisal.vue')
+    },
+    {
+        path:'/enshrine',
+        name:'enshrine',
+        component:()=>import('./Enshrine.vue')
+    },
+    {
+        path:'/revamp',
+        name:'revamp',
+        component:()=>import('./Revamp.vue')
+    }
+]

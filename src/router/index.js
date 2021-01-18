@@ -5,6 +5,7 @@ import myRoutes from "../views/My/router"
 import LogRouter from '../views/Register/log'
 import SearchRouter from '../views/Search/sear'
 import ejs from "../views/HomeFeature/ejs"
+import exercise from '../views/Exercise/exercise'
 Vue.use(VueRouter)
 
 const routes = [
@@ -53,6 +54,7 @@ const routes = [
   ...LogRouter,
   ...SearchRouter,
   ...ejs,
+  ...exercise,
 ]
 const router = new VueRouter({
   routes,
