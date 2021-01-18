@@ -34,6 +34,47 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+      <!-- 列表渲染 -->
+      <div v-for="item in recommend" :key="item.channel_info.id" class="item">
+        <div v-if="item.channel_info.type === 3" class="one">
+          <h3>
+            <span>{{ item.channel_info.name }}</span
+            ><span class="more">更多<right size=".32rem"/></span>
+          </h3>
+          <div class="content" v-for="el in item.list" :key="el.teacher_id">
+            <div class="left">
+              <img :src="el.teacher_avatar" alt="" />
+            </div>
+            <div class="right">
+              <p>{{ el.teacher_name }}</p>
+              <p>{{ el.introduction }}</p>
+            </div>
+          </div>
+        </div>
+        <div v-if="item.channel_info.type === 6" class="two">
+          <h3>
+            <span>{{ item.channel_info.name }}</span
+            ><span class="more">更多<right size=".32rem"/></span>
+          </h3>
+          <div class="content" v-for="el in item.list" :key="el.id">
+            <div class="left">
+              <img :src="el.thumb_img" alt="" />
+            </div>
+            <div class="right">
+              <p>{{ el.title }}</p>
+              <p class="van-ellipsis">{{ el.description }}</p>
+              <div>
+                <p>
+                  <preview-open theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" />
+                  <span>{{ el.click_rate }}</span>
+                </p>
+                <p>
+                  <!-- <time theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" /> -->
+                  <history theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" />
+                  <span>{{ el.created_at | timeFilter }}</span>
+                </p>
+=======
       <div class="home_herder_container">
         <div class="home_herder_wrapper">
           <!-- 名师阵容 -->
@@ -138,26 +179,50 @@
               <div class="jingpin_title_buttom">
                 <div>112人已报名</div>
                 <div class="greey_contianer">免费</div>
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- 列表渲染 -->
     </div>
   </div>
 </template>
 <script>
+<<<<<<< HEAD
+import { Right, PreviewOpen, Time, History } from "@icon-park/vue"
+import { getBanner, recommend } from "@/utils/api"
+import axios from "axios"
+=======
 // import Vue from "vue"
 // import { Swipe, SwipeItem } from "vant"
 import { getBanner } from "@/utils/api";
 // Vue.use(Swipe)
 // Vue.use(SwipeItem)
 import axios from "axios";
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
 export default {
   data() {
     return {
       banner: [],
+<<<<<<< HEAD
+      recommend: [],
+    }
+=======
     };
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
+  },
+  components: {
+    Right,
+    PreviewOpen,
+    Time,
+    History,
+  },
+  filters: {
+    timeFilter(data) {
+      return new Date(data * 1000).toLocaleString()
+    },
   },
   methods: {
     onClickFeature() {
@@ -181,9 +246,20 @@ export default {
   },
   created() {
     getBanner().then((res) => {
+<<<<<<< HEAD
+      this.banner = res.data.data
+    })
+    recommend().then((res) => {
+      if (res.data.code === 200) {
+        this.recommend = res.data.data
+        // this.recommend.splice(1, 1)
+      }
+    })
+=======
       console.log(res);
       this.banner = res.data.data;
     });
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
   },
 };
 </script>
@@ -192,7 +268,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-
+  background-color: #f0f2f5;
   .home_one_container {
     width: 100%;
     height: 100%;
@@ -200,6 +276,8 @@ export default {
     .home_swiper_container {
       height: 4rem;
       width: 100%;
+      margin-bottom: 1.2rem;
+      box-sizing: content-box;
       position: relative;
       .my-swipe .van-swipe-item {
         color: #fff;
@@ -240,122 +318,93 @@ export default {
         }
       }
     }
-    .home_herder_container {
-      width: 100%;
-      background-color: #f0f2f5;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      .home_herder_wrapper {
-        width: 94%;
-        background-color: #f0f2f5;
-        margin-top: 1.2rem;
-        //名师阵容
-        .mingshi_contaoner {
-          width: 100%;
-          height: 0.4rem;
-          font-size: 0.3rem;
-          font-weight: 500;
-          margin: 0.24rem 0;
-          div {
-            height: 100%;
-            line-height: 0.4rem;
-            padding-left: 0.3rem;
-            border-left: 0.1rem solid #eb6100;
+
+    // 列表渲染
+    .item {
+      padding: 0.4rem 0.2rem;
+      h3 {
+        font-size: 0.32rem;
+        padding-left: 0.2rem;
+        border-left: 4px solid red;
+        display: flex;
+        justify-content: space-between;
+        .more {
+          display: flex;
+          align-items: center;
+          span {
+            display: flex;
           }
         }
-        // 老师名言
-        .laoshi_container {
-          width: 100%;
-          .image_container {
-            margin-bottom: 0.2rem;
-            width: 100%;
-            height: 1.7rem;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #fff;
-            border-radius: 0.1rem;
-            .image_left_container {
-              width: 20%;
-              height: 100%;
-              display: inline-flex;
-              justify-content: center;
-              align-items: center;
-              img {
-                width: 1rem;
-                border-radius: 50%;
-              }
+      }
+      .one {
+        // padding: 0.4rem;
+        .content {
+          padding: 0.3rem 0.2rem;
+          background-color: #fff;
+          border-radius: 0.2rem;
+          display: flex;
+          margin-top: 0.4rem;
+          font-size: 0.28rem;
+          .left {
+            margin-right: 0.2rem;
+            img {
+              width: 0.8rem;
+              height: 0.8rem;
+              border-radius: 50%;
             }
-            .image_right_container {
-              width: 80%;
-              height: 100%;
-              font-size: 0.3rem;
-              line-height: 0.7rem;
-              color: #595959;
-              .title_overf {
-                width: 100%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+          }
+          .right {
+            height: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            p:last-child {
+              color: #b7b7b7;
+            }
+          }
+        }
+      }
+      .two {
+        .content {
+          padding: 0.2rem;
+          background-color: #fff;
+          border-radius: 0.2rem;
+          display: flex;
+          margin-top: 0.4rem;
+          font-size: 0.28rem;
+          .left {
+            margin-right: 0.2rem;
+            img {
+              width: 2rem;
+              height: 1.3rem;
+              border-radius: 0.1rem;
+            }
+          }
+          .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            font-size: 0.24rem;
+            > p {
+              width: 4rem;
+              overflow: hidden;
+              &:last-of-type {
                 color: #b7b7b7;
               }
             }
-          }
-        }
-        //精品课堂
-        .jingpin_container {
-          width: 100%;
-          height: 3.8rem;
-          border-radius: 0.1rem;
-          background-color: #fff;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0.14rem 0;
-          .jingpin_wrpaaer {
-            width: 95%;
-            height: 100%;
-            .jingpin_title_container {
-              width: 100%;
-              height: 20%;
-              font-size: 0.3rem;
-              font-weight: 600;
-              color: #333;
-              line-height: 0.4rem;
-              margin-top: 0.2rem;
-            }
-            .jingpin_title_tow {
-              margin-top: 0.1rem;
-              font-size: 0.2rem;
-              margin-top: 0.1rem;
-            }
-            .jingpin_title_therr {
-              width: 100%;
-              height: 1.4rem;
-              display: inline-flex;
-              justify-content: flex-start;
-              align-items: center;
-              color: rgba(0, 0, 0, 0.45);
-              img {
-                width: 0.6rem;
-                border-radius: 50%;
-              }
-              .jshi {
-                font-size: 0.3rem;
-                margin-left: 0.3rem;
-              }
-            }
-            .jingpin_title_buttom {
-              width: 100%;
-              height: 1rem;
+            div {
               display: flex;
               justify-content: space-between;
               align-items: center;
-              font-size: 0.3rem;
-              border-top: 0.01rem solid #f8f8f8;
-              .greey_contianer {
-                color: greenyellow;
+              color: #b7b7b7;
+              p {
+                display: flex;
+                align-items: center;
+              }
+              .i-icon {
+                margin-right: 0.1rem;
+                display: inline-flex;
               }
             }
           }
