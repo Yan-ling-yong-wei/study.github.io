@@ -31,3 +31,17 @@ export const getUCenterInfo = () => http.get("/getUCenterInfo")
 
 //设置用户信息
 export const setInfo = (data) => http.put("/user", data)
+
+//关注老师接口
+export const setCollect= (id)=> http.get('/teacher/collect/'+id)
+
+//获取我关注的老师
+export const getCollect = (data)=>{
+  // console.log(data)
+  let str = ""
+  for (const key in data) {
+    str += `${key}=${data[key]}&`
+  }
+  // console.log(str)
+  return http.get("/collect?" + str)
+}

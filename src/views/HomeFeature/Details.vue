@@ -19,7 +19,10 @@
             </div>
           </div>
           <div class="imag_box_container">
-            <img src="../../assets/img/touxiang1.png" alt="" />
+            <p @click="guan">
+              <button v-if="flag">关注</button>
+              <button v-else>取消关注</button>
+            </p>
           </div>
         </div>
         <div class="button_container">
@@ -100,18 +103,40 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
+import { setCollect } from "@/utils/api"
 export default {
   data() {
     return {
       active: 0,
       value: 4,
+      flag: true,
     };
   },
   methods: {
     onClickFan() {
       this.$router.go(-1);
     },
+    guan(){ 
+      if(this.flag==true){
+        Toast('关注成功');
+      }else{
+        Toast('取消关注成功');
+      }
+      this.flag = !this.flag;
+    },
+    fn(){
+      setCollect(this.$route.query.id).then(res=>{
+        console.log(res)
+      })
+    }
+    
   },
+  watch:{
+    flag(val){
+      this.fn()
+    }
+  }
 };
 </script>
 
@@ -196,8 +221,13 @@ export default {
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          img {
-            font-size: 1rem;
+          button{
+            width: 100%;
+            font-size: 0.2rem;
+            border-radius: 0.1rem;
+            border: none;
+            background: orangered;
+            padding: 0.06rem 0.2rem;
           }
         }
       }
