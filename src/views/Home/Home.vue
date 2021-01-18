@@ -39,7 +39,7 @@
             <span>{{ item.channel_info.name }}</span
             ><span class="more">更多<right size=".32rem"/></span>
           </h3>
-          <div class="content" v-for="el in item.list" :key="el.teacher_id">
+          <div class="content" v-for="el in item.list" :key="el.teacher_id" @click="go(el.teacher_id)">
             <div class="left">
               <img :src="el.teacher_avatar" alt="" />
             </div>
@@ -54,7 +54,7 @@
             <span>{{ item.channel_info.name }}</span
             ><span class="more">更多<right size=".32rem"/></span>
           </h3>
-          <div class="content" v-for="el in item.list" :key="el.id">
+          <div class="content" v-for="el in item.list" :key="el.id" @click="go(el.teacher_id)">
             <div class="left">
               <img :src="el.thumb_img" alt="" />
             </div>
@@ -99,7 +99,7 @@ export default {
   },
   filters: {
     timeFilter(data) {
-      return new Date(data * 1000).toLocaleString()
+      return new Date(data * 1000).toLocaleString();
     },
   },
   methods: {
@@ -112,15 +112,9 @@ export default {
     onClickCalendar() {
       this.$router.push("/Calendar")
     },
-    onClickFamous() {
-      this.$router.push("/Details")
-    },
-    onClickDetails() {
-      this.$router.push("/Details")
-    },
-    onClickJing() {
-      this.$router.push("/Details")
-    },
+    go(id){
+       this.$router.push({path:"/Details",query:{id}})
+    }
   },
   created() {
     getBanner().then((res) => {

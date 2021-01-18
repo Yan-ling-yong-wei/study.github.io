@@ -19,7 +19,10 @@
             </div>
           </div>
           <div class="imag_box_container">
-            <img src="../../assets/img/touxiang1.png" alt="" />
+            <p @click="guan">
+              <button>{{ flag === 1 ? "关注" : "取消关注" }}</button>
+              <!-- <button>取消关注</button> -->
+            </p>
           </div>
         </div>
         <div class="button_container">
@@ -56,8 +59,7 @@
                 <nav>23分钟一节课</nav>
                 <nav>偶像</nav>
                 <nav>
-                  教程作者：白苔白（软件基础应33期学员）原图作者
-                  本次教程会教你如何利用AE制作文字动态LOGO
+                  教程作者：白苔白（软件基础应33期学员）原图作者 本次教程会教你如何利用AE制作文字动态LOGO
                 </nav>
               </div>
             </div>
@@ -100,19 +102,40 @@
 </template>
 
 <script>
+import { Toast } from "vant"
+import { setCollect, getTeaDetails } from "@/utils/api"
 export default {
   data() {
     return {
       active: 0,
       value: 4,
-    };
+      flag: 0,
+    }
   },
   methods: {
     onClickFan() {
-      this.$router.go(-1);
+      this.$router.go(-1)
+    },
+    guan() {
+      setCollect(this.$route.query.id).then((res) => {
+        console.log(res)
+      })
     },
   },
-};
+  created() {
+    // setCollect(this.$route.query.id).then((res) => {
+    //   console.log(res.data.data.flag)
+    // })
+    getTeaDetails(this.$route.query.id).then((res) => {
+      this.flag = res.data.data.flag
+    })
+  },
+  watch: {
+    flag(val) {
+      this.fn()
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -196,8 +219,13 @@ export default {
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          img {
-            font-size: 1rem;
+          button {
+            width: 100%;
+            font-size: 0.2rem;
+            border-radius: 0.1rem;
+            border: none;
+            background: orangered;
+            padding: 0.06rem 0.2rem;
           }
         }
       }
