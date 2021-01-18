@@ -4,7 +4,7 @@ import Home from "../views/Home/Home.vue"
 import myRoutes from "../views/My/router"
 import LogRouter from '../views/Register/log'
 import SearchRouter from '../views/Search/sear'
-import aajs from "../views/HomeFeature/ejs"
+import ejs from "../views/HomeFeature/ejs"
 Vue.use(VueRouter)
 
 const routes = [
@@ -52,7 +52,7 @@ const routes = [
   ...myRoutes,
   ...LogRouter,
   ...SearchRouter,
-  ...aajs,
+  ...ejs,
 ]
 const router = new VueRouter({
   routes,

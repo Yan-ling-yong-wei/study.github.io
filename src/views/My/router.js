@@ -47,5 +47,10 @@ export default [{
     path:'/svip',
     name:'svip',
     component:()=>import('./Svip.vue')
+  },
+  {
+    path:'/open',
+    name:"open",
+    component:()=>import('./Open.vue')
   }
 ]

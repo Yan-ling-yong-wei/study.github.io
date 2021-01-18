@@ -3,7 +3,9 @@
     <div class="home_one_container">
       <div class="home_swiper_container">
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-          <van-swipe-item v-for="(item, index) in banner" :key="index"> <img :src="item.banner_img"/></van-swipe-item>
+          <van-swipe-item v-for="(item, index) in banner" :key="index">
+            <img :src="item.banner_img"
+          /></van-swipe-item>
         </van-swipe>
         <div class="nav_container">
           <div @click="onClickFeature">
@@ -32,6 +34,7 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
       <!-- 列表渲染 -->
       <div v-for="item in recommend" :key="item.channel_info.id" class="item">
         <div v-if="item.channel_info.type === 3" class="one">
@@ -71,6 +74,112 @@
                   <history theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" />
                   <span>{{ el.created_at | timeFilter }}</span>
                 </p>
+=======
+      <div class="home_herder_container">
+        <div class="home_herder_wrapper">
+          <!-- 名师阵容 -->
+          <div class="mingshi_contaoner" @click="onClickFamous">
+            <div @click="onClickJing">名师阵容</div>
+          </div>
+          <div class="laoshi_container">
+            <div class="image_container" @click="onClickDetails">
+              <div class="image_left_container">
+                <img
+                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                />
+              </div>
+              <div class="image_right_container">
+                <p>杨德胜</p>
+                <p class="title_overf">
+                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
+                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
+                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
+                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
+                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
+                </p>
+              </div>
+            </div>
+            <div class="image_container">
+              <div class="image_left_container">
+                <img
+                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                />
+              </div>
+              <div class="image_right_container">
+                <p>文卫星</p>
+                <p class="title_overf">
+                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
+                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
+                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
+                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
+                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
+                </p>
+              </div>
+            </div>
+            <div class="image_container">
+              <div class="image_left_container">
+                <img
+                  src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                />
+              </div>
+              <div class="image_right_container">
+                <p>马学斌</p>
+                <p class="title_overf">
+                  杨老师,特级教师.多次被中国数学会评为全国高中数学竞联赛优秀教练员。
+                  长期从事名校理科班的数学教学和数学竞赛辅导工作。
+                  辅导学生参加全国高中数学联赛有数百人次获全国高中数学联赛一、二、三等奖，数十人被免试保送到清华大学、
+                  北京大学等名牌大学学习。十多人获CMO获一、二、三等奖，一人获IMO金牌。特别是近年来大学试行自主招生，
+                  有很多同学通过上他的竞赛辅导课进入清华大学、北京大学、上海交通大学等。
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- 精品课堂 -->
+          <div class="mingshi_contaoner">
+            <div @click="onClickJing">精品课堂</div>
+          </div>
+          <div class="jingpin_container" @click="onClickJing">
+            <div class="jingpin_wrpaaer">
+              <div class="jingpin_title_container">
+                每时每课特级教师-自主招生冲刺讲座6-多元方程组与可转化为多元方程组问题
+              </div>
+              <div class="jingpin_title_tow">共1课时</div>
+              <div class="jingpin_title_therr">
+                <div>
+                  <img
+                    src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                  />
+                </div>
+                <div class="jshi">杨德胜</div>
+              </div>
+              <div class="jingpin_title_buttom">
+                <div>112人已报名</div>
+                <div class="greey_contianer">免费</div>
+              </div>
+            </div>
+          </div>
+          <!-- 推荐课程 -->
+          <div class="mingshi_contaoner">
+            <div @click="onClickJing">推荐课程</div>
+          </div>
+          <div class="jingpin_container" @click="onClickJing">
+            <div class="jingpin_wrpaaer">
+              <div class="jingpin_title_container">
+                每时每课特级教师-自主招生冲刺讲座6-多元方程组与可转化为多元方程组问题
+              </div>
+              <div class="jingpin_title_tow">共1课时</div>
+              <div class="jingpin_title_therr">
+                <div>
+                  <img
+                    src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/2019X3gWvILU7J1571983543.png"
+                  />
+                </div>
+                <div class="jshi">杨德胜</div>
+              </div>
+              <div class="jingpin_title_buttom">
+                <div>112人已报名</div>
+                <div class="greey_contianer">免费</div>
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
               </div>
             </div>
           </div>
@@ -81,15 +190,28 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
 import { Right, PreviewOpen, Time, History } from "@icon-park/vue"
 import { getBanner, recommend } from "@/utils/api"
 import axios from "axios"
+=======
+// import Vue from "vue"
+// import { Swipe, SwipeItem } from "vant"
+import { getBanner } from "@/utils/api";
+// Vue.use(Swipe)
+// Vue.use(SwipeItem)
+import axios from "axios";
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
 export default {
   data() {
     return {
       banner: [],
+<<<<<<< HEAD
       recommend: [],
     }
+=======
+    };
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
   },
   components: {
     Right,
@@ -104,20 +226,27 @@ export default {
   },
   methods: {
     onClickFeature() {
-      this.$router.push("/Feature")
+      this.$router.push("/Feature");
     },
     onClickTutorship() {
-      this.$router.push("/Tutorship")
+      this.$router.push("/Tutorship");
     },
     onClickCalendar() {
-      this.$router.push("/Calendar")
+      this.$router.push("/Calendar");
     },
     onClickFamous() {
-      this.$router.push("/Famous")
+      this.$router.push("/Details");
+    },
+    onClickDetails() {
+      this.$router.push("/Details");
+    },
+    onClickJing() {
+      this.$router.push("/Details");
     },
   },
   created() {
     getBanner().then((res) => {
+<<<<<<< HEAD
       this.banner = res.data.data
     })
     recommend().then((res) => {
@@ -126,8 +255,13 @@ export default {
         // this.recommend.splice(1, 1)
       }
     })
+=======
+      console.log(res);
+      this.banner = res.data.data;
+    });
+>>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .home {
