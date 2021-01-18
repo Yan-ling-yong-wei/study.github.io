@@ -99,7 +99,7 @@ export default {
   },
   filters: {
     timeFilter(data) {
-      return new Date(data * 1000).toLocaleString()
+      return new Date(data * 1000).toLocaleString();
     },
   },
   methods: {
