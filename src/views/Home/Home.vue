@@ -34,47 +34,6 @@
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-      <!-- 列表渲染 -->
-      <div v-for="item in recommend" :key="item.channel_info.id" class="item">
-        <div v-if="item.channel_info.type === 3" class="one">
-          <h3>
-            <span>{{ item.channel_info.name }}</span
-            ><span class="more">更多<right size=".32rem"/></span>
-          </h3>
-          <div class="content" v-for="el in item.list" :key="el.teacher_id">
-            <div class="left">
-              <img :src="el.teacher_avatar" alt="" />
-            </div>
-            <div class="right">
-              <p>{{ el.teacher_name }}</p>
-              <p>{{ el.introduction }}</p>
-            </div>
-          </div>
-        </div>
-        <div v-if="item.channel_info.type === 6" class="two">
-          <h3>
-            <span>{{ item.channel_info.name }}</span
-            ><span class="more">更多<right size=".32rem"/></span>
-          </h3>
-          <div class="content" v-for="el in item.list" :key="el.id">
-            <div class="left">
-              <img :src="el.thumb_img" alt="" />
-            </div>
-            <div class="right">
-              <p>{{ el.title }}</p>
-              <p class="van-ellipsis">{{ el.description }}</p>
-              <div>
-                <p>
-                  <preview-open theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" />
-                  <span>{{ el.click_rate }}</span>
-                </p>
-                <p>
-                  <!-- <time theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" /> -->
-                  <history theme="two-tone" size=".24rem" :fill="['#aaa', '#fff']" />
-                  <span>{{ el.created_at | timeFilter }}</span>
-                </p>
-=======
       <div class="home_herder_container">
         <div class="home_herder_wrapper">
           <!-- 名师阵容 -->
@@ -179,7 +138,6 @@
               <div class="jingpin_title_buttom">
                 <div>112人已报名</div>
                 <div class="greey_contianer">免费</div>
->>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
               </div>
             </div>
           </div>
@@ -190,28 +148,18 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-import { Right, PreviewOpen, Time, History } from "@icon-park/vue"
-import { getBanner, recommend } from "@/utils/api"
-import axios from "axios"
-=======
 // import Vue from "vue"
 // import { Swipe, SwipeItem } from "vant"
 import { getBanner } from "@/utils/api";
 // Vue.use(Swipe)
 // Vue.use(SwipeItem)
 import axios from "axios";
->>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
+import { Right, PreviewOpen, Time, History } from "@icon-park/vue";
 export default {
   data() {
     return {
       banner: [],
-<<<<<<< HEAD
-      recommend: [],
-    }
-=======
     };
->>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
   },
   components: {
     Right,
@@ -221,7 +169,7 @@ export default {
   },
   filters: {
     timeFilter(data) {
-      return new Date(data * 1000).toLocaleString()
+      return new Date(data * 1000).toLocaleString();
     },
   },
   methods: {
@@ -246,20 +194,9 @@ export default {
   },
   created() {
     getBanner().then((res) => {
-<<<<<<< HEAD
-      this.banner = res.data.data
-    })
-    recommend().then((res) => {
-      if (res.data.code === 200) {
-        this.recommend = res.data.data
-        // this.recommend.splice(1, 1)
-      }
-    })
-=======
       console.log(res);
       this.banner = res.data.data;
     });
->>>>>>> 2110dd343125077e4764dac2e66dc19baadf47c7
   },
 };
 </script>

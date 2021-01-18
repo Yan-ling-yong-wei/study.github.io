@@ -63,4 +63,5 @@ export default [{
   path: "/Courses",
   name: "Courses",
   component: () => import("./orderForm/Courses")
-},]
+},
+]

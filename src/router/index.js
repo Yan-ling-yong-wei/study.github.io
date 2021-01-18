@@ -46,6 +46,9 @@ const routes = [
         path: "/my",
         name: "my",
         component: () => import("../views/Home/My.vue"),
+        meta:{
+          needLogin:true,
+        }
       },
     ],
   },

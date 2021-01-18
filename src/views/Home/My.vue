@@ -163,6 +163,9 @@ export default {
     hui() {
       this.$router.push({ path: "/svip" })
     },
+    onClickCourses(){
+      this.$router.push("/Courses")
+    }
   },
   created() {
     getUCenterInfo().then((res) => {
