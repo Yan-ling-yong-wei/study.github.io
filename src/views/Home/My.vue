@@ -125,10 +125,7 @@
     </ul>
 
     <van-overlay :show="show" @click.self="show = false">
-      <img
-        src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png"
-        alt=""
-      />
+      <img src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png" alt="" />
     </van-overlay>
   </div>
 </template>
@@ -142,17 +139,17 @@ export default {
         uid: 0,
       },
       show: false,
-    };
+    }
   },
   methods: {
     shou() {
-      this.$router.push({ path: "/collect" });
+      this.$router.push({ path: "/collect" })
     },
     guan() {
-      this.$router.push({ path: "/attention" });
+      this.$router.push({ path: "/attention" })
     },
     yi() {
-      this.$router.push({ path: "/opinion" });
+      this.$router.push({ path: "/opinion" })
     },
     ka() {
       this.$router.push({ path: "/card" })
@@ -163,9 +160,9 @@ export default {
     hui() {
       this.$router.push({ path: "/svip" })
     },
-    onClickCourses(){
+    onClickCourses() {
       this.$router.push("/Courses")
-    }
+    },
   },
   created() {
     getUCenterInfo().then((res) => {
@@ -177,7 +174,7 @@ export default {
       }
     })
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 #my {

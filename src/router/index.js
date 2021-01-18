@@ -2,9 +2,11 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Home from "../views/Home/Home.vue"
 import myRoutes from "../views/My/router"
-import LogRouter from '../views/Register/log'
-import SearchRouter from '../views/Search/sear'
+import LogRouter from "../views/Register/log"
+import SearchRouter from "../views/Search/sear"
 import ejs from "../views/HomeFeature/ejs"
+import exercise from '../views/Exercise/exercise'
+import { Toast } from "vant"
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,9 +48,9 @@ const routes = [
         path: "/my",
         name: "my",
         component: () => import("../views/Home/My.vue"),
-        meta:{
-          needLogin:true,
-        }
+        meta: {
+          needLogin: true,
+        },
       },
     ],
   },
@@ -56,6 +58,7 @@ const routes = [
   ...LogRouter,
   ...SearchRouter,
   ...ejs,
+  ...exercise,
 ]
 const router = new VueRouter({
   routes,
@@ -64,5 +67,16 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err)
 }
-
+router.beforeEach((to, from, next) => {
+  if (!sessionStorage.getItem("token")) {
+    if (to.matched.some((item) => item.meta.needLogin)) {
+      Toast.fail("请先登录！")
+      next("/login")
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 export default router

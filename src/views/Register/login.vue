@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import { Toast } from "vant"
 import { mapMutations } from "vuex"
 import { login } from "@/utils/api"
 export default {
@@ -41,7 +42,10 @@ export default {
         // this.setUser(data.data)
         sessionStorage.setItem("userId", data.data.id)
         sessionStorage.setItem("token", data.data.remember_token)
-        this.$router.push("/")
+        Toast.success("登录成功！")
+        setTimeout(() => {
+          this.$router.push("/")
+        }, 500)
       }
     },
   },

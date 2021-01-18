@@ -29,7 +29,6 @@ export default {
           endY: 0,
         }
         el.addEventListener("touchstart", function(e) {
-          console.log(e)
           switchPos.startX = e.touches[0].pageX
           switchPos.startY = e.touches[0].pageY
         })

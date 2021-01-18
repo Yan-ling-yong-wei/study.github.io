@@ -1,4 +1,5 @@
 import axios from "axios"
+import vueRouter from "vue-router"
 import { Guid } from "@/utils/guid.js"
 import { Toast } from "vant"
 const http = axios.create({
@@ -36,8 +37,11 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    reqCount--
-    if (reqCount === 0) toast.clear()
+    console.log(res)
+    if (res.data.code === 200) {
+      reqCount--
+      if (reqCount === 0) toast.clear()
+    }
     return res
   },
   (err) => {

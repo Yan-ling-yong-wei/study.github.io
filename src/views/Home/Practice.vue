@@ -3,13 +3,13 @@
     <Header title="练习"></Header>
     <div class="cont">
       <ul>
-        <li>
+        <li @click="tiku">
           <div>
             <writing-fluently theme="filled" size="24" fill="#31C2D5" />
           </div>
           <p>考点专练</p>
         </li>
-        <li>
+        <li @click="juan">
           <div>
             <book-one
               theme="filled"
@@ -20,7 +20,7 @@
           </div>
           <p>套卷练习</p>
         </li>
-        <li>
+        <li @click="kashi">
           <div>
             <book-open
               theme="filled"
@@ -31,7 +31,7 @@
           </div>
           <p>仿真考试</p>
         </li>
-        <li>
+        <li @click="cuo">
           <div>
             <newspaper-folding
               theme="filled"
@@ -42,7 +42,7 @@
           </div>
           <p>错题练习</p>
         </li>
-        <li>
+        <li @click="ce">
           <div>
             <bookshelf
               theme="filled"
@@ -53,7 +53,7 @@
           </div>
           <p>测评记录</p>
         </li>
-        <li>
+        <li @click="shou">
           <div>
             <collection-files
               theme="filled"
@@ -98,6 +98,26 @@ export default {
     NewspaperFolding,
     Bookshelf,
     CollectionFiles,
+  },
+  methods: {
+    tiku(){
+      this.$router.push({path:'/preface'})
+    },
+    juan(){
+      this.$router.push({path:'/file'})
+    },
+    kashi(){
+      this.$router.push({path:'/xam'})
+    },
+    cuo(){
+      this.$router.push({path:'/mistakes'})
+    },
+    ce(){
+      this.$router.push({path:'/appraisal'})
+    },
+    shou(){
+      this.$router.push({path:'/enshrine'})
+    }
   },
 };
 </script>

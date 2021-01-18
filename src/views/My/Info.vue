@@ -5,17 +5,17 @@
       <li @click="avatarShow = true">
         <span>头像</span><span><img :src="info.avatar" alt=""/></span>
       </li>
-      <li>
+      <li @click="$router.push({ path: '/Personal', query: { name: info.nickname } })">
         <span>昵称</span><span>{{ info.nickname }}</span>
       </li>
       <li>
         <span>手机号</span><span>{{ info.mobile }}</span>
       </li>
-      <li>
+      <li @click="$router.push({ path: '/Gender', query: { sex: info.sex } })">
         <span>性别</span><span>{{ info.sex === 0 ? "男" : info.sex === 1 ? "女" : "保密" }}</span>
       </li>
       <li @click="birthShow = true">
-        <span>出生日期</span><span>{{ date(currentDate) }}</span>
+        <span>出生日期</span><span>{{ info.birthday }}</span>
       </li>
       <li @click="cityShow = true">
         <span>所在城市</span><span>{{ info.province_name + "," + info.city_name + "," + info.district_name }}</span>
@@ -68,7 +68,6 @@ export default {
     changeDate(val) {
       setInfo({ birthday: this.date(val) }).then((res) => {
         this.birthShow = false
-
         if (res.data.code === 200) {
           // Toast.success("数据更新成功！")
           this.getInfo()
@@ -128,7 +127,9 @@ export default {
         right: 0;
         transform: translateY(-50%) rotate(45deg);
       }
-
+      &:nth-child(3)::before {
+        display: none;
+      }
       &::after {
         content: "";
         display: block;
@@ -156,6 +157,7 @@ export default {
         img {
           width: 0.74rem;
           height: 0.74rem;
+          border-radius: 50%;
         }
       }
     }
