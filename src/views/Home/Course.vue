@@ -49,8 +49,8 @@
         <van-dropdown-item title="筛选" ref="item">
           <div class="filter-box">
             <ul>
-              <li>全部</li>
-              <li>大班课</li>
+              <li v-for="item in appCourseType" :key="item.id">{{ item.name }}</li>
+              <!-- <li>大班课</li>
               <li>小班课</li>
               <li>公开课</li>
               <li>点播课</li>
@@ -58,7 +58,7 @@
               <li>音频课</li>
               <li>系统课</li>
               <li>图文课</li>
-              <li>会员课</li>
+              <li>会员课</li> -->
             </ul>
           </div>
         </van-dropdown-item>
@@ -66,7 +66,7 @@
     </div>
     <div class="cont">
       <div class="page">
-        <div class="dv" v-for="(item, index) in 10" :key="index">
+        <div class="dv" v-for="item in list" :key="item.id">
           <h4>李老师16号到22号地理大课堂开课啦</h4>
           <p>
             <time theme="outline" size="24" fill="#595959" />
@@ -88,10 +88,27 @@
   </div>
 </template>
 <script>
+import { courseClassify, courseBasis } from "@/utils/api"
 import Header from "../../components/Header.vue"
 export default {
   components: {
     Header,
+  },
+  data() {
+    return {
+      appCourseType: [],
+      list: [],
+    }
+  },
+  created() {
+    courseClassify().then((res) => {
+      console.log(res)
+      this.appCourseType = res.data.data.appCourseType
+    })
+    courseBasis().then((res) => {
+      console.log(res)
+      this.list = res.data.data.list
+    })
   },
 }
 </script>

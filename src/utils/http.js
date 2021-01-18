@@ -37,10 +37,12 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    console.log(res)
     if (res.data.code === 200) {
       reqCount--
       if (reqCount === 0) toast.clear()
+    } else {
+      toast.clear()
+      Toast.fail(res.data.msg)
     }
     return res
   },

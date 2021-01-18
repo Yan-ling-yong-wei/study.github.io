@@ -31,3 +31,6 @@ export const getUCenterInfo = () => http.get("/getUCenterInfo")
 
 //设置用户信息
 export const setInfo = (data) => http.put("/user", data)
+
+//获取城市 /sonArea/0
+export const getCity = (data) => http.get("/sonArea/410000")
