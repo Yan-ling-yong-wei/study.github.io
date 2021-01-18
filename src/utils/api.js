@@ -34,6 +34,11 @@ export const setInfo = (data) => http.put("/user", data)
 
 //获取城市 /sonArea/0
 export const getCity = (data) => http.get("/sonArea/410000")
+//点击进入详情页
+export const getDetail = (id) => http.get("/teacher/info/" + id)
+//详情页老师介绍
+export const getjie = (id) => http.get("/teacher/" + id)
+
 //关注老师接口
 export const setCollect = (id) => http.get("/teacher/collect/" + id)
 
@@ -47,5 +52,3 @@ export const getCollect = (data) => {
   // console.log(str)
   return http.get("/collect?" + str)
 }
-
-export const getTeaDetails = (id) => http.get("/teacher/" + id)

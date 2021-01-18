@@ -8,19 +8,16 @@
     <div class="xiangqing_contaner">
       <div>
         <div class="xiangqing_wrapper">
-          <div class="ima_box_container"><img src="../../assets/img/tu_34.jpg" /></div>
+          <div class="ima_box_container"><img :src="list.avatar" /></div>
           <div class="title_box_container">
-            <div class="tiqie_container"><div class="tiqie_wrapper">理想老师</div></div>
-            <div class="nav_container">
-              <span>女</span>
-              <span>32岁</span>
-              <span>10年教龄</span>
-              <span>关注数1012</span>
+            <div class="tiqie_container">
+              <div class="tiqie_wrapper">{{ list.real_name }}</div>
             </div>
+            <div class="nav_container">{{ list.introduction }}</div>
           </div>
           <div class="imag_box_container">
             <p @click="guan">
-              <button>{{ flag === 1 ? "关注" : "取消关注" }}</button>
+              <button>{{ flag === 2 ? "关注" : "取消关注" }}</button>
               <!-- <button>取消关注</button> -->
             </p>
           </div>
@@ -103,13 +100,14 @@
 
 <script>
 import { Toast } from "vant"
-import { setCollect, getTeaDetails } from "@/utils/api"
+import { setCollect, getjie } from "@/utils/api"
 export default {
   data() {
     return {
       active: 0,
       value: 4,
-      flag: 0,
+      flag: true,
+      list: [],
     }
   },
   methods: {
@@ -119,6 +117,7 @@ export default {
     guan() {
       setCollect(this.$route.query.id).then((res) => {
         console.log(res)
+        this.flag = res.data.data.flag
       })
     },
   },
@@ -130,10 +129,16 @@ export default {
       this.flag = res.data.data.flag
     })
   },
-  watch: {
-    flag(val) {
-      this.fn()
-    },
+  created() {
+    // getDetail(this.$route.query.id).then(res=>{
+    //   console.log(res)
+    // })
+    getjie(this.$route.query.id).then((res) => {
+      // console.log(res)
+      this.flag = res.data.data.flag
+      this.list = res.data.data.teacher
+      console.log(this.flag)
+    })
   },
 }
 </script>
