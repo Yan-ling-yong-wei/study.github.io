@@ -5,13 +5,13 @@
       <li @click="avatarShow = true">
         <span>头像</span><span><img :src="info.avatar" alt=""/></span>
       </li>
-      <li>
+      <li @click="$router.push({ path: '/Personal', query: { name: info.nickname } })">
         <span>昵称</span><span>{{ info.nickname }}</span>
       </li>
       <li>
         <span>手机号</span><span>{{ info.mobile }}</span>
       </li>
-      <li>
+      <li @click="$router.push({ path: '/Gender', query: { sex: info.sex } })">
         <span>性别</span><span>{{ info.sex === 0 ? "男" : info.sex === 1 ? "女" : "保密" }}</span>
       </li>
       <li @click="birthShow = true">
@@ -36,8 +36,11 @@
 </template>
 
 <script>
+import { Toast } from "vant"
 import headerNav from "@/components/Header.vue"
-import { userInfo } from "@/utils/api"
+import { userInfo, setInfo } from "@/utils/api"
+import area from "@/utils/area"
+// console.log(area)
 export default {
   components: { headerNav },
   data() {
@@ -46,21 +49,49 @@ export default {
       birthShow: false,
       minDate: new Date(1990, 0, 1),
       maxDate: new Date(2025, 10, 1),
-      currentDate: new Date(),
+      currentDate: null,
+      info: [],
+      areaList: area,
+      cityShow: false,
     }
   },
 
   created() {
-    userInfo().then((res) => {
-      console.log(res)
-    })
+    this.getInfo()
   },
   methods: {
-    onClickPersonal() {
-      this.$router.push("/Personal")
+    async getInfo() {
+      let { data } = await userInfo()
+      this.info = data.data
+      this.currentDate = new Date(this.info.birthday)
     },
-    onClickGender() {
-      this.$router.push("/Gender")
+    changeDate(val) {
+      setInfo({ birthday: this.date(val) }).then((res) => {
+        this.birthShow = false
+        if (res.data.code === 200) {
+          // Toast.success("数据更新成功！")
+          this.getInfo()
+        }
+      })
+    },
+    cityChange(val) {
+      setInfo({
+        city_id: val[1].code,
+        district_id: val[2].code,
+        province_id: val[0].code,
+      }).then((res) => {
+        this.cityShow = false
+        if (res.data.code === 200) {
+          // Toast.success("数据更新成功！")
+          this.getInfo()
+        }
+      })
+    },
+    date(val) {
+      if (val !== null) {
+        // console.log(val.getFullYear(), val.getMonth() + 1, val.getDate())
+        return val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate()
+      }
     },
   },
 }
@@ -96,7 +127,9 @@ export default {
         right: 0;
         transform: translateY(-50%) rotate(45deg);
       }
-
+      &:nth-child(3)::before {
+        display: none;
+      }
       &::after {
         content: "";
         display: block;
