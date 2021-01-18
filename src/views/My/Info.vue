@@ -1,49 +1,100 @@
 <template>
   <div class="info">
-    <header-nav back title="个人信息" rigth/>
+    <header-nav back title="个人信息" rigth />
     <ul>
       <li @click="avatarShow = true">
-        <span>头像</span><span><img src="@/assets/img/avatar.jpg" alt=""/></span>
+        <span>头像</span><span><img :src="info.avatar" alt=""/></span>
       </li>
-      <li><span>昵称</span><span>18538100192</span></li>
-      <li><span>手机号</span><span>185****0192</span></li>
-      <li><span>性别</span><span>保密</span></li>
-      <li @click="birthShow = true"><span>出生日期</span><span>1999-02-05</span></li>
-      <li><span>所在城市</span><span>北京，北京市，昌平区</span></li>
+      <li>
+        <span>昵称</span><span>{{ info.nickname }}</span>
+      </li>
+      <li>
+        <span>手机号</span><span>{{ info.mobile }}</span>
+      </li>
+      <li>
+        <span>性别</span><span>{{ info.sex === 0 ? "男" : info.sex === 1 ? "女" : "保密" }}</span>
+      </li>
+      <li @click="birthShow = true">
+        <span>出生日期</span><span>{{ date(currentDate) }}</span>
+      </li>
+      <li @click="cityShow = true">
+        <span>所在城市</span><span>{{ info.province_name + "," + info.city_name + "," + info.district_name }}</span>
+      </li>
       <li><span>学科</span><span>信息技术</span></li>
       <li><span>年级</span><span>高三</span></li>
     </ul>
-    <van-action-sheet v-model="avatarShow" :actions="[{ name: '拍照' }, { name: '从手机相册选择' }]" cancel-text="取消"
-                      close-on-click-action/>
+    <van-action-sheet v-model="avatarShow" :actions="[{ name: '拍照' }, { name: '从手机相册选择' }]" cancel-text="取消" close-on-click-action />
 
-    <van-popup v-model="birthShow" position="bottom" :style="{ height: '47%' }">
-      <van-datetime-picker v-model="currentDate" type="date" :min-date="minDate" :max-date="maxDate"
-                           @confirm="birthShow = false" @cancel="birthShow = false"/>
+    <van-popup v-model="birthShow" position="bottom">
+      <van-datetime-picker v-model="currentDate" type="date" :min-date="minDate" :max-date="maxDate" @cancel="birthShow = false" @confirm="changeDate" />
+    </van-popup>
+
+    <van-popup v-model="cityShow" position="bottom">
+      <van-area :area-list="areaList" :value="info.district_id + ''" position="bottom" @cancel="cityShow = false" @confirm="cityChange" />
     </van-popup>
   </div>
 </template>
 
 <script>
+import { Toast } from "vant"
 import headerNav from "@/components/Header.vue"
-import {userInfo} from "@/utils/api";
-
+import { userInfo, setInfo } from "@/utils/api"
+import area from "@/utils/area"
+// console.log(area)
 export default {
-  components: {headerNav},
+  components: { headerNav },
   data() {
     return {
       avatarShow: false,
       birthShow: false,
       minDate: new Date(1990, 0, 1),
       maxDate: new Date(2025, 10, 1),
-      currentDate: new Date(),
+      currentDate: null,
+      info: [],
+      areaList: area,
+      cityShow: false,
     }
   },
+
   created() {
-    userInfo().then(res => {
-      console.log(res)
-    })
+    this.getInfo()
   },
-  methods: {},
+  methods: {
+    async getInfo() {
+      let { data } = await userInfo()
+      this.info = data.data
+      this.currentDate = new Date(this.info.birthday)
+    },
+    changeDate(val) {
+      setInfo({ birthday: this.date(val) }).then((res) => {
+        this.birthShow = false
+
+        if (res.data.code === 200) {
+          // Toast.success("数据更新成功！")
+          this.getInfo()
+        }
+      })
+    },
+    cityChange(val) {
+      setInfo({
+        city_id: val[1].code,
+        district_id: val[2].code,
+        province_id: val[0].code,
+      }).then((res) => {
+        this.cityShow = false
+        if (res.data.code === 200) {
+          // Toast.success("数据更新成功！")
+          this.getInfo()
+        }
+      })
+    },
+    date(val) {
+      if (val !== null) {
+        // console.log(val.getFullYear(), val.getMonth() + 1, val.getDate())
+        return val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate()
+      }
+    },
+  },
 }
 </script>
 

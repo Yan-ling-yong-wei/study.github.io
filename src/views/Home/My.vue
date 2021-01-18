@@ -2,18 +2,18 @@
   <div id="my">
     <header>
       <div class="person">
-        <div class="info" @click="$router.push(`/${!user.mobile ? 'login' : 'info'}`)">
+        <div class="info" @click="$router.push(`/${!info.uid ? 'login' : 'info'}`)">
           <div class="avatar-box">
             <div class="avatar">
               <!--              {{user.mobile }}-->
-              <div class="img-avatar" v-if="!user.mobile"></div>
-              <img :src="user.avatar" alt="" class="img-avatar" v-else />
+              <div class="img-avatar" v-if="!info.uid"></div>
+              <img :src="info.avatar" alt="" class="img-avatar" v-else />
               <img src="../../assets/img/img00.png" alt="" class="img-vip" />
             </div>
           </div>
           <div class="mobile-box">
             <div class="mobile">
-              <span>{{ !user.mobile ? "登陆/注册" : user.mobile }}</span>
+              <span>{{ !info.uid ? "登陆/注册" : info.nickname }}</span>
             </div>
             <div class="edit">
               <img src="../../assets/img/img000.png" alt="" />
@@ -132,14 +132,14 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex"
-
+import { getUCenterInfo } from "@/utils/api"
+import { Toast } from "vant"
 export default {
-  computed: {
-    ...mapState(["user"]),
-  },
   data() {
     return {
+      info: {
+        uid: 0,
+      },
       show: false,
     }
   },
@@ -153,15 +153,25 @@ export default {
     yi() {
       this.$router.push({ path: "/opinion" })
     },
-    ka(){
-      this.$router.push({path:'/card'})
+    ka() {
+      this.$router.push({ path: "/card" })
     },
-    you(){
-      this.$router.push({path:'/discounts'})
+    you() {
+      this.$router.push({ path: "/discounts" })
     },
-    hui(){
-      this.$router.push({path:'/svip'})
-    }
+    hui() {
+      this.$router.push({ path: "/svip" })
+    },
+  },
+  created() {
+    getUCenterInfo().then((res) => {
+      console.log(res)
+      if (res.data.code !== 200) {
+        Toast.fail(res.data.msg)
+      } else {
+        this.info = res.data.data
+      }
+    })
   },
 }
 </script>

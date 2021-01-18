@@ -1,6 +1,6 @@
 <template>
   <div class="feature_container">
-    <div class="title_box_container"><Header title="特色课" right /></div>
+    <div class="title_box_container"><Header back title="特色课" right /></div>
     <div class="sele">
       <van-dropdown-menu>
         <van-dropdown-item title="分类" ref="item">
@@ -89,12 +89,29 @@
 </template>
 
 <script>
-import Header from "../../components/Header";
+import { courseClassify, courseBasis } from "@/utils/api"
+import Header from "../../components/Header"
 export default {
   components: {
     Header,
   },
-};
+  created() {
+    // courseClassify().then((res) => {
+    //   console.log(res)
+    // })
+    courseBasis({
+      page: 1, //第几页开始获取
+      limit: 10, //请求数据数量
+      course_type: "高中", //筛选类型
+      classify_id: "",
+      order_by: 0, //排序方式：（0综合排序，1最新，2最热，3价格由低到高，4价格由高到低）
+      attr_val_id: 0, //分类id
+      is_vip: 0, //是否是vip会员  默认0
+    }).then((res) => {
+      console.log(res)
+    })
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,29 +1,52 @@
 import axios from "axios"
-
+import { Guid } from "@/utils/guid.js"
+import { Toast } from "vant"
 const http = axios.create({
-    baseURL: "/api/app",
-    timeout: 10000,
+  baseURL: "http://120.53.31.103:84/api/app",
+  timeout: 5000,
 })
-
+let reqCount = 0,
+  toast
 http.interceptors.request.use(
-    (config) => {
-        config.headers = {
-            deviceType: "H5"
-        }
-        return config
-    },
-    (err) => {
-        Promise.reject(err)
+  (config) => {
+    reqCount++
+    if (reqCount !== 0) {
+      toast = Toast.loading({
+        message: "正在加载...",
+        duration: 0,
+        forbidClick: true,
+      })
     }
+
+    if (!sessionStorage.getItem("DeviceId")) {
+      let DeviceID = Guid.NewGuid().ToString("D")
+    }
+    let token = sessionStorage.getItem("token")
+    config.headers = {
+      Authorization: `Bearer ${token}`,
+      DeviceID: sessionStorage.getItem("DeviceId"),
+      deviceType: "H5",
+    }
+    return config
+  },
+  (err) => {
+    return Promise.reject(err)
+  }
 )
 
 http.interceptors.response.use(
-    (res) => {
-        return res
-    },
-    (err) => {
-        Promise.reject(err)
+  (res) => {
+    reqCount--
+    if (reqCount === 0) toast.clear()
+    return res
+  },
+  (err) => {
+    // console.log(err.request, err.message)
+    if (err.message.includes("timeout")) {
+      toast.clear()
     }
+    return Promise.reject(err)
+  }
 )
 
 export default http

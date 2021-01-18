@@ -35,13 +35,14 @@ export default {
       this.$router.push("/Register")
     },
     ...mapMutations(["setUser"]),
-    userLogin() {
-      login(this.user).then((res) => {
-        console.log(res.data)
-        this.setUser(res.data.data)
-        this.$router.back()
-      })
-
+    async userLogin() {
+      let { data } = await login(this.user)
+      if (data.code === 200) {
+        // this.setUser(data.data)
+        sessionStorage.setItem("userId", data.data.id)
+        sessionStorage.setItem("token", data.data.remember_token)
+        this.$router.push("/")
+      }
     },
   },
 }

@@ -5,19 +5,19 @@ Vue.use(Vuex)
 import vuexPersist from "vuex-persist"
 
 export default new Vuex.Store({
-    state: {
-        user: {},
+  state: {
+    user: {},
+  },
+  mutations: {
+    setUser(state, value) {
+      state.user = value
     },
-    mutations: {
-        setUser(state, value) {
-            state.user = value
-        },
-    },
-    actions: {},
-    modules: {},
-    plugins: [
-        new vuexPersist({
-            storage: window.localStorage,
-        }).plugin,
-    ],
+  },
+  actions: {},
+  modules: {},
+  plugins: [
+    new vuexPersist({
+      storage: window.localStorage,
+    }).plugin,
+  ],
 })
