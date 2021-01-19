@@ -55,3 +55,9 @@ export const getCollect = (data) => {
 
 //图片上传到服务器
 export const uploaderImg = (formData) => http.post("/public/img", formData)
+
+//课程详情页数据
+export const getCourBas = (id)=>http.get("/courseInfo/basis_id="+id)
+
+//课程收藏
+export const getKeCollect = (data)=> http.post('/collect',data)

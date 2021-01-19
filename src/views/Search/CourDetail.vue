@@ -1,5 +1,6 @@
 <template>
   <div class="courDetail">
+      <!-- 头部 -->
     <div class="hand">
         <div class="dv">
             <left theme="outline" size="24" fill="#333" @click.native="$router.back()" />
@@ -11,24 +12,26 @@
     </div>
     <div class="cont">
       <!-- 图片 -->
-      <div class="swipe"></div>
+      <div class="swipe">
+          <img :src="reslist.recommendCourse[0].cover_img">
+      </div>
       <!-- 收藏 -->
       <div class="head">
-        <h3>初中化学</h3>
-        <span @click="shou">
-          <star v-if="flag" theme="outline" size="24" fill="#f18e11" />
-          <star v-else theme="filled" size="24" fill="#f18e11" />
+        <h3>{{reslist.recommendCourse[0].title}}</h3>
+        <span @click="shou(reslist.info.collect_id)">
+          <star v-if="reslist.info.is_collect" theme="filled" size="24" fill="#f18e11" />  
+          <star v-else theme="outline" size="24" fill="#f18e11" />    
         </span>
-        <p class="p1">共1课时 | 0人已报名</p>
-        <p class="p2">免费</p>
+        <p class="p1">共{{reslist.recommendCourse[0].sales_base}}课时 | {{reslist.recommendCourse[0].sales_num}}人已报名</p>
+        <p class="p2">{{reslist.recommendCourse[0].price}}元</p>
       </div>
       <!-- 团队 -->
       <div class="tuan">
         <h3>教学团队</h3>
         <ul>
-          <li>
-            <img src="../../assets/img/avatar.jpg" />
-            <p>小张</p>
+          <li v-for="item in reslist.teachers" :key="item.teacher_id">
+            <img :src="item.teacher_avatar" />
+            <p>{{item.teacher_name}}</p>
           </li>
         </ul>
       </div>
@@ -49,11 +52,13 @@
     </van-popup>
     <!-- 底部报名 -->
     <div class="foot">
-      <button>立即报名</button>
+      <button v-if="reslist.info.is_join_study">立即学习</button> 
+      <button v-else>立即报名</button>
     </div>
   </div>
 </template>
 <script>
+import { getCourBas,getKeCollect } from "@/utils/api"
 import { Star,Left,ShareOne } from "@icon-park/vue";
 import { Toast } from "vant";
 export default {
@@ -65,8 +70,8 @@ export default {
   data() {
     return {
       active: "",
-      flag: true,
       show: false,
+      reslist:[],
       list: [
         { title: "课程介绍", id: 1 },
         { title: "课程大纲", id: 2 },
@@ -75,14 +80,22 @@ export default {
     };
   },
   methods: {
-    shou() {
-      if (this.flag) {
-        Toast("收藏成功");
-      } else {
-        Toast("取消收藏成功");
-      }
-      this.flag = !this.flag;
+    shou(id) {
+    //   console.log(id);
+        getKeCollect({
+            course_basis_id:id,
+            type: 1
+        }).then(res=>{
+            console.log(res)
+        })
     },
+  },
+  created() {
+    //   console.log(this.$route.query.id);
+      getCourBas(this.$route.query.id).then(res=>{
+        console.log(res.data.data);
+        this.reslist=res.data.data
+      })
   },
 };
 </script>
@@ -169,15 +182,17 @@ export default {
         padding: 0.2rem 0;
         display: flex;
         li {
-          width: 1.8rem;
+          width: 1rem;
           height: 100%;
           text-align: center;
+          margin-right: 0.1rem;
           img {
-            width: 55%;
-            height: 60%;
+            width: 90%;
+            height: 55%;
+            border-radius: 50%;
           }
           p {
-            font-size: 0.3rem;
+            font-size: 0.2rem;
             margin-top: 0.16rem;
           }
         }
