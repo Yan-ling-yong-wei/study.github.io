@@ -126,7 +126,7 @@ export default {
         this.reslist = this.listData.filter((item) => {
           return item.title.includes(val);
         });
-      }
+      }   
     },
     history() {
       localStorage.setItem("searchList", JSON.stringify(this.history));
