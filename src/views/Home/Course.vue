@@ -63,6 +63,7 @@
           </div>
           <div class="right">
             <p>{{ item.title }}</p>
+            <check-one class="h4" v-if="item.has_buy" theme="filled" size="24" fill="#f3850f"/>
             <p>
               <span>{{ item.sales_num }}人已报名</span>
               <span>免费</span>
@@ -75,10 +76,12 @@
 </template>
 <script>
 import { courseClassify, courseBasis } from "@/utils/api"
+import { CheckOne } from "@icon-park/vue"
 import Header from "../../components/Header.vue"
 export default {
   components: {
     Header,
+    CheckOne,
   },
   data() {
     return {
@@ -97,7 +100,7 @@ export default {
       this.appCourseType = res.data.data.appCourseType
     })
     courseBasis().then((res) => {
-      // console.log(res)
+      console.log(res)
       this.list = res.data.data.list
     })
   },
@@ -253,9 +256,15 @@ export default {
         }
         .right {
           display: flex;
+          position: relative;
           flex-direction: column;
           flex-grow: 1;
           justify-content: space-between;
+          .h4{
+            position: absolute;
+            right: 0.1rem;
+            top: 0.2rem;
+          }
           p:first-child {
             font-size: 0.28rem;
           }
