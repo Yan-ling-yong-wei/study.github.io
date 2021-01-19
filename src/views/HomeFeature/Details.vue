@@ -10,13 +10,15 @@
         <div class="xiangqing_wrapper">
           <div class="ima_box_container"><img :src="list.avatar" /></div>
           <div class="title_box_container">
-            <div class="tiqie_container"><div class="tiqie_wrapper">{{list.real_name}}</div></div>
-            <div class="nav_container">{{list.introduction}}</div>
+            <div class="tiqie_container">
+              <div class="tiqie_wrapper">{{ list.real_name }}</div>
+            </div>
+            <div class="nav_container">{{ list.introduction }}</div>
           </div>
           <div class="imag_box_container">
             <p @click="guan">
-              <button v-if="flag">关注</button>
-              <button v-else>取消关注</button>
+              <button>{{ flag === 2 ? "关注" : "取消关注" }}</button>
+              <!-- <button>取消关注</button> -->
             </p>
           </div>
         </div>
@@ -54,8 +56,7 @@
                 <nav>23分钟一节课</nav>
                 <nav>偶像</nav>
                 <nav>
-                  教程作者：白苔白（软件基础应33期学员）原图作者
-                  本次教程会教你如何利用AE制作文字动态LOGO
+                  教程作者：白苔白（软件基础应33期学员）原图作者 本次教程会教你如何利用AE制作文字动态LOGO
                 </nav>
               </div>
             </div>
@@ -98,53 +99,48 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
-import { setCollect,getjie } from "@/utils/api"
+import { Toast } from "vant"
+import { setCollect, getjie } from "@/utils/api"
 export default {
   data() {
     return {
       active: 0,
       value: 4,
       flag: true,
-      list:[],
-
-    };
+      list: [],
+    }
   },
   methods: {
     onClickFan() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
-    guan(){ 
-      if(this.flag==true){
-        Toast('关注成功');
-      }else{
-        Toast('取消关注成功');
-      }
-      this.flag = !this.flag;
-    },
-    fn(){
-      setCollect(this.$route.query.id).then(res=>{
+    guan() {
+      setCollect(this.$route.query.id).then((res) => {
         console.log(res)
+        this.flag = res.data.data.flag
       })
-    }
-    
+    },
+  },
+  created() {
+    // setCollect(this.$route.query.id).then((res) => {
+    //   console.log(res.data.data.flag)
+    // })
+    getTeaDetails(this.$route.query.id).then((res) => {
+      this.flag = res.data.data.flag
+    })
   },
   created() {
     // getDetail(this.$route.query.id).then(res=>{
     //   console.log(res)
     // })
-    getjie(this.$route.query.id).then(res=>{
+    getjie(this.$route.query.id).then((res) => {
       // console.log(res)
-      this.list=res.data.data.teacher
-      console.log(this.list)
+      this.flag = res.data.data.flag
+      this.list = res.data.data.teacher
+      console.log(this.flag)
     })
   },
-  watch:{
-    flag(val){
-      this.fn()
-    }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -228,7 +224,7 @@ export default {
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          button{
+          button {
             width: 100%;
             font-size: 0.2rem;
             border-radius: 0.1rem;

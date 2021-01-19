@@ -49,16 +49,7 @@
         <van-dropdown-item title="筛选" ref="item">
           <div class="filter-box">
             <ul>
-              <li>全部</li>
-              <li>大班课</li>
-              <li>小班课</li>
-              <li>公开课</li>
-              <li>点播课</li>
-              <li>面授课</li>
-              <li>音频课</li>
-              <li>系统课</li>
-              <li>图文课</li>
-              <li>会员课</li>
+              <li v-for="item in appCourseType" :key="item.id">{{ item.name }}</li>
             </ul>
           </div>
         </van-dropdown-item>
@@ -66,21 +57,16 @@
     </div>
     <div class="cont">
       <div class="page">
-        <div class="dv" v-for="(item, index) in 10" :key="index">
-          <h4>李老师16号到22号地理大课堂开课啦</h4>
-          <p>
-            <time theme="outline" size="24" fill="#595959" />
-            03月16日 18:30 ~ 03月22日 15:00 | 共8课时
-          </p>
-          <div class="teacher">
-            <div class="tea-item">
-              <img src="../../assets/img/avatar.jpg" />
-              <span>李青</span>
-            </div>
+        <div class="dv" v-for="item in list" :key="item.id">
+          <div class="left">
+            <img :src="item.cover_img" alt="" />
           </div>
-          <div class="footer">
-            <span class="sp1">178人已报名</span>
-            <span class="sp2">免费</span>
+          <div class="right">
+            <p>{{ item.title }}</p>
+            <p>
+              <span>{{ item.sales_num }}人已报名</span>
+              <span>免费</span>
+            </p>
           </div>
         </div>
       </div>
@@ -88,10 +74,27 @@
   </div>
 </template>
 <script>
+import { courseClassify, courseBasis } from "@/utils/api"
 import Header from "../../components/Header.vue"
 export default {
   components: {
     Header,
+  },
+  data() {
+    return {
+      appCourseType: [],
+      list: [],
+    }
+  },
+  created() {
+    courseClassify().then((res) => {
+      console.log(res)
+      this.appCourseType = res.data.data.appCourseType
+    })
+    courseBasis().then((res) => {
+      console.log(res)
+      this.list = res.data.data.list
+    })
   },
 }
 </script>
@@ -230,54 +233,36 @@ export default {
       padding: 0.3rem;
       flex-direction: column;
       .dv {
-        width: 100%;
-        height: 3.5rem;
-        background: white;
-        border-radius: 0.1rem;
-        margin-bottom: 0.3rem;
-        padding: 0 0.2rem;
-        > h4 {
-          font-size: 0.34rem;
-          padding-top: 0.3rem;
-          color: #333;
-        }
-        > p {
-          font-size: 0.26rem;
-          padding: 0.12rem 0;
-          color: #666;
-        }
-        .teacher {
-          width: 100%;
-          height: 1.4rem;
-          border-bottom: 0.02rem solid #f5f5f5;
-          display: flex;
-          .tea-item {
-            height: 100%;
-            align-items: center;
-            display: flex;
-            img {
-              height: 0.56rem;
-            }
-            span {
-              color: rgba(0, 0, 0, 0.45);
-              font-size: 0.2rem;
-              margin-left: 0.18rem;
-            }
+        padding: 0.2rem;
+        background-color: #fff;
+        border-radius: 0.2rem;
+        margin-bottom: 0.2rem;
+        display: flex;
+        .left {
+          margin-right: 0.2rem;
+          img {
+            width: 2rem;
+            height: 1.2rem;
+            border-radius: 0.1rem;
           }
         }
-        .footer {
-          width: 100%;
-          height: 1rem;
-          line-height: 1rem;
-          .sp1 {
-            float: left;
-            color: rgba(0, 0, 0, 0.45);
+        .right {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          justify-content: space-between;
+          p:first-child {
             font-size: 0.28rem;
           }
-          .sp2 {
-            float: right;
-            color: #44a426;
-            font-size: 0.34rem;
+          p:last-child {
+            font-size: 0.24rem;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(0, 0, 0, 0.45);
+            span:last-child {
+              color: #44a426;
+              font-size: 0.28rem;
+            }
           }
         }
       }

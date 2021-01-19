@@ -9,13 +9,24 @@
           </div>
           <div class="con">
             <h3>
-              <p>{{item.teacher_name}}</p>
+              <p>{{ item.teacher_name }}</p>
               <span>已关注</span>
             </h3>
-            <p>{{item.introduction}}</p>
+            <p>{{ item.introduction }}</p>
           </div>
           <div class="rig">
-            <button>查看详情</button>
+            <button
+              @click="
+                $router.push({
+                  path: '/Details',
+                  query: {
+                    id: item.teacher_id,
+                  },
+                })
+              "
+            >
+              查看详情
+            </button>
           </div>
         </li>
       </ul>
@@ -23,29 +34,29 @@
   </div>
 </template>
 <script>
-import Header from "@/components/Header";
-import { getCollect } from "@/utils/api";
+import Header from "@/components/Header"
+import { getCollect } from "@/utils/api"
 export default {
   components: {
     Header,
   },
   data() {
-      return {
-          list: []
-      }
+    return {
+      list: [],
+    }
   },
   created() {
     getCollect({
       page: 1,
       limit: 3,
       type: 2,
-    }).then(res=>{
-        // console.log(res.data.data.list)
-        this.list=res.data.data.list
-        console.log(this.list)
+    }).then((res) => {
+      // console.log(res.data.data.list)
+      this.list = res.data.data.list
+      console.log(this.list)
     })
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .attention {
