@@ -1,29 +1,32 @@
 <template>
   <div class="courDetail">
-      <!-- 头部 -->
+    <!-- 头部 -->
     <div class="hand">
-        <div class="dv">
-            <left theme="outline" size="24" fill="#333" @click.native="$router.back()" />
-        </div>
-        <div class="dv">课程详情</div>
-        <div class="dv">
-            <share-one theme="outline" size="24" @click.native="show = true" fill="#333"/>
-        </div>
+      <div class="dv">
+        <left theme="outline" size="24" fill="#333" @click.native="$router.back()" />
+      </div>
+      <div class="dv">课程详情</div>
+      <div class="dv">
+        <share-one theme="outline" size="24" @click.native="show = true" fill="#333" />
+      </div>
     </div>
     <div class="cont" v-if="reslist.recommendCourse">
       <!-- 图片 -->
       <div class="swipe">
-          <img :src="reslist.recommendCourse[0].cover_img">
+        <img :src="reslist.recommendCourse[0].cover_img" />
       </div>
       <!-- 收藏 -->
       <div class="head">
-        <h3>{{reslist.recommendCourse[0].title}}</h3>
+        <h3>{{ reslist.recommendCourse[0].title }}</h3>
         <span @click="shou(reslist.info.collect_id)">
-          <star v-if="reslist.info.is_collect" theme="filled" size="24" fill="#f18e11" />  
-          <star v-else theme="outline" size="24" fill="#f18e11" />    
+          <star v-if="reslist.info.is_collect" theme="filled" size="24" fill="#f18e11" />
+          <star v-else theme="outline" size="24" fill="#f18e11" />
         </span>
-        <p class="p1">共{{reslist.recommendCourse[0].sales_base}}课时 | {{reslist.recommendCourse[0].sales_num}}人已报名</p>
-        <p class="p2">{{reslist.recommendCourse[0].price}}元</p>
+        <p class="p1">
+          共{{ reslist.recommendCourse[0].sales_base }}课时 |
+          {{ reslist.recommendCourse[0].sales_num }}人已报名
+        </p>
+        <p class="p2">{{ reslist.recommendCourse[0].price }}元</p>
       </div>
       <!-- 团队 -->
       <div class="tuan">
@@ -31,7 +34,7 @@
         <ul>
           <li v-for="item in reslist.teachers" :key="item.teacher_id">
             <img :src="item.teacher_avatar" />
-            <p>{{item.teacher_name}}</p>
+            <p>{{ item.teacher_name }}</p>
           </li>
         </ul>
       </div>
@@ -43,59 +46,71 @@
       </van-tabs>
     </div>
     <!-- 分享弹出层 -->
-    <van-popup v-model="show" round position="bottom" :style="{ height: '30%' }">
-        <ul>
-            <li>微信</li>
-            <li>QQ</li>
-            <li>微博</li>
-        </ul>
-    </van-popup>
+    <div>
+      <van-share-sheet v-model="show" title="立即分享给好友" :options="options"/>
+    </div>
+    <!-- 弹出二维码图片 -->
+    <div>
+      <van-overlay :show="showimage" @click="showimage = false" >
+        <div class="wrapper" @click.stop>
+          <div class="block" />
+        </div>
+      </van-overlay>
+    </div>
     <!-- 底部报名 -->
     <div class="foot" v-if="reslist.info">
-      <button v-if="reslist.info.is_join_study">立即学习</button> 
+      <button v-if="reslist.info.is_join_study">立即学习</button>
       <button v-else>立即报名</button>
     </div>
   </div>
 </template>
 <script>
-import { getCourBas,getKeCollect } from "@/utils/api"
-import { Star,Left,ShareOne } from "@icon-park/vue";
+import { getCourBas, getKeCollect } from "@/utils/api";
+import { Star, Left, ShareOne } from "@icon-park/vue";
 import { Toast } from "vant";
 export default {
   components: {
     Star,
     Left,
-    ShareOne
+    ShareOne,
   },
   data() {
     return {
       active: "",
       show: false,
-      reslist:[],
+      reslist: [],
+      showimage: false,
       list: [
         { title: "课程介绍", id: 1 },
         { title: "课程大纲", id: 2 },
         { title: "课程评价", id: 3 },
       ],
+      options: [
+        [
+          { name: "微信", icon: "wechat" },
+          { name: "微博", icon: "weibo" },
+          { name: "QQ", icon: "qq" },
+        ],
+      ],
     };
   },
   methods: {
     shou(id) {
-    //   console.log(id);
-        getKeCollect({
-            course_basis_id:id,
-            type: 0
-        }).then(res=>{
-            console.log(res)
-        })
+      //   console.log(id);
+      getKeCollect({
+        course_basis_id: id,
+        type: 0,
+      }).then((res) => {
+        console.log(res);
+      });
     },
   },
   created() {
     //   console.log(this.$route.query.id);
-      getCourBas(this.$route.query.id).then(res=>{
-        console.log(res.data.data);
-        this.reslist=res.data.data
-      })
+    getCourBas(this.$route.query.id).then((res) => {
+      console.log(res.data.data);
+      this.reslist = res.data.data;
+    });
   },
 };
 </script>
@@ -111,18 +126,18 @@ export default {
     padding: 0 0.3rem;
     display: flex;
     align-items: center;
-    .dv{
-        flex: 1;
-        &:nth-child(1){
-           text-align: left; 
-        }
-        &:nth-child(2){
-           text-align: center; 
-           font-size: 0.36rem;
-        }
-        &:nth-child(3){
-           text-align: right; 
-        }   
+    .dv {
+      flex: 1;
+      &:nth-child(1) {
+        text-align: left;
+      }
+      &:nth-child(2) {
+        text-align: center;
+        font-size: 0.36rem;
+      }
+      &:nth-child(3) {
+        text-align: right;
+      }
     }
   }
   .cont {
@@ -228,6 +243,21 @@ export default {
       margin-top: 0.1rem;
       border-radius: 0.4rem;
     }
+  }
+}
+.weixin_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  li {
+    width: 26%;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid red;
+    text-align: center;
+    line-height: 2rem;
   }
 }
 </style>
