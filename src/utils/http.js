@@ -50,6 +50,7 @@ http.interceptors.response.use(
     // console.log(err.request, err.message)
     if (err.message.includes("timeout")) {
       toast.clear()
+      Toast.fail("连接超时！")
     }
     return Promise.reject(err)
   }

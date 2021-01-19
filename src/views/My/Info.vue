@@ -23,22 +23,27 @@
       <li><span>学科</span><span>信息技术</span></li>
       <li><span>年级</span><span>高三</span></li>
     </ul>
-    <van-action-sheet v-model="avatarShow" :actions="[{ name: '拍照' }, { name: '从手机相册选择' }]" cancel-text="取消" close-on-click-action />
-
+    <!-- <van-action-sheet v-model="avatarShow" :actions="[{ name: '拍照' }, { name: '从手机相册选择' }]" cancel-text="取消" close-on-click-action /> -->
+    <!-- //头像上传 -->
+    <van-popup v-model="avatarShow" position="bottom" class="avatarPopup">
+      <div class="van-hairline--bottom">拍照</div>
+      <van-uploader class="van-hairline--bottom" :after-read="afterRead">从手机相册选择</van-uploader>
+      <div @click="avatarShow = false">取消</div>
+    </van-popup>
+    <!-- 生日选择 -->
     <van-popup v-model="birthShow" position="bottom">
       <van-datetime-picker v-model="currentDate" type="date" :min-date="minDate" :max-date="maxDate" @cancel="birthShow = false" @confirm="changeDate" />
     </van-popup>
-
+    <!-- 城市选择 -->
     <van-popup v-model="cityShow" position="bottom">
       <van-area :area-list="areaList" :value="info.district_id + ''" position="bottom" @cancel="cityShow = false" @confirm="cityChange" />
     </van-popup>
   </div>
 </template>
-
 <script>
 import { Toast } from "vant"
 import headerNav from "@/components/Header.vue"
-import { userInfo, setInfo } from "@/utils/api"
+import { userInfo, setInfo, uploaderImg } from "@/utils/api"
 import area from "@/utils/area"
 // console.log(area)
 export default {
@@ -60,6 +65,23 @@ export default {
     this.getInfo()
   },
   methods: {
+    afterRead(file) {
+      // console.log(file)
+      let formData = new FormData()
+      formData.append("file", file.file)
+      uploaderImg(formData).then((res) => {
+        // console.log(res)
+        if (res.data.code === 200) {
+          setInfo({ avatar: res.data.data.path }).then((result) => {
+            if (result.data.code === 200) {
+              // Toast("更新成功！")
+              this.avatarShow = false
+              this.getInfo()
+            }
+          })
+        }
+      })
+    },
     async getInfo() {
       let { data } = await userInfo()
       this.info = data.data
@@ -69,7 +91,7 @@ export default {
       setInfo({ birthday: this.date(val) }).then((res) => {
         this.birthShow = false
         if (res.data.code === 200) {
-          // Toast.success("数据更新成功！")
+          // Toast("更新成功！")
           this.getInfo()
         }
       })
@@ -161,6 +183,16 @@ export default {
         }
       }
     }
+  }
+}
+.avatarPopup {
+  padding: 0 0.4rem;
+  div {
+    // text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 0.4rem 0;
+    font-size: 0.32rem;
   }
 }
 </style>

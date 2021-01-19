@@ -15,7 +15,7 @@ export const recommend = () => http.get("/recommend/appIndex")
 
 // 特色课
 export const courseBasis = (data) => {
-  console.log(data)
+  // console.log(data)
   let str = ""
   for (const key in data) {
     str += `${key}=${data[key]}&`
@@ -52,3 +52,6 @@ export const getCollect = (data) => {
   // console.log(str)
   return http.get("/collect?" + str)
 }
+
+//图片上传到服务器
+export const uploaderImg = (formData) => http.post("/public/img", formData)
