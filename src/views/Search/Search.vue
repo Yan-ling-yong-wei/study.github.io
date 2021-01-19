@@ -14,9 +14,8 @@
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
         <input
           type="text"
-          :value="value"
+          v-model="value"
           placeholder="请输入关键字"
-          @input="onInput"
           @keydown.enter="onEnter(value)"
         />
       </div>
@@ -92,52 +91,43 @@ export default {
       value: "",
       list: [], //搜索后的数据
       history: JSON.parse(localStorage.getItem("searchList")) || [], //历史记录
-      listData: [], //搜索时的选框
+      listData: [], //获取的全部数据
       showList: false,
-      reslist: [],
+      reslist: [], //关键词
     };
   },
   methods: {
-    // 输入关键字查找事件
-    onInput(e) {
-      // console.log(e.target.value);
-      // console.log(this.value);
-      if (e.target.value == "") {
-        this.reslist = [];
-      } else {
-        this.value = e.target.value;
-        this.reslist = this.listData.filter((item) => {
-          return item.title.includes(this.value);
-        });
-      }
-    },
-
     // 按下搜索事件
     onEnter(val) {
       this.reslist = [];
-      if (this.value === "") {
-        alert("内容不能为空！");
-      } else {
-        getSearch({
-          limit: 6,
-          page: 1,
-          course_type: 0,
-          keyWords: val,
-        }).then((res) => {
-          console.log(res.data.data.list);
-          this.list = res.data.data.list;
-        });
-        if (this.history.length >= 5) this.history.pop();
-        this.history.unshift(this.value);
-        this.value = "";
-        // this.$router.push("")
-      }
+      this.showList = true;
+      getSearch({
+        limit: 6,
+        page: 1,
+        course_type: 0,
+        keyWords: val,
+      }).then((res) => {
+        this.list = res.data.data.list;
+      });
+      if (this.history.length >= 5) this.history.pop();
+      this.history.unshift(val);
     },
     go(id) {
       this.$router.push({ path: "/courDetail", query: { id } });
     },
   },
   watch: {
+    value(val) {
+      if (val == "") {
+        this.reslist = [];
+        this.list=[];
+        this.showList=false
+      } else {
+        this.reslist = this.listData.filter((item) => {
+          return item.title.includes(val);
+        });
+      }
+    },
     history() {
       localStorage.setItem("searchList", JSON.stringify(this.history));
     },
@@ -282,8 +272,4 @@ ul {
     border-bottom: 0.01rem solid #ccc;
   }
 }
-// div {
-//     line-height: 1rem;
-//     border-bottom: 1px solid #eeeeee;
-//   }
 </style>
