@@ -8,6 +8,11 @@ export default [
         path:'/courDetail',
         name:"courDetail",
         component:()=>import('./CourDetail.vue')
+    },
+    {
+        path:'/qrCode',
+        name:'qrCode',
+        component:()=>import('./QRCode.vue')
     }
   ]
   

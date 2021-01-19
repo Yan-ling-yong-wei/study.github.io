@@ -47,15 +47,7 @@
     </div>
     <!-- 分享弹出层 -->
     <div>
-      <van-share-sheet v-model="show" title="立即分享给好友" :options="options"/>
-    </div>
-    <!-- 弹出二维码图片 -->
-    <div>
-      <van-overlay :show="showimage" @click="showimage = false" >
-        <div class="wrapper" @click.stop>
-          <div class="block" />
-        </div>
-      </van-overlay>
+      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options"/>
     </div>
     <!-- 底部报名 -->
     <div class="foot" v-if="reslist.info">
@@ -96,7 +88,7 @@ export default {
   },
   methods: {
     shou(id) {
-      //   console.log(id);
+        // console.log(id);
       getKeCollect({
         course_basis_id: id,
         type: 0,
@@ -104,6 +96,10 @@ export default {
         console.log(res);
       });
     },
+    fen(option){
+      // console.log(option.name);
+      this.$router.push({path:'/qrCode',query:{name:option.name}})
+    }
   },
   created() {
     //   console.log(this.$route.query.id);
