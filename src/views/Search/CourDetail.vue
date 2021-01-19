@@ -91,7 +91,7 @@ export default {
         // console.log(id);
       getKeCollect({
         course_basis_id: id,
-        type: 0,
+        type: 1,
       }).then((res) => {
         console.log(res);
       });
