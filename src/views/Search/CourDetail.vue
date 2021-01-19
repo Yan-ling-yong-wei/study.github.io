@@ -10,7 +10,7 @@
             <share-one theme="outline" size="24" @click.native="show = true" fill="#333"/>
         </div>
     </div>
-    <div class="cont">
+    <div class="cont" v-if="reslist.recommendCourse">
       <!-- 图片 -->
       <div class="swipe">
           <img :src="reslist.recommendCourse[0].cover_img">
@@ -51,7 +51,7 @@
         </ul> -->
     </van-popup>
     <!-- 底部报名 -->
-    <div class="foot">
+    <div class="foot" v-if="reslist.info">
       <button v-if="reslist.info.is_join_study">立即学习</button> 
       <button v-else>立即报名</button>
     </div>
@@ -84,7 +84,7 @@ export default {
     //   console.log(id);
         getKeCollect({
             course_basis_id:id,
-            type: 1
+            type: 0
         }).then(res=>{
             console.log(res)
         })
@@ -202,7 +202,7 @@ export default {
       margin-bottom: 0.2rem;
       padding: 0 0.2rem;
       background: white;
-      height: 3rem;
+      height: 10rem;
       overflow: hidden;
       h3 {
         font-size: 0.32rem;
