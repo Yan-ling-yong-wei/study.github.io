@@ -4,7 +4,7 @@ import { Guid } from "@/utils/guid.js"
 import { Toast } from "vant"
 const http = axios.create({
   baseURL: "http://120.53.31.103:84/api/app",
-  timeout: 5000,
+  timeout: 10000,
 })
 let reqCount = 0
 

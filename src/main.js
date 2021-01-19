@@ -16,6 +16,10 @@ Vue.use(Vant)
 import axios from "axios"
 Vue.prototype.$axios = axios
 
+
+import VueQriously from 'vue-qriously'
+Vue.use(VueQriously)
+
 new Vue({
   router,
   store,

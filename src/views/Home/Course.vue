@@ -57,7 +57,7 @@
     </div>
     <div class="cont">
       <div class="page">
-        <div class="dv" v-for="item in list" :key="item.id">
+        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
@@ -86,13 +86,18 @@ export default {
       list: [],
     }
   },
+  methods: {
+    go(id){
+      this.$router.push({path:'/courDetail',query:{id}})
+    }
+  },
   created() {
     courseClassify().then((res) => {
-      console.log(res)
+      // console.log(res)
       this.appCourseType = res.data.data.appCourseType
     })
     courseBasis().then((res) => {
-      console.log(res)
+      // console.log(res)
       this.list = res.data.data.list
     })
   },

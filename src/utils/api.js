@@ -58,3 +58,8 @@ export const uploaderImg = (formData) => http.post("/public/img", formData)
 
 //发送验证码
 export const smsCode = (obj) => http.post("/smsCode", obj)
+//课程详情页数据
+export const getCourBas = (id) => http.get("/courseInfo/basis_id=" + id)
+
+//课程收藏
+export const getKeCollect = (data) => http.post("/collect", data)
