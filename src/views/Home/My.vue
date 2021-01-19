@@ -27,7 +27,7 @@
             <p class="name">我的课程</p>
             <p class="note">已购课程学习</p>
           </div>
-          <div class="my-plan item">
+          <div class="my-plan item" @click="Appointment">
             <p class="count">0</p>
             <p class="name">我的预约</p>
             <p class="note">一对一老师预约</p>
@@ -163,6 +163,9 @@ export default {
     onClickCourses() {
       this.$router.push("/Courses")
     },
+    Appointment(){
+      this.$router.push("/Appointment")
+    }
   },
   created() {
     getUCenterInfo().then((res) => {

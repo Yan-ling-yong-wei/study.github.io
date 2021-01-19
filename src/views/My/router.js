@@ -67,4 +67,14 @@ export default [
     name: "Gender",
     component: () => import("./infoModule/Gender"),
   },
+  {
+    path: "/Courses",
+    name: "Courses",
+    component: () => import("./orderForm/Courses"),
+  },
+  {
+    path: "/Appointment",
+    name: "Appointment",
+    component: () => import("./orderForm/Appointment"),
+  },
 ]
