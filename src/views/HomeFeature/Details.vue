@@ -8,18 +8,18 @@
     <div class="xiangqing_contaner">
       <div>
         <div class="xiangqing_wrapper">
-          <div class="ima_box_container"><img src="../../assets/img/tu_34.jpg" /></div>
+          <div class="ima_box_container"><img :src="list.avatar" /></div>
           <div class="title_box_container">
-            <div class="tiqie_container"><div class="tiqie_wrapper">理想老师</div></div>
-            <div class="nav_container">
-              <span>女</span>
-              <span>32岁</span>
-              <span>10年教龄</span>
-              <span>关注数1012</span>
+            <div class="tiqie_container">
+              <div class="tiqie_wrapper">{{ list.real_name }}</div>
             </div>
+            <div class="nav_container">{{ list.introduction }}</div>
           </div>
           <div class="imag_box_container">
-            <img src="../../assets/img/touxiang1.png" alt="" />
+            <p @click="guan">
+              <button>{{ flag === 2 ? "关注" : "取消关注" }}</button>
+              <!-- <button>取消关注</button> -->
+            </p>
           </div>
         </div>
         <div class="button_container">
@@ -56,8 +56,7 @@
                 <nav>23分钟一节课</nav>
                 <nav>偶像</nav>
                 <nav>
-                  教程作者：白苔白（软件基础应33期学员）原图作者
-                  本次教程会教你如何利用AE制作文字动态LOGO
+                  教程作者：白苔白（软件基础应33期学员）原图作者 本次教程会教你如何利用AE制作文字动态LOGO
                 </nav>
               </div>
             </div>
@@ -100,19 +99,48 @@
 </template>
 
 <script>
+import { Toast } from "vant"
+import { setCollect, getjie } from "@/utils/api"
 export default {
   data() {
     return {
       active: 0,
       value: 4,
-    };
+      flag: true,
+      list: [],
+    }
   },
   methods: {
     onClickFan() {
-      this.$router.go(-1);
+      this.$router.go(-1)
+    },
+    guan() {
+      setCollect(this.$route.query.id).then((res) => {
+        console.log(res)
+        this.flag = res.data.data.flag
+      })
     },
   },
-};
+  created() {
+    // setCollect(this.$route.query.id).then((res) => {
+    //   console.log(res.data.data.flag)
+    // })
+    getTeaDetails(this.$route.query.id).then((res) => {
+      this.flag = res.data.data.flag
+    })
+  },
+  created() {
+    // getDetail(this.$route.query.id).then(res=>{
+    //   console.log(res)
+    // })
+    getjie(this.$route.query.id).then((res) => {
+      // console.log(res)
+      this.flag = res.data.data.flag
+      this.list = res.data.data.teacher
+      console.log(this.flag)
+    })
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -196,8 +224,13 @@ export default {
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          img {
-            font-size: 1rem;
+          button {
+            width: 100%;
+            font-size: 0.2rem;
+            border-radius: 0.1rem;
+            border: none;
+            background: orangered;
+            padding: 0.06rem 0.2rem;
           }
         }
       }

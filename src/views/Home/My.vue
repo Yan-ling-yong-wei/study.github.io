@@ -169,7 +169,6 @@ export default {
   },
   created() {
     getUCenterInfo().then((res) => {
-      console.log(res)
       if (res.data.code !== 200) {
         Toast.fail(res.data.msg)
       } else {

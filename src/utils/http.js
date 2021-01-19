@@ -4,7 +4,7 @@ import { Guid } from "@/utils/guid.js"
 import { Toast } from "vant"
 const http = axios.create({
   baseURL: "http://120.53.31.103:84/api/app",
-  timeout: 5000,
+  timeout: 10000,
 })
 let reqCount = 0,
   toast
@@ -37,10 +37,12 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    console.log(res)
     if (res.data.code === 200) {
       reqCount--
       if (reqCount === 0) toast.clear()
+    } else {
+      toast.clear()
+      Toast.fail(res.data.msg)
     }
     return res
   },
@@ -48,6 +50,7 @@ http.interceptors.response.use(
     // console.log(err.request, err.message)
     if (err.message.includes("timeout")) {
       toast.clear()
+      Toast.fail("连接超时！")
     }
     return Promise.reject(err)
   }

@@ -2,7 +2,7 @@
     <div class="revamp">
         <div class="top">
             <div class="dv">
-                <left theme="outline" size="24" fill="#333"/>
+                <left theme="outline" size="24" fill="#333"  @click.native="$router.back()" />
             </div>
             <div class="rig">
                 <ul>
@@ -31,19 +31,33 @@
                 <li><input type="checkbox">&emsp;D、达尔文发现生物进化论</li>
             </ul>
             <div class="dv">
-                
+                <button>上一题</button>
+                <button>确定</button>
+                <button>下一题</button>
             </div>
+        </div>
+        <div class="foot">
+            <button>
+                <clear theme="outline" size="16" fill="#1a70ec"/>
+                移出错题
+            </button>
+            <button>
+                <preview-open theme="outline" size="16" fill="#1a70ec"/>
+                查看答案
+            </button>
         </div>
     </div>
 </template>
 <script>
-import { Left,MessageOne,Star,TerminationFile } from "@icon-park/vue";
+import { Left,MessageOne,Star,TerminationFile,Clear,PreviewOpen } from "@icon-park/vue";
 export default {
     components:{
         Left,
         MessageOne,
         Star,
         TerminationFile,
+        Clear,
+        PreviewOpen
     },
 }
 </script>
@@ -77,7 +91,7 @@ export default {
             width: 100%;
             height: 0.9rem;
             border-bottom: 0.01rem solid #ddd;
-            padding: 0 0.2rem;
+            padding: 0 0.4rem;
             font-size: 0.3rem;
             display: flex;
             align-items: center;
@@ -102,6 +116,34 @@ export default {
                 li{
                     margin: 0.3rem 0;
                 }
+            }
+            .dv{
+                width: 100%;
+                height: 0.8rem;
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+                button{
+                    background: none;
+                    border: 0.01rem solid #555;
+                    border-radius: 0.1rem;
+                    padding: 0.2rem 0.3rem;
+                }
+            }
+        }
+        .foot{
+            width: 100%;
+            height: 1rem;
+            padding: 0 0.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            button{
+                padding: 0.14rem 0.3rem;
+                background: none;
+                font-size: 0.3rem;
+                border: 0.01rem solid #555;
+                border-radius: 0.1rem;
             }
         }
     }
