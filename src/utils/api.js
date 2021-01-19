@@ -61,3 +61,14 @@ export const getCourBas = (id)=>http.get("/courseInfo/basis_id="+id)
 
 //课程收藏
 export const getKeCollect = (data)=> http.post('/collect',data)
+
+//搜索接口
+export const getSearch = (data)=>{
+  // console.log(data);
+  let str=''
+  for (const key in data) {
+    str += `${key}=${data[key]}&`
+  }
+  // console.log(str)
+  return http.get("/courseBasis?" + str)
+}
