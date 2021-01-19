@@ -44,11 +44,11 @@
     </div>
     <!-- 分享弹出层 -->
     <van-popup v-model="show" round position="bottom" :style="{ height: '30%' }">
-        <!-- <ul>
+        <ul>
             <li>微信</li>
             <li>QQ</li>
             <li>微博</li>
-        </ul> -->
+        </ul>
     </van-popup>
     <!-- 底部报名 -->
     <div class="foot">
