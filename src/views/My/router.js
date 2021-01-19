@@ -67,4 +67,9 @@ export default [
     name: "Gender",
     component: () => import("./infoModule/Gender"),
   },
+  {
+    path: "/setting",
+    name: "setting",
+    component: () => import("./Setting"),
+  },
 ]

@@ -6,24 +6,40 @@
     <div class="phone_input_container">
       <div class="pgone_input_container">
         <div class="mybox">
-          <input type="text" placeholder="请输入手机号" />
-          <div><div>获取验证码</div></div>
+          <input type="text" placeholder="请输入手机号" v-model="user.mobile" />
+          <div @click="sendCode">获取验证码</div>
         </div>
         <input type="text" placeholder="请输入验证码" />
         <input type="passwrod" placeholder="请输入密码" />
       </div>
     </div>
-    <div class="phone_button_container"><button >完成</button></div>
+    <div class="phone_button_container"><button>完成</button></div>
   </div>
 </template>
 
 <script>
-import Header from "../../components/Header";
+import { smsCode } from "@/utils/api"
+import Header from "../../components/Header"
 export default {
   components: {
     Header,
   },
-};
+  data() {
+    return {
+      user: {
+        mobile: "",
+        sms_type: "login",
+      },
+    }
+  },
+  methods: {
+    sendCode() {
+      smsCode(this.user).then((res) => {
+        console.log(res)
+      })
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -84,14 +100,13 @@ export default {
     font-size: 0.3rem;
     display: inline-flex;
     justify-content: center;
-    align-items: center;   
-    button{
-        width: 95%;
-        height: 100%;
-        outline: none;
-        border: 1px solid #eb6100;
-        background-color: #eb6100;
-
+    align-items: center;
+    button {
+      width: 95%;
+      height: 100%;
+      outline: none;
+      border: 1px solid #eb6100;
+      background-color: #eb6100;
     }
   }
 }

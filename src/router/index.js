@@ -5,7 +5,7 @@ import myRoutes from "../views/My/router"
 import LogRouter from "../views/Register/log"
 import SearchRouter from "../views/Search/sear"
 import ejs from "../views/HomeFeature/ejs"
-import exercise from '../views/Exercise/exercise'
+import exercise from "../views/Exercise/exercise"
 import { Toast } from "vant"
 Vue.use(VueRouter)
 
@@ -33,6 +33,9 @@ const routes = [
         path: "/course",
         name: "course",
         component: () => import("../views/Home/Course.vue"),
+        meta: {
+          needLogin: true,
+        },
       },
       {
         path: "/record",
