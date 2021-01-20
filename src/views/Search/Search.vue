@@ -3,22 +3,11 @@
     <!-- 搜索输入框 -->
     <div class="searchBox">
       <div class="back">
-        <left
-          theme="two-tone"
-          size=".44rem"
-          :fill="['#aaa', '#fff']"
-          @click.native="$router.back()"
-        />
+        <left theme="two-tone" size=".44rem" :fill="['#aaa', '#fff']" @click.native="$router.back()" />
       </div>
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
-        <input
-          type="text"
-          :value="value"
-          placeholder="请输入关键字"
-          @input="onInput"
-          @keydown.enter="onEnter(value)"
-        />
+        <input type="text" v-model="value" placeholder="请输入关键字" @keydown.enter="onEnter(value)" />
       </div>
       <div class="text">
         <span>取消</span>
@@ -28,12 +17,7 @@
     <div class="history" v-if="!showList">
       <h3>
         <span>历史搜索</span>
-        <delete
-          theme="two-tone"
-          size=".28rem"
-          :fill="['#aaa', '#fff']"
-          @click.native="history = []"
-        />
+        <delete theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" @click.native="history = []" />
       </h3>
       <div class="list">
         <div v-for="(item, index) in history" :key="index">
@@ -46,14 +30,9 @@
       清空历史记录
     </div>
     <!-- 搜索后的页面 -->
-    <div class="dataList" v-if="showList">
+    <!-- <div class="dataList" v-if="showList">
       <div class="page">
-        <div
-          class="dv"
-          v-for="item in list"
-          :key="item.id"
-          @click="go(item.id)"
-        >
+        <div class="dv" v-for="item in reslist" :key="item.id" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
@@ -66,21 +45,17 @@
           </div>
         </div>
       </div>
-    </div>
-    <ul v-if="reslist">
-      <li
-        v-for="(item, index) in reslist"
-        :key="index"
-        @click="onEnter(item.title)"
-      >
+    </div> -->
+    <ul v-if="showList">
+      <li v-for="(item, index) in reslist" :key="index" @click="onEnter(item.title)">
         {{ item.title }}
       </li>
     </ul>
   </div>
 </template>
 <script>
-import { Left, Search, Delete } from "@icon-park/vue";
-import { getSearch, courseBasis } from "@/utils/api";
+import { Left, Search, Delete } from "@icon-park/vue"
+import { getSearch, courseBasis } from "@/utils/api"
 export default {
   components: {
     Left,
@@ -92,63 +67,61 @@ export default {
       value: "",
       list: [], //搜索后的数据
       history: JSON.parse(localStorage.getItem("searchList")) || [], //历史记录
-      listData: [], //搜索时的选框
+      listData: [], //进入获取全部的数据
       showList: false,
-      reslist: [],
-    };
+      reslist: [], //关键词
+    }
   },
   methods: {
-    // 输入关键字查找事件
-    onInput(e) {
-      // console.log(e.target.value);
-      // console.log(this.value);
-      if (e.target.value == "") {
-        this.reslist = [];
-      } else {
-        this.value = e.target.value;
-        this.reslist = this.listData.filter((item) => {
-          return item.title.includes(this.value);
-        });
-      }
-    },
-
     // 按下搜索事件
     onEnter(val) {
-      this.reslist = [];
+      this.reslist = []
       if (this.value === "") {
-        alert("内容不能为空！");
+        alert("内容不能为空！")
       } else {
         getSearch({
-          limit: 6,
+          limit: 999,
           page: 1,
           course_type: 0,
           keyWords: val,
         }).then((res) => {
-          console.log(res.data.data.list);
-          this.list = res.data.data.list;
-        });
-        if (this.history.length >= 5) this.history.pop();
-        this.history.unshift(this.value);
-        this.value = "";
+          console.log(res.data.data.list)
+          this.list = res.data.data.list
+        })
+        if (this.history.length >= 5) this.history.pop()
+        this.history.unshift(val)
+        this.value = ""
         // this.$router.push("")
       }
     },
     go(id) {
-      this.$router.push({ path: "/courDetail", query: { id } });
+      this.$router.push({ path: "/courDetail", query: { id } })
     },
   },
   watch: {
+    value() {
+      if (this.value == "") {
+        this.showList = false
+        this.reslist = []
+      } else {
+        this.showList = true
+        this.reslist = this.listData.filter((item) => {
+          return item.title.includes(this.value)
+        })
+        console.log(this.reslist)
+      }
+    },
     history() {
-      localStorage.setItem("searchList", JSON.stringify(this.history));
+      localStorage.setItem("searchList", JSON.stringify(this.history))
     },
   },
   mounted() {
     courseBasis().then((res) => {
       // console.log(res.data.data.list)
-      this.listData = res.data.data.list;
-    });
+      this.listData = res.data.data.list
+    })
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .sear {

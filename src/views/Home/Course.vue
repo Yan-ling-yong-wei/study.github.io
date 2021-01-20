@@ -56,7 +56,7 @@
       </van-dropdown-menu>
     </div>
     <div class="cont">
-      <div class="page">
+      <!-- <div class="page">
         <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
@@ -69,7 +69,21 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" offset="5">
+        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
+          <div class="left">
+            <img :src="item.cover_img" alt="" />
+          </div>
+          <div class="right">
+            <p>{{ item.title }}</p>
+            <p>
+              <span>{{ item.sales_num }}人已报名</span>
+              <span>免费</span>
+            </p>
+          </div>
+        </div>
+      </van-list>
     </div>
   </div>
 </template>
@@ -84,22 +98,42 @@ export default {
     return {
       appCourseType: [],
       list: [],
+      loading: false,
+      finished: false,
+      page: 0,
     }
   },
   methods: {
-    go(id){
-      this.$router.push({path:'/courDetail',query:{id}})
-    }
+    onLoad() {
+      courseBasis({
+        page: ++this.page,
+        limit: 10,
+      }).then((res) => {
+        // console.log(res)
+        this.list.push.apply(this.list, res.data.data.list)
+        this.loading = false
+        // this.finished = true
+        if (res.data.data.list.length === 0) {
+          this.finished = true
+        }
+      })
+    },
+    go(id) {
+      this.$router.push({ path: "/courDetail", query: { id } })
+    },
   },
   created() {
     courseClassify().then((res) => {
       // console.log(res)
       this.appCourseType = res.data.data.appCourseType
     })
-    courseBasis().then((res) => {
-      // console.log(res)
-      this.list = res.data.data.list
-    })
+    // courseBasis({
+    //   page: this.page,
+    //   limit: 5,
+    // }).then((res) => {
+    //   // console.log(res)
+    //   this.list = res.data.data.list
+    // })
   },
 }
 </script>
@@ -230,7 +264,7 @@ export default {
     height: calc(100% - 1.8rem);
     background: #f0f2f5;
     overflow: hidden;
-    .page {
+    .van-list {
       width: 100%;
       height: 100%;
       overflow: scroll;

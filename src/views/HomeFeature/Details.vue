@@ -2,13 +2,15 @@
   <div class="details_container">
     <div class="images_container">
       <img src="../../assets/img/老师详情.png" class="image_one" />
-      <div @click="onClickFan">＜</div>
+      <div @click="onClickFan"><left size=".36rem" /></div>
     </div>
     <!-- 老师简介 -->
     <div class="xiangqing_contaner">
       <div>
         <div class="xiangqing_wrapper">
-          <div class="ima_box_container"><img :src="list.avatar" /></div>
+          <div class="ima_box_container">
+            <img :src="list.avatar" />
+          </div>
           <div class="title_box_container">
             <div class="tiqie_container">
               <div class="tiqie_wrapper">{{ list.real_name }}</div>
@@ -17,8 +19,8 @@
           </div>
           <div class="imag_box_container">
             <p @click="guan">
-              <button>{{ flag === 2 ? "关注" : "取消关注" }}</button>
-              <!-- <button>取消关注</button> -->
+              <like theme="filled" size=".4rem" fill="#d0021b" v-if="flag === 1" />
+              <like theme="outline" size=".4rem" fill="#d0021b" v-else />
             </p>
           </div>
         </div>
@@ -99,9 +101,14 @@
 </template>
 
 <script>
+import { Like, Left } from "@icon-park/vue"
 import { Toast } from "vant"
 import { setCollect, getjie } from "@/utils/api"
 export default {
+  components: {
+    Like,
+    Left,
+  },
   data() {
     return {
       active: 0,
@@ -118,6 +125,7 @@ export default {
       setCollect(this.$route.query.id).then((res) => {
         console.log(res)
         this.flag = res.data.data.flag
+        Toast(this.flag === 1 ? "关注成功！" : "取消关注！")
       })
     },
   },
@@ -191,6 +199,8 @@ export default {
           align-items: center;
           img {
             width: 1.1rem;
+            height: 1.1rem;
+            border-radius: 50%;
           }
         }
         .title_box_container {

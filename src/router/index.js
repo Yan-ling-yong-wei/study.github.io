@@ -6,6 +6,7 @@ import LogRouter from "../views/Register/log"
 import SearchRouter from "../views/Search/sear"
 import ejs from "../views/HomeFeature/ejs"
 import exercise from "../views/Exercise/exercise"
+
 import { Toast } from "vant"
 Vue.use(VueRouter)
 
@@ -28,6 +29,9 @@ const routes = [
         path: "/home",
         name: "home",
         component: Home,
+        meta: {
+          title: "首页",
+        },
       },
       {
         path: "/course",
@@ -71,6 +75,7 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err)
 }
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
   if (!sessionStorage.getItem("token")) {
     if (to.matched.some((item) => item.meta.needLogin)) {
       Toast.fail("请先登录！")
