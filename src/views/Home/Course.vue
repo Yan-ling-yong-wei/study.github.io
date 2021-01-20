@@ -130,7 +130,6 @@ export default {
       // console.log(res)
       this.appCourseType = res.data.data.appCourseType
     })
-<<<<<<< HEAD
     // courseBasis({
     //   page: this.page,
     //   limit: 5,
@@ -138,12 +137,6 @@ export default {
     //   // console.log(res)
     //   this.list = res.data.data.list
     // })
-=======
-    courseBasis().then((res) => {
-      console.log(res)
-      this.list = res.data.data.list
-    })
->>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
   },
 }
 </script>
@@ -301,7 +294,7 @@ export default {
           flex-direction: column;
           flex-grow: 1;
           justify-content: space-between;
-          .h4{
+          .h4 {
             position: absolute;
             right: 0.1rem;
             top: 0.2rem;

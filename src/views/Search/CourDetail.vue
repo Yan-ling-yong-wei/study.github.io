@@ -44,7 +44,6 @@
     </div>
     <!-- 分享弹出层 -->
     <div>
-<<<<<<< HEAD
       <van-share-sheet v-model="show" title="立即分享给好友" :options="options" />
     </div>
     <!-- 弹出二维码图片 -->
@@ -54,9 +53,7 @@
           <div class="block" />
         </div>
       </van-overlay>
-=======
-      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options"/>
->>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
+      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options" />
     </div>
     <!-- 底部报名 -->
     <div class="foot" v-if="reslist.info">
@@ -97,7 +94,7 @@ export default {
   },
   methods: {
     shou(id) {
-        // console.log(id);
+      // console.log(id);
       getKeCollect({
         course_basis_id: id,
         type: 1,
@@ -105,10 +102,10 @@ export default {
         console.log(res)
       })
     },
-    fen(option){
+    fen(option) {
       // console.log(option.name);
-      this.$router.push({path:'/qrCode',query:{name:option.name}})
-    }
+      this.$router.push({ path: "/qrCode", query: { name: option.name } })
+    },
   },
   created() {
     //   console.log(this.$route.query.id);
