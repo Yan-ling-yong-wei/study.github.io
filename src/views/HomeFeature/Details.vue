@@ -8,13 +8,7 @@
     <div class="xiangqing_contaner">
       <div>
         <div class="xiangqing_wrapper">
-<<<<<<< HEAD
-          <div class="ima_box_container">
-            <img :src="list.avatar" />
-          </div>
-=======
           <div class="ima_box_container" v-if="list.avatar"><img :src="list.avatar" /></div>
->>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
           <div class="title_box_container">
             <div class="tiqie_container">
               <div class="tiqie_wrapper">{{ list.real_name }}</div>
