@@ -5,6 +5,7 @@
       <div class="back">
         <left theme="two-tone" size=".44rem" :fill="['#aaa', '#fff']" @click.native="$router.back()" />
       </div>
+
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
         <input type="text" v-model="value" placeholder="请输入关键字" @keydown.enter="onEnter(value)" />
@@ -30,9 +31,9 @@
       清空历史记录
     </div>
     <!-- 搜索后的页面 -->
-    <!-- <div class="dataList" v-if="showList">
+    <div class="dataList" v-if="showList">
       <div class="page">
-        <div class="dv" v-for="item in reslist" :key="item.id" @click="go(item.id)">
+        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
@@ -45,8 +46,8 @@
           </div>
         </div>
       </div>
-    </div> -->
-    <ul v-if="showList">
+    </div>
+    <ul v-if="reslist">
       <li v-for="(item, index) in reslist" :key="index" @click="onEnter(item.title)">
         {{ item.title }}
       </li>
