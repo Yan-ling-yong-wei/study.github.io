@@ -7,7 +7,16 @@
       </div>
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
+<<<<<<< HEAD
         <input type="text" v-model="value" placeholder="请输入关键字" @keydown.enter="onEnter(value)" />
+=======
+        <input
+          type="text"
+          v-model="value"
+          placeholder="请输入关键字"
+          @keydown.enter="onEnter(value)"
+        />
+>>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
       </div>
       <div class="text">
         <span>取消</span>
@@ -67,14 +76,22 @@ export default {
       value: "",
       list: [], //搜索后的数据
       history: JSON.parse(localStorage.getItem("searchList")) || [], //历史记录
+<<<<<<< HEAD
       listData: [], //进入获取全部的数据
       showList: false,
       reslist: [], //关键词
     }
+=======
+      listData: [], //获取的全部数据
+      showList: false,
+      reslist: [], //关键词
+    };
+>>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
   },
   methods: {
     // 按下搜索事件
     onEnter(val) {
+<<<<<<< HEAD
       this.reslist = []
       if (this.value === "") {
         alert("内容不能为空！")
@@ -93,12 +110,27 @@ export default {
         this.value = ""
         // this.$router.push("")
       }
+=======
+      this.reslist = [];
+      this.showList = true;
+      getSearch({
+        limit: 6,
+        page: 1,
+        course_type: 0,
+        keyWords: val,
+      }).then((res) => {
+        this.list = res.data.data.list;
+      });
+      if (this.history.length >= 5) this.history.pop();
+      this.history.unshift(val);
+>>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
     },
     go(id) {
       this.$router.push({ path: "/courDetail", query: { id } })
     },
   },
   watch: {
+<<<<<<< HEAD
     value() {
       if (this.value == "") {
         this.showList = false
@@ -110,6 +142,18 @@ export default {
         })
         console.log(this.reslist)
       }
+=======
+    value(val) {
+      if (val == "") {
+        this.reslist = [];
+        this.list=[];
+        this.showList=false
+      } else {
+        this.reslist = this.listData.filter((item) => {
+          return item.title.includes(val);
+        });
+      }   
+>>>>>>> 2ed20a9e5fa64bf65a4fe5102b3cc57798e8e84f
     },
     history() {
       localStorage.setItem("searchList", JSON.stringify(this.history))
@@ -255,8 +299,4 @@ ul {
     border-bottom: 0.01rem solid #ccc;
   }
 }
-// div {
-//     line-height: 1rem;
-//     border-bottom: 1px solid #eeeeee;
-//   }
 </style>

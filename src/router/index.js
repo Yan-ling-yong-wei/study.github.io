@@ -19,6 +19,9 @@ const routes = [
     path: "/envelope",
     name: "envelope",
     component: () => import("../views/HomeFeature/Envelope.vue"),
+    meta: {
+      title: "给我们留言",
+    },
   },
   {
     path: "/main",
@@ -37,7 +40,9 @@ const routes = [
         path: "/course",
         name: "course",
         component: () => import("../views/Home/Course.vue"),
+
         meta: {
+          title: "课程列表",
           needLogin: true,
         },
       },
@@ -45,11 +50,17 @@ const routes = [
         path: "/record",
         name: "record",
         component: () => import("../views/Home/Record.vue"),
+        meta: {
+          title: "约课记录",
+        },
       },
       {
         path: "/practice",
         name: "practice",
         component: () => import("../views/Home/Practice.vue"),
+        meta: {
+          title: "练习",
+        },
       },
       {
         path: "/my",
@@ -57,6 +68,7 @@ const routes = [
         component: () => import("../views/Home/My.vue"),
         meta: {
           needLogin: true,
+          title: "我的",
         },
       },
     ],
