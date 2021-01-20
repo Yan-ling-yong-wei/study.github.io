@@ -4,6 +4,7 @@
       <div class="back">
         <left theme="two-tone" size=".44rem" :fill="['#aaa', '#fff']" @click.native="$router.back()" />
       </div>
+
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
         <input type="text" :value="value" placeholder="请输入关键字" @input="onInput" @keydown.enter="onEnter" />
@@ -14,7 +15,7 @@
     </div>
     <div class="history" v-if="!showList">
       <h3>
-        <span>历史搜索</span>
+        <span>历史搜索</span>x
         <delete theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" @click.native="history = []" />
       </h3>
       <div class="list">

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <router-view />
-    <!-- @click="onClickEnvelope" -->
-    <div v-drag class="mailBox">
+    
+    <div v-drag class="mailBox" @click="onClickEnvelope">
       <mail theme="two-tone" size=".64rem" :fill="['rgb(0, 122, 255)', '#fff']" />
     </div>
     <div class="image_box_container" v-show="imageShow" @click="onClickRemove">
