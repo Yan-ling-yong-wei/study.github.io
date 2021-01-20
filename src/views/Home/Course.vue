@@ -56,40 +56,58 @@
       </van-dropdown-menu>
     </div>
     <div class="cont">
-      <div class="page">
-        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" offset="5">
+        <div class="dv" v-for="(item,index) in list" :key="index" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
           <div class="right">
             <p>{{ item.title }}</p>
+             <check-one class="h4" v-if="item.has_buy" theme="filled" size="24" fill="#f3850f"/>
             <p>
               <span>{{ item.sales_num }}人已报名</span>
               <span>免费</span>
             </p>
           </div>
         </div>
-      </div>
+      </van-list>
     </div>
   </div>
 </template>
 <script>
 import { courseClassify, courseBasis } from "@/utils/api"
+import { CheckOne } from "@icon-park/vue"
 import Header from "../../components/Header.vue"
 export default {
   components: {
     Header,
+    CheckOne,
   },
   data() {
     return {
       appCourseType: [],
       list: [],
+      loading: false,
+      finished: false,
+      page: 0,
     }
   },
   methods: {
-    go(id){
-      this.$router.push({path:'/courDetail',query:{id}})
-    }
+    onLoad() {
+      courseBasis({
+        page: ++this.page,
+        limit: 10,
+      }).then((res) => {
+        this.list.push.apply(this.list, res.data.data.list)
+        this.loading = false
+        if (res.data.data.list.length === 0) {
+          this.finished = true
+        }
+      })
+    },
+    go(id) {
+      this.$router.push({ path: "/courDetail", query: { id } })
+    },
   },
   created() {
     courseClassify().then((res) => {
@@ -230,7 +248,7 @@ export default {
     height: calc(100% - 1.8rem);
     background: #f0f2f5;
     overflow: hidden;
-    .page {
+    .van-list {
       width: 100%;
       height: 100%;
       overflow: scroll;
@@ -253,9 +271,15 @@ export default {
         }
         .right {
           display: flex;
+          position: relative;
           flex-direction: column;
           flex-grow: 1;
           justify-content: space-between;
+          .h4{
+            position: absolute;
+            right: 0.1rem;
+            top: 0.2rem;
+          }
           p:first-child {
             font-size: 0.28rem;
           }

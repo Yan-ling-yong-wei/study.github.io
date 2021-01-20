@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <router-view class="aa" />
-    <van-tabbar route active-color="rgb(235, 97, 0)">
+    <van-tabbar route active-color="rgb(235, 97, 0)" placeholder>
       <van-tabbar-item icon="wap-home-o" to="/home">首页</van-tabbar-item>
       <van-tabbar-item icon="notes-o" to="/course">课程</van-tabbar-item>
       <van-tabbar-item icon="todo-list-o" to="/record">约课记录</van-tabbar-item>

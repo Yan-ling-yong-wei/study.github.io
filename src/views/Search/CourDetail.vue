@@ -22,10 +22,7 @@
           <star v-if="reslist.info.is_collect" theme="filled" size="24" fill="#f18e11" />
           <star v-else theme="outline" size="24" fill="#f18e11" />
         </span>
-        <p class="p1">
-          共{{ reslist.recommendCourse[0].sales_base }}课时 |
-          {{ reslist.recommendCourse[0].sales_num }}人已报名
-        </p>
+        <p class="p1">共{{ reslist.recommendCourse[0].sales_base }}课时 | {{ reslist.recommendCourse[0].sales_num }}人已报名</p>
         <p class="p2">{{ reslist.recommendCourse[0].price }}元</p>
       </div>
       <!-- 团队 -->
@@ -47,15 +44,7 @@
     </div>
     <!-- 分享弹出层 -->
     <div>
-      <van-share-sheet v-model="show" title="立即分享给好友" :options="options"/>
-    </div>
-    <!-- 弹出二维码图片 -->
-    <div>
-      <van-overlay :show="showimage" @click="showimage = false" >
-        <div class="wrapper" @click.stop>
-          <div class="block" />
-        </div>
-      </van-overlay>
+      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options"/>
     </div>
     <!-- 底部报名 -->
     <div class="foot" v-if="reslist.info">
@@ -65,9 +54,9 @@
   </div>
 </template>
 <script>
-import { getCourBas, getKeCollect } from "@/utils/api";
-import { Star, Left, ShareOne } from "@icon-park/vue";
-import { Toast } from "vant";
+import { getCourBas, getKeCollect } from "@/utils/api"
+import { Star, Left, ShareOne } from "@icon-park/vue"
+import { Toast } from "vant"
 export default {
   components: {
     Star,
@@ -92,27 +81,31 @@ export default {
           { name: "QQ", icon: "qq" },
         ],
       ],
-    };
+    }
   },
   methods: {
     shou(id) {
-      //   console.log(id);
+        // console.log(id);
       getKeCollect({
         course_basis_id: id,
-        type: 0,
+        type: 1,
       }).then((res) => {
-        console.log(res);
-      });
+        console.log(res)
+      })
     },
+    fen(option){
+      // console.log(option.name);
+      this.$router.push({path:'/qrCode',query:{name:option.name}})
+    }
   },
   created() {
     //   console.log(this.$route.query.id);
     getCourBas(this.$route.query.id).then((res) => {
-      console.log(res.data.data);
-      this.reslist = res.data.data;
-    });
+      console.log(res.data.data)
+      this.reslist = res.data.data
+    })
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .courDetail {

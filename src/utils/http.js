@@ -6,13 +6,13 @@ const http = axios.create({
   baseURL: "http://120.53.31.103:84/api/app",
   timeout: 10000,
 })
-let reqCount = 0,
-  toast
+let reqCount = 0
+
 http.interceptors.request.use(
   (config) => {
     reqCount++
     if (reqCount !== 0) {
-      toast = Toast.loading({
+      Toast.loading({
         message: "正在加载...",
         duration: 0,
         forbidClick: true,
@@ -39,9 +39,9 @@ http.interceptors.response.use(
   (res) => {
     if (res.data.code === 200) {
       reqCount--
-      if (reqCount === 0) toast.clear()
+      if (reqCount === 0) Toast.clear()
     } else {
-      toast.clear()
+      Toast.clear()
       Toast.fail(res.data.msg)
     }
     return res
@@ -49,7 +49,7 @@ http.interceptors.response.use(
   (err) => {
     // console.log(err.request, err.message)
     if (err.message.includes("timeout")) {
-      toast.clear()
+      Toast.clear()
       Toast.fail("连接超时！")
     }
     return Promise.reject(err)

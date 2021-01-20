@@ -6,10 +6,10 @@
     <div class="login_input_container">
       <div>
         <div>
-          <input type="text" placeholder="请输入手机号" v-model="user.mobile" />
-          <span class="research_container">获取验证码</span>
+          <input type="text" placeholder="请输入手机号" v-model="obj.mobile" />
+          <span class="research_container" @click="sendCode">获取验证码</span>
         </div>
-        <input type="password" placeholder="请输入密码" v-model="user.passworf" />
+        <input type="password" placeholder="请输入验证码" />
         <div>
           <span>*未注册的手机号将自动注册</span>
           <span @click="onClickRegister">使用密码登录</span>
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { Register } from "@/utils/api"
+import { Register, smsCode } from "@/utils/api"
 export default {
   methods: {
     onClickRegister() {
@@ -31,13 +31,17 @@ export default {
         console.log(res)
       })
     },
+    sendCode() {
+      smsCode(this.obj).then((res) => {
+        console.log(res)
+      })
+    },
   },
   data() {
     return {
-      user: {
+      obj: {
         mobile: "",
-        password: "",
-        type: 2,
+        sms_type: "login",
       },
     }
   },
