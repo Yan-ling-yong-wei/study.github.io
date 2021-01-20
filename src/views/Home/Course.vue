@@ -56,28 +56,14 @@
       </van-dropdown-menu>
     </div>
     <div class="cont">
-      <!-- <div class="page">
-        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
-          <div class="left">
-            <img :src="item.cover_img" alt="" />
-          </div>
-          <div class="right">
-            <p>{{ item.title }}</p>
-            <check-one class="h4" v-if="item.has_buy" theme="filled" size="24" fill="#f3850f"/>
-            <p>
-              <span>{{ item.sales_num }}人已报名</span>
-              <span>免费</span>
-            </p>
-          </div>
-        </div>
-      </div> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" offset="5">
-        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
+        <div class="dv" v-for="(item,index) in list" :key="index" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
           <div class="right">
             <p>{{ item.title }}</p>
+             <check-one class="h4" v-if="item.has_buy" theme="filled" size="24" fill="#f3850f"/>
             <p>
               <span>{{ item.sales_num }}人已报名</span>
               <span>免费</span>
@@ -112,10 +98,8 @@ export default {
         page: ++this.page,
         limit: 10,
       }).then((res) => {
-        // console.log(res)
         this.list.push.apply(this.list, res.data.data.list)
         this.loading = false
-        // this.finished = true
         if (res.data.data.list.length === 0) {
           this.finished = true
         }
