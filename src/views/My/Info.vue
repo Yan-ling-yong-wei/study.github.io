@@ -74,9 +74,11 @@ export default {
         if (res.data.code === 200) {
           setInfo({ avatar: res.data.data.path }).then((result) => {
             if (result.data.code === 200) {
-              // Toast("更新成功！")
               this.avatarShow = false
-              this.getInfo()
+              Toast("更新成功！")
+              setTimeout(() => {
+                this.getInfo()
+              }, 300)
             }
           })
         }
@@ -91,8 +93,10 @@ export default {
       setInfo({ birthday: this.date(val) }).then((res) => {
         this.birthShow = false
         if (res.data.code === 200) {
-          // Toast("更新成功！")
-          this.getInfo()
+          Toast("更新成功！")
+          setTimeout(() => {
+            this.getInfo()
+          }, 300)
         }
       })
     },
@@ -104,8 +108,10 @@ export default {
       }).then((res) => {
         this.cityShow = false
         if (res.data.code === 200) {
-          // Toast.success("数据更新成功！")
-          this.getInfo()
+          Toast("更新成功！")
+          setTimeout(() => {
+            this.getInfo()
+          }, 300)
         }
       })
     },

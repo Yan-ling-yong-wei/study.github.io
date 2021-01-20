@@ -120,6 +120,10 @@
             <img src="../../assets/img/img16.png" alt="" />
             <p>在线客服</p>
           </div>
+          <div @click="$router.push('/setting')">
+            <setting theme="outline" size=".4rem" fill="#333" />
+            <p>设置</p>
+          </div>
         </div>
       </li>
     </ul>
@@ -132,6 +136,7 @@
 <script>
 import { getUCenterInfo } from "@/utils/api"
 import { Toast } from "vant"
+import { Setting } from "@icon-park/vue"
 export default {
   data() {
     return {
@@ -140,6 +145,9 @@ export default {
       },
       show: false,
     }
+  },
+  components: {
+    Setting,
   },
   methods: {
     shou() {

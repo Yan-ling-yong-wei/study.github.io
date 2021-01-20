@@ -22,10 +22,7 @@
           <star v-if="reslist.info.is_collect" theme="filled" size="24" fill="#f18e11" />
           <star v-else theme="outline" size="24" fill="#f18e11" />
         </span>
-        <p class="p1">
-          共{{ reslist.recommendCourse[0].sales_base }}课时 |
-          {{ reslist.recommendCourse[0].sales_num }}人已报名
-        </p>
+        <p class="p1">共{{ reslist.recommendCourse[0].sales_base }}课时 | {{ reslist.recommendCourse[0].sales_num }}人已报名</p>
         <p class="p2">{{ reslist.recommendCourse[0].price }}元</p>
       </div>
       <!-- 团队 -->
@@ -57,9 +54,9 @@
   </div>
 </template>
 <script>
-import { getCourBas, getKeCollect } from "@/utils/api";
-import { Star, Left, ShareOne } from "@icon-park/vue";
-import { Toast } from "vant";
+import { getCourBas, getKeCollect } from "@/utils/api"
+import { Star, Left, ShareOne } from "@icon-park/vue"
+import { Toast } from "vant"
 export default {
   components: {
     Star,
@@ -84,7 +81,7 @@ export default {
           { name: "QQ", icon: "qq" },
         ],
       ],
-    };
+    }
   },
   methods: {
     shou(id) {
@@ -93,8 +90,8 @@ export default {
         course_basis_id: id,
         type: 1,
       }).then((res) => {
-        console.log(res);
-      });
+        console.log(res)
+      })
     },
     fen(option){
       // console.log(option.name);
@@ -104,11 +101,11 @@ export default {
   created() {
     //   console.log(this.$route.query.id);
     getCourBas(this.$route.query.id).then((res) => {
-      // console.log(res.data.data);
-      this.reslist = res.data.data;
-    });
+      console.log(res.data.data)
+      this.reslist = res.data.data
+    })
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .courDetail {

@@ -6,7 +6,7 @@
           <van-swipe-item v-for="(item, index) in banner" :key="index"> <img :src="item.banner_img"/></van-swipe-item>
         </van-swipe>
         <div class="nav_container">
-          <div @click="$router.push('/course')">
+          <div @click="onClickFeature">
             <nav>
               <img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA8CAYAAADSfGxZAAAFZUlEQVRoQ+1bW2xUVRRd68xMeZPaFESeBkuLhkekk6IfxDEEMQqUmWGMwcQPE5FEo9GYGONP/TIh8UH88BsNwTDObR0CGsUImGDAGVEQIn1JIBYqBSwtr5m5Z5tbaDLYoXPb28d8nPs1ybl7n7PXXWedk8leRN6zfv3pSr/f9wypN4uwlhAheJKQvVnNfblc2fkLFy72ptPBbH5cqf0OhcQ/ZcqJaWVl02dRsmtJrtPQywmQwG+AfJG1M98mk0s7+9dO50dDg6jjx5vrofE2qFYC4htYnPQC6gREpwl1BD5/KpF48DRAKQ0ghNFoexVsvVKAWlCCAJYDmDZwfbQBSYPqo2XLHoo3NFD3AbEp3FKvIZ8CmFesKBE4hfcQuASgTSi7/f7pTfH4AxeLxY7G+MaNV8qV6opSEBVIjQgqSU4FRBWbTwSdCmproqmqibG1Jyv05EBCgFCxwHuNk8hCuF+RO5Dhz7dU9koyWXMNoB5uzsJxomKxi5Ntu7tcCR63oV8g1NOATPAwz8GcrTczGm2Lira/BOD3kOxOaN82+UegjwE4qrRKZcVOJ5OLO7zk3rCh/X6lsisUVJ1QgnSoD84CpI/RHp8ciJcZibRaEB32mGxAuAhyJLodYEB1REQn/P7Md/H4koybuUKhH/0VFfNDgH4eIo8BmCki95EcgQ/2/xWovYyEW/4GZLabxXl/hx0UvHnmXHfjvU6eWEx8OtuyUYhtABZ6n9NNBl5gJNx8tbCyukkwrHe6QLXFsqoaC0WHw+1riNxOADOGlX14Qb0OI256FJuhT00esqxFTxQGonk/gdVDT+op4ta4AEHiWsKqnlpo6ZFwcw+AgmOeSh00mOMFBHXCWlTg0gZEIy22SPE7wMiCYoDoP/YNI24jYRhhGHG3xhhGGEYYRhQ8d83WMFvDbA2zNQa7lBuNMBphNMJohNEIF39dGLE0YmnE0oilEUsjli4QMGJpxNKIpRFLF1JhbpZGLI1YGrE0YmnE0gUC+WI55j1UIEuuUaTHaSY7BeBh9+h5f7MEgWhmJNKyGyIx7+W5zzAYEJFws9OtOxKNpO4XBCQZibRththOO9+YPSXHCGIrY+va5tsB+zCAOWOFRCkBIYIOZfMphkJ/Tawoz34G4kUARTvaRwKsUgHCcRoQ2JHT+vXbNoX69lVa5XaNFStKBQgAl0GELav6UB8QfQ3g5XNfA+XjkfjixXKUChCK8l7X5Y5tBw48mbtLnaPh5u0CbAEwsVgxXsZL4NS4CeJzy6p+pb+Ou4CIxQ5PyuUq3yL4BiCj1hQ+zoz4F4IPc1pvTyYXO+3Ofc+A89oBQzIzH9VKPgBk1Wic6eMEhGOqOQLiHZ9v0i/x+Lwb+ay+58XF8U3YduuzFHlVgKUQTAc5yY1Xqti2GQsg7pwI10H2CORPQH9y9mzNvnSaBR2Krm5wkcipBSKBOooESdQKuAKQ8uGyZRSBcL56twC/UyRFqKOiJGVZ1e1FP06xF/LHa2tTgTlzJlQEAhNna40QgSggdQACQ8kDoNdqrC5gQwSGaVPIkvhVNCz6yr6/caP3fGfnzUtD8ae6YsRgRcZirVW2Lc9BY5NAHLvkNBKDue4cw+QPVlP1mkJ5I+HT3wBcOzjbJCPCq1ToANhIqp2JxMJWLx5Uz0D0F+O4b2eUn1liq1wQIkEI60A8MsAdRLQqW1766uuanwoBEY22BSF6l4hU5Y87ZjkQfxBMQUuKwqNqwq2Tbs1yxRg7YkDkT+ScPJnMzMoyxQU29DpA6gHMFeCYz+d7v6vr7EHnElN4caLC4ZbVhLwL0HH1ngO4F0BSa7ZrPfnSnj2zrxcrbKjj/wFPducAYoibwgAAAABJRU5ErkJggg=="
@@ -49,12 +49,13 @@
             </div>
           </div>
         </div>
+        <!-- 热门资讯 -->
         <div v-if="item.channel_info.type === 6" class="two">
           <h3>
             <span>{{ item.channel_info.name }}</span
             ><span class="more">更多<right size=".32rem"/></span>
           </h3>
-          <div class="content" v-for="el in item.list" :key="el.id" @click="go(el.teacher_id)">
+          <div class="content" v-for="el in item.list" :key="el.id">
             <div class="left">
               <img :src="el.thumb_img" alt="" />
             </div>
@@ -78,6 +79,10 @@
       </div>
       <!-- 列表渲染 -->
     </div>
+    <!-- <van-popup v-model="show">
+      <p>请先登录</p>
+      <button>去登陆</button>
+    </van-popup> -->
   </div>
 </template>
 <script>
@@ -89,6 +94,7 @@ export default {
     return {
       banner: [],
       recommend: [],
+      show: true,
     }
   },
   components: {
@@ -99,12 +105,12 @@ export default {
   },
   filters: {
     timeFilter(data) {
-      return new Date(data * 1000).toLocaleString();
+      return new Date(data * 1000).toLocaleString()
     },
   },
   methods: {
     onClickFeature() {
-      this.$router.push("/Feature")
+      this.$router.push("/course")
     },
     onClickTutorship() {
       this.$router.push("/Tutorship")
@@ -112,9 +118,13 @@ export default {
     onClickCalendar() {
       this.$router.push("/Calendar")
     },
-    go(id){
-       this.$router.push({path:"/Details",query:{id}})
-    }
+    isLogin() {
+      if (!sessionStorage.getItem("token")) {
+      }
+    },
+    go(id) {
+      this.$router.push({ path: "/Details", query: { id } })
+    },
   },
   created() {
     getBanner().then((res) => {

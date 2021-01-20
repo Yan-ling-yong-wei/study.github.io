@@ -105,6 +105,11 @@ export default [
     },
   },
   {
+    path: "/setting",
+    name: "setting",
+    component: () => import("./Setting"),
+  },
+  {
     path: "/Courses",
     name: "Courses",
     component: () => import("./orderForm/Courses"),

@@ -33,7 +33,7 @@ export const getUCenterInfo = () => http.get("/getUCenterInfo")
 export const setInfo = (data) => http.put("/user", data)
 
 //获取城市 /sonArea/0
-export const getCity = (data) => http.get("/sonArea/410000")
+// export const getCity = (data) => http.get("/sonArea/410000")
 //点击进入详情页
 export const getDetail = (id) => http.get("/teacher/info/" + id)
 //详情页老师介绍
@@ -56,16 +56,18 @@ export const getCollect = (data) => {
 //图片上传到服务器
 export const uploaderImg = (formData) => http.post("/public/img", formData)
 
+//发送验证码
+export const smsCode = (obj) => http.post("/smsCode", obj)
 //课程详情页数据
-export const getCourBas = (id)=>http.get("/courseInfo/basis_id="+id)
+export const getCourBas = (id) => http.get("/courseInfo/basis_id=" + id)
 
 //课程收藏
-export const getKeCollect = (data)=> http.post('/collect',data)
+export const getKeCollect = (data) => http.post("/collect", data)
 
 //搜索接口
-export const getSearch = (data)=>{
+export const getSearch = (data) => {
   // console.log(data);
-  let str=''
+  let str = ""
   for (const key in data) {
     str += `${key}=${data[key]}&`
   }

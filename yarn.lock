@@ -8099,6 +8099,11 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-qriously@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/vue-qriously/-/vue-qriously-1.1.1.tgz#b3a84b05280cb1edfd153bbc003f031995ea7ce7"
+  integrity sha512-AlP8A7LpXWF5lyJsQYxtPE3+qlRqIBX9CP3cn0Oiov9QFNovp+3z7VJLqHRQh6poXO5K2RbZwAiY3hsVVlQbRg==
+
 vue-router@^3.2.0:
   version "3.4.9"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.4.9.tgz?cache=0&sync_timestamp=1610356131172&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-3.4.9.tgz#c016f42030ae2932f14e4748b39a1d9a0e250e66"

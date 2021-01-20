@@ -5,7 +5,8 @@ import myRoutes from "../views/My/router"
 import LogRouter from "../views/Register/log"
 import SearchRouter from "../views/Search/sear"
 import ejs from "../views/HomeFeature/ejs"
-import exercise from '../views/Exercise/exercise'
+import exercise from "../views/Exercise/exercise"
+
 import { Toast } from "vant"
 Vue.use(VueRouter)
 
@@ -18,8 +19,8 @@ const routes = [
     path: "/envelope",
     name: "envelope",
     component: () => import("../views/HomeFeature/Envelope.vue"),
-    meta:{
-        title:"给我们留言",
+    meta: {
+      title: "给我们留言",
     },
   },
   {
@@ -31,32 +32,34 @@ const routes = [
         path: "/home",
         name: "home",
         component: Home,
-        meta:{
-          title:"首页"
+        meta: {
+          title: "首页",
         },
       },
       {
         path: "/course",
         name: "course",
         component: () => import("../views/Home/Course.vue"),
-        meta:{
-          title:"课程列表"
+
+        meta: {
+          title: "课程列表",
+          needLogin: true,
         },
       },
       {
         path: "/record",
         name: "record",
         component: () => import("../views/Home/Record.vue"),
-        meta:{
-          title:"约课记录"
+        meta: {
+          title: "约课记录",
         },
       },
       {
         path: "/practice",
         name: "practice",
         component: () => import("../views/Home/Practice.vue"),
-        meta:{
-          title:"练习"
+        meta: {
+          title: "练习",
         },
       },
       {
@@ -65,7 +68,7 @@ const routes = [
         component: () => import("../views/Home/My.vue"),
         meta: {
           needLogin: true,
-          title:"我的",
+          title: "我的",
         },
       },
     ],
@@ -84,6 +87,7 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err)
 }
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
   if (!sessionStorage.getItem("token")) {
     if (to.matched.some((item) => item.meta.needLogin)) {
       Toast.fail("请先登录！")
