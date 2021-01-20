@@ -100,7 +100,7 @@ export default {
       this.appCourseType = res.data.data.appCourseType
     })
     courseBasis().then((res) => {
-      console.log(res)
+      // console.log(res)
       this.list = res.data.data.list
     })
   },

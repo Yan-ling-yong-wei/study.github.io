@@ -104,7 +104,7 @@ export default {
   created() {
     //   console.log(this.$route.query.id);
     getCourBas(this.$route.query.id).then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       this.reslist = res.data.data;
     });
   },
