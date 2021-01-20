@@ -3,21 +3,12 @@
     <!-- 搜索输入框 -->
     <div class="searchBox">
       <div class="back">
-        <left
-          theme="two-tone"
-          size=".44rem"
-          :fill="['#aaa', '#fff']"
-          @click.native="$router.back()"
-        />
+        <left theme="two-tone" size=".44rem" :fill="['#aaa', '#fff']" @click.native="$router.back()" />
       </div>
+
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
-        <input
-          type="text"
-          v-model="value"
-          placeholder="请输入关键字"
-          @keydown.enter="onEnter(value)"
-        />
+        <input type="text" v-model="value" placeholder="请输入关键字" @keydown.enter="onEnter(value)" />
       </div>
       <div class="text">
         <span>取消</span>
@@ -27,12 +18,7 @@
     <div class="history" v-if="!showList">
       <h3>
         <span>历史搜索</span>
-        <delete
-          theme="two-tone"
-          size=".28rem"
-          :fill="['#aaa', '#fff']"
-          @click.native="history = []"
-        />
+        <delete theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" @click.native="history = []" />
       </h3>
       <div class="list">
         <div v-for="(item, index) in history" :key="index">
@@ -47,12 +33,7 @@
     <!-- 搜索后的页面 -->
     <div class="dataList" v-if="showList">
       <div class="page">
-        <div
-          class="dv"
-          v-for="item in list"
-          :key="item.id"
-          @click="go(item.id)"
-        >
+        <div class="dv" v-for="item in list" :key="item.id" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
@@ -67,19 +48,15 @@
       </div>
     </div>
     <ul v-if="reslist">
-      <li
-        v-for="(item, index) in reslist"
-        :key="index"
-        @click="onEnter(item.title)"
-      >
+      <li v-for="(item, index) in reslist" :key="index" @click="onEnter(item.title)">
         {{ item.title }}
       </li>
     </ul>
   </div>
 </template>
 <script>
-import { Left, Search, Delete } from "@icon-park/vue";
-import { getSearch, courseBasis } from "@/utils/api";
+import { Left, Search, Delete } from "@icon-park/vue"
+import { getSearch, courseBasis } from "@/utils/api"
 export default {
   components: {
     Left,
@@ -94,51 +71,51 @@ export default {
       listData: [], //获取的全部数据
       showList: false,
       reslist: [], //关键词
-    };
+    }
   },
   methods: {
     // 按下搜索事件
     onEnter(val) {
-      this.reslist = [];
-      this.showList = true;
+      this.reslist = []
+      this.showList = true
       getSearch({
         limit: 6,
         page: 1,
         course_type: 0,
         keyWords: val,
       }).then((res) => {
-        this.list = res.data.data.list;
-      });
-      if (this.history.length >= 5) this.history.pop();
-      this.history.unshift(val);
+        this.list = res.data.data.list
+      })
+      if (this.history.length >= 5) this.history.pop()
+      this.history.unshift(val)
     },
     go(id) {
-      this.$router.push({ path: "/courDetail", query: { id } });
+      this.$router.push({ path: "/courDetail", query: { id } })
     },
   },
   watch: {
     value(val) {
       if (val == "") {
-        this.reslist = [];
-        this.list=[];
-        this.showList=false
+        this.reslist = []
+        this.list = []
+        this.showList = false
       } else {
         this.reslist = this.listData.filter((item) => {
-          return item.title.includes(val);
-        });
-      }   
+          return item.title.includes(val)
+        })
+      }
     },
     history() {
-      localStorage.setItem("searchList", JSON.stringify(this.history));
+      localStorage.setItem("searchList", JSON.stringify(this.history))
     },
   },
   mounted() {
     courseBasis().then((res) => {
       // console.log(res.data.data.list)
-      this.listData = res.data.data.list;
-    });
+      this.listData = res.data.data.list
+    })
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 .sear {

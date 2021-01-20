@@ -57,13 +57,13 @@
     </div>
     <div class="cont">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" offset="5">
-        <div class="dv" v-for="(item,index) in list" :key="index" @click="go(item.id)">
+        <div class="dv" v-for="(item, index) in list" :key="index" @click="go(item.id)">
           <div class="left">
             <img :src="item.cover_img" alt="" />
           </div>
           <div class="right">
             <p>{{ item.title }}</p>
-             <check-one class="h4" v-if="item.has_buy" theme="filled" size="24" fill="#f3850f"/>
+            <check-one class="h4" v-if="item.has_buy" theme="filled" size="24" fill="#f3850f" />
             <p>
               <span>{{ item.sales_num }}人已报名</span>
               <span>免费</span>
@@ -114,10 +114,13 @@ export default {
       // console.log(res)
       this.appCourseType = res.data.data.appCourseType
     })
-    courseBasis().then((res) => {
-      // console.log(res)
-      this.list = res.data.data.list
-    })
+    // courseBasis({
+    //   page: this.page,
+    //   limit: 5,
+    // }).then((res) => {
+    //   // console.log(res)
+    //   this.list = res.data.data.list
+    // })
   },
 }
 </script>
@@ -275,7 +278,7 @@ export default {
           flex-direction: column;
           flex-grow: 1;
           justify-content: space-between;
-          .h4{
+          .h4 {
             position: absolute;
             right: 0.1rem;
             top: 0.2rem;
