@@ -5,7 +5,6 @@
       <div class="back">
         <left theme="two-tone" size=".44rem" :fill="['#aaa', '#fff']" @click.native="$router.back()" />
       </div>
-
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
         <input type="text" v-model="value" placeholder="请输入关键字" @keydown.enter="onEnter(value)" />
