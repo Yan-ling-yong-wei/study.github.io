@@ -10,7 +10,6 @@
           @click.native="$router.back()"
         />
       </div>
-
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
         <input
