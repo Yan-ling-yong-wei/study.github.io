@@ -10,20 +10,20 @@
         <share-one theme="outline" size="24" @click.native="show = true" fill="#333" />
       </div>
     </div>
-    <div class="cont" v-if="reslist.recommendCourse">
+    <div class="cont" v-if="reslist.info">
       <!-- 图片 -->
       <div class="swipe">
-        <img :src="reslist.recommendCourse[0].cover_img" />
+        <img :src="reslist.info.cover_img" />
       </div>
       <!-- 收藏 -->
       <div class="head">
-        <h3>{{ reslist.recommendCourse[0].title }}</h3>
+        <h3 v-html="reslist.info.course_details"></h3>
         <span @click="shou(reslist.info.collect_id)">
           <star v-if="reslist.info.is_collect" theme="filled" size="24" fill="#f18e11" />
           <star v-else theme="outline" size="24" fill="#f18e11" />
         </span>
-        <p class="p1">共{{ reslist.recommendCourse[0].sales_base }}课时 | {{ reslist.recommendCourse[0].sales_num }}人已报名</p>
-        <p class="p2">{{ reslist.recommendCourse[0].price }}元</p>
+        <p class="p1">共{{ reslist.info.is_collect }}课时 | {{ reslist.info.sales_num }}人已报名</p>
+        <p class="p2">{{ reslist.info.spell_price?"元":"免费" }}</p>
       </div>
       <!-- 团队 -->
       <div class="tuan">
@@ -44,10 +44,10 @@
     </div>
     <!-- 分享弹出层 -->
     <div>
-      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options"/>
+      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options" />
     </div>
     <!-- 底部报名 -->
-    <div class="foot" v-if="reslist.info">
+    <div class="foot">
       <button v-if="reslist.info.is_join_study">立即学习</button>
       <button v-else>立即报名</button>
     </div>
@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     shou(id) {
-        // console.log(id);
+      // console.log(id);
       getKeCollect({
         course_basis_id: id,
         type: 1,
@@ -93,10 +93,10 @@ export default {
         console.log(res)
       })
     },
-    fen(option){
+    fen(option) {
       // console.log(option.name);
-      this.$router.push({path:'/qrCode',query:{name:option.name}})
-    }
+      this.$router.push({ path: "/qrCode", query: { name: option.name } })
+    },
   },
   created() {
     //   console.log(this.$route.query.id);

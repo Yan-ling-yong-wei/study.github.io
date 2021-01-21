@@ -13,7 +13,7 @@ export default {
     },
     data() {
         return {
-            initQCode: 'url'
+            initQCode: 'https://www.baidu.com/'
         }
     },
 }

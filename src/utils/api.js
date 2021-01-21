@@ -74,3 +74,7 @@ export const getSearch = (data) => {
   // console.log(str)
   return http.get("/courseBasis?" + str)
 }
+
+//我的学习
+myStudy / 2
+export const myStudy = (type) => http.get("/myStudy/" + type)
