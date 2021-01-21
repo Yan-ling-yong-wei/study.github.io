@@ -63,7 +63,7 @@ export default {
   },
   watch: {
     active() {
-      console.log(this.active)
+      // console.log(this.active)
       myStudy(this.active).then((res) => {
         // console.log(res)
         this.showList = res.data.data.courseList

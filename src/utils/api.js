@@ -76,5 +76,8 @@ export const getSearch = (data) => {
 }
 
 //我的学习
-myStudy / 2
+// myStudy / 2
 export const myStudy = (type) => http.get("/myStudy/" + type)
+
+//立即报名
+export const DanPresent = (data)=>http.post("/downOrder",data)
