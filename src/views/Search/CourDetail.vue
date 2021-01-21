@@ -28,9 +28,9 @@
       <!-- 收藏 -->
       <div class="head">
         <h3 v-html="reslist.info.title"></h3>
-        <span @click="shou(reslist.info.collect_id)">
+        <span @click="shou">
           <star
-            v-if="reslist.info.is_collect"
+            v-if="flag"
             theme="filled"
             size="24"
             fill="#f18e11"
@@ -91,7 +91,7 @@ export default {
       active: "",
       show: false,
       reslist: [],
-      showimage: false,
+      flag: false,
       list: [
         { title: "课程介绍", id: 1 },
         { title: "课程大纲", id: 2 },
@@ -114,6 +114,13 @@ export default {
         type: 1,
       }).then((res) => {
         console.log(res);
+        this.flag= !this.flag;
+        if(this.flag){
+          Toast('收藏成功');
+        }else{
+          Toast('取消收藏成功');
+        }
+        
       });
     },
     fen(option) {

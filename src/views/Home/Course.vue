@@ -49,7 +49,7 @@
         <van-dropdown-item title="筛选" ref="item">
           <div class="filter-box">
             <ul>
-              <li v-for="item in appCourseType" :key="item.id">{{ item.name }}</li>
+              <li v-for="item in appCourseType" @click="shai(item.id)" :key="item.id" :class="li2==item.id?'li2':''">{{ item.name }}</li>
             </ul>
           </div>
         </van-dropdown-item>
@@ -90,6 +90,7 @@ export default {
       loading: false,
       finished: false,
       page: 0,
+      li2: 0,
     }
   },
   methods: {
@@ -98,6 +99,7 @@ export default {
         page: ++this.page,
         limit: 10,
       }).then((res) => {
+        // console.log(res);
         this.list.push.apply(this.list, res.data.data.list)
         this.loading = false
         if (res.data.data.list.length === 0) {
@@ -108,6 +110,20 @@ export default {
     go(id) {
       this.$router.push({ path: "/courDetail", query: { id } })
     },
+
+    shai(id){
+      this.li2=id;
+      courseBasis({
+        page: 1,
+        limit: 10,
+        course_type: id,
+        is_vip: 0
+      }).then(res=>{
+        console.log(res);
+        this.list=res.data.data.list;
+        this.$refs.item.toggle()
+      })
+    }
   },
   created() {
     courseClassify().then((res) => {
@@ -222,8 +238,8 @@ export default {
   }
   .filter-box {
     width: 100%;
-    height: 3.4rem;
-    padding: 0.2rem 0 0 0.2rem;
+    height: 2.6rem;
+    padding: 0.4rem 0 0 0.3rem;
     ul {
       width: 100%;
       height: 100%;
@@ -243,6 +259,10 @@ export default {
         &:nth-child(4) {
           margin: 0;
         }
+      }
+      .li2{
+        background: #ebeefe;
+        color: #e60012;
       }
     }
   }

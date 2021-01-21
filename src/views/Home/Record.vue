@@ -14,7 +14,7 @@
           <div class="dv">
             <img src="../../assets/img/yueke.png" />
             <p>还没有待上课记录哦</p>
-            <button>立即约课</button>
+            <button @click="yue">立即约课</button>
           </div>
           <div class="attend" v-if="aa"></div>
         </li>
@@ -107,6 +107,9 @@ export default {
   },
   methods: {
     qie() {},
+    yue(){
+      this.$router.push({path:'/course'})
+    },
   },
 }
 </script>
