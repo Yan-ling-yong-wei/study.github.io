@@ -64,7 +64,7 @@ export default {
   height: 100%;
   .cont {
     width: 100%;
-    height: calc(100% - 09rem);
+    height: calc(100% - 0.9rem);
     ul {
       width: 100%;
       height: 100%;

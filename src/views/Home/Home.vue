@@ -113,7 +113,8 @@ export default {
       this.$router.push("/course")
     },
     onClickTutorship() {
-      this.$router.push("/Tutorship")
+      // this.$router.push("/Tutorship")
+      this.$router.push({path:'/attention'})
     },
     onClickCalendar() {
       this.$router.push("/Calendar")
