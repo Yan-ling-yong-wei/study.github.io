@@ -108,6 +108,17 @@ export default [
     path: "/setting",
     name: "setting",
     component: () => import("./Setting"),
+    meta:{
+      title:"设置",
+    },
+  },
+  {
+    path: "/setpwd",
+    name: "setpwd",
+    component: () => import("./SetPwd.vue"),
+    meta:{
+      title:"设置密码",
+    },
   },
   {
     path: "/Courses",

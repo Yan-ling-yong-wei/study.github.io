@@ -1,7 +1,7 @@
 <template>
   <div class="setting">
     <nav-header back title="设置" />
-    <div class="setPass">
+    <div class="setPass" @click="pass">
       设置密码
     </div>
     <div class="logout" @click="logOut">
@@ -9,7 +9,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { Toast } from "vant"
 import navHeader from "../../components/Header.vue"
@@ -23,6 +22,9 @@ export default {
         this.$router.push("/")
       }, 300)
     },
+    pass(){
+      this.$router.push({path:'/setpwd'})
+    }
   },
 }
 </script>

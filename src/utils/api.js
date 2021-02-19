@@ -56,8 +56,9 @@ export const getCollect = (data) => {
 //图片上传到服务器
 export const uploaderImg = (formData) => http.post("/public/img", formData)
 
-//发送验证码
+//发送获取验证码
 export const smsCode = (obj) => http.post("/smsCode", obj)
+
 //课程详情页数据
 export const getCourBas = (id) => http.get("/courseInfo/basis_id=" + id)
 
@@ -81,3 +82,9 @@ export const myStudy = (type) => http.get("/myStudy/" + type)
 
 //立即报名
 export const DanPresent = (data)=>http.post("/downOrder",data)
+
+//设置更改密码
+export const setPaswd = (data)=>http.post("/password",data)
+
+//获取三级联动
+export const setSJ = (id)=>(http).get("/sonArea/"+id)
