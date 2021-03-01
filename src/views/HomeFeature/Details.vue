@@ -145,7 +145,7 @@ export default {
       // console.log(res)
       this.flag = res.data.data.flag
       this.list = res.data.data.teacher
-      console.log(this.flag)
+      // console.log(this.flag)
     })
   },
 }

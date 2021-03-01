@@ -76,9 +76,10 @@ export default {
     // 按下搜索事件
     onEnter(val) {
       this.reslist = []
+      this.list=[]
       this.showList = true
       getSearch({
-        limit: 6,
+        limit: 5,
         page: 1,
         course_type: 0,
         keyWords: val,

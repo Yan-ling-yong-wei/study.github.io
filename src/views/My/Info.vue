@@ -24,7 +24,7 @@
       <li @click="birthShow = true">
         <span>出生日期</span><span>{{ info.birthday }}</span>
       </li>
-      <li @click="cityShow = true">
+      <li @click="cheng">
         <span>所在城市</span
         ><span>{{
           info.province_name +
@@ -61,7 +61,7 @@
     <van-popup v-model="cityShow" position="bottom">
       <van-area
         :area-list="areaList"
-        
+        :value="info.district_id+''"
         position="bottom"
         @cancel="cityShow = false"
         @confirm="cityChange"
@@ -98,7 +98,7 @@ export default {
   },
 
   created() {
-    this.fn();
+    this.getInfo();
   },
   methods: {
     // 上传文件
@@ -123,12 +123,12 @@ export default {
     },
 
     // // 获取三级联动json数据
-    // async getInfo() {
-    //   let { data } = await userInfo();
-    //   console.log(data);
-    //   this.info = data.data;
-    // //   this.currentDate = new Date(this.info.birthday);
-    // },
+    async getInfo() {
+      let { data } = await userInfo();
+      // console.log(data);
+      this.info = data.data;
+      this.currentDate = new Date(this.info.birthday);
+    },
 
     // 当时间发生改变
     changeDate(val) {
@@ -154,9 +154,9 @@ export default {
         this.cityShow = false;
         if (res.data.code === 200) {
           Toast("更新成功！");
-          // setTimeout(() => {
-          //   this.getInfo();
-          // }, 300);
+          setTimeout(() => {
+            this.getInfo();
+          }, 300);
         }
       });
     },
@@ -171,12 +171,18 @@ export default {
       }
     },
 
+    //点击切换城市
+    cheng(){
+      this.cityShow = true
+      this.fn()
+    },
+
     //三级联动初始化
     async fn(){
-      let { data } = await userInfo();
-      console.log(data);
-      this.info = data.data;
-      this.currentDate = new Date(this.info.birthday);
+      // let { data } = await userInfo();
+      // console.log(data);
+      // this.info = data.data;
+      // this.currentDate = new Date(this.info.birthday);
 
       // 省
       let { data:res } = await setSJ('0')
@@ -187,7 +193,7 @@ export default {
       this.areaList.province_list=sheng
 
       //市
-      let { data:res1 } = await setSJ( res.data[0].id)
+      let { data:res1 } = await setSJ( this.info.province_id?this.info.province_id:res.data[0].id)
       let shi={}
       res1.data.forEach(item=>{
         shi[item.id]=item.area_name
@@ -195,7 +201,7 @@ export default {
       this.areaList.city_list=shi
 
       //县
-      let { data:res2 } = await setSJ( res1.data[0].id)
+      let { data:res2 } = await setSJ( this.info.city_id?this.info.city_id:res1.data[0].id)
       let qu={}
       res2.data.forEach(item=>{
         qu[item.id]=item.area_name

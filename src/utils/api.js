@@ -65,6 +65,12 @@ export const getCourBas = (id) => http.get("/courseInfo/basis_id=" + id)
 //课程收藏
 export const getKeCollect = (data) => http.post("/collect", data)
 
+//课程取消收藏
+// export const setQushou =(data)=>http.put("/collect/cancel",data)
+export const setQushou = (id) => {
+  return http.put("/collect/cancel/" + id + "/1")
+}
+
 //搜索接口
 export const getSearch = (data) => {
   // console.log(data);
@@ -87,4 +93,7 @@ export const DanPresent = (data)=>http.post("/downOrder",data)
 export const setPaswd = (data)=>http.post("/password",data)
 
 //获取三级联动
-export const setSJ = (id)=>(http).get("/sonArea/"+id)
+export const setSJ = (id)=>http.get("/sonArea/"+id)
+
+//意见反馈
+export const getYi = (cont)=>http.post("/feedback",cont)

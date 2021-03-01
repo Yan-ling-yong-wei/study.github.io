@@ -28,14 +28,21 @@
       <!-- 收藏 -->
       <div class="head">
         <h3 v-html="reslist.info.title"></h3>
-        <span @click="shou">
+        <span>
           <star
-            v-if="flag"
+            v-if="reslist.info.is_collect"
             theme="filled"
             size="24"
             fill="#f18e11"
+            @click.native="quxiao"
           />
-          <star v-else theme="outline" size="24" fill="#f18e11" />
+          <star
+            v-else
+            theme="outline"
+            size="24"
+            fill="#f18e11"
+            @click.native="shou"
+          />
         </span>
         <p class="p1">
           共{{ reslist.info.is_collect }}课时 |
@@ -77,7 +84,7 @@
   </div>
 </template>
 <script>
-import { getCourBas, getKeCollect, DanPresent } from "@/utils/api";
+import { getCourBas, getKeCollect, DanPresent, setQushou } from "@/utils/api";
 import { Star, Left, ShareOne } from "@icon-park/vue";
 import { Toast } from "vant";
 export default {
@@ -91,7 +98,6 @@ export default {
       active: "",
       show: false,
       reslist: [],
-      flag: false,
       list: [
         { title: "课程介绍", id: 1 },
         { title: "课程大纲", id: 2 },
@@ -107,22 +113,29 @@ export default {
     };
   },
   methods: {
-    shou(id) {
+    //收藏
+    shou() {
       // console.log(id);
       getKeCollect({
-        course_basis_id: id,
+        course_basis_id: this.reslist.info.id,
         type: 1,
       }).then((res) => {
-        console.log(res);
-        this.flag= !this.flag;
-        if(this.flag){
-          Toast('收藏成功');
-        }else{
-          Toast('取消收藏成功');
-        }
-        
+        // console.log(res);
+        Toast("收藏成功");
+        this.shua()
       });
     },
+
+    //取消收藏
+    quxiao() {
+      // console.log(123);
+      setQushou(this.reslist.info.collect_id).then((res) => {
+        // console.log(res);
+        Toast("取消收藏成功");
+        this.shua()
+      });
+    },
+
     fen(option) {
       // console.log(option.name);
       this.$router.push({ path: "/qrCode", query: { name: option.name } });
@@ -143,13 +156,17 @@ export default {
     xue() {
       this.$router.push({ path: "/myStudy" });
     },
+
+    shua() {
+      getCourBas(this.$route.query.id).then((res) => {
+        console.log(res.data.data);
+        this.reslist = res.data.data;
+      });
+    },
   },
   created() {
     //   console.log(this.$route.query.id);
-    getCourBas(this.$route.query.id).then((res) => {
-      console.log(res.data.data);
-      this.reslist = res.data.data;
-    });
+    this.shua()
   },
 };
 </script>
