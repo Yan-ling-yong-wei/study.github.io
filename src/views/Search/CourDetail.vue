@@ -3,21 +3,11 @@
     <!-- 头部 -->
     <div class="hand">
       <div class="dv">
-        <left
-          theme="outline"
-          size="24"
-          fill="#333"
-          @click.native="$router.back()"
-        />
+        <left theme="outline" size="24" fill="#333" @click.native="$router.back()" />
       </div>
       <div class="dv">课程详情</div>
       <div class="dv">
-        <share-one
-          theme="outline"
-          size="24"
-          @click.native="show = true"
-          fill="#333"
-        />
+        <share-one theme="outline" size="24" @click.native="show = true" fill="#333" />
       </div>
     </div>
     <div class="cont" v-if="reslist.info">
@@ -36,18 +26,9 @@
             fill="#f18e11"
             @click.native="quxiao"
           />
-          <star
-            v-else
-            theme="outline"
-            size="24"
-            fill="#f18e11"
-            @click.native="shou"
-          />
+          <star v-else theme="outline" size="24" fill="#f18e11" @click.native="shou" />
         </span>
-        <p class="p1">
-          共{{ reslist.info.is_collect }}课时 |
-          {{ reslist.info.sales_num }}人已报名
-        </p>
+        <p class="p1">共{{ reslist.info.is_collect }}课时 | {{ reslist.info.sales_num }}人已报名</p>
         <p class="p2">{{ reslist.info.spell_price ? "元" : "免费" }}</p>
       </div>
       <!-- 团队 -->
@@ -64,17 +45,27 @@
       <van-tabs v-model="active" scrollspy sticky>
         <van-tab v-for="item in list" :title="item.title" :key="item.id">
           <h3>{{ item.title }}</h3>
+          <ul v-if="item.id === 3" class="comment">
+            <!-- {{ comment }} -->
+            <li v-for="el in comment" :key="el.id">
+              <div>
+                <img :src="el.avatar" alt="" />
+              </div>
+              <div class="center">
+                <div>{{ el.nickname }} <van-rate v-model="el.grade" size="small" /></div>
+                <div>{{ el.content }}</div>
+              </div>
+              <div>
+                {{ el.created_at | setTime }}
+              </div>
+            </li>
+          </ul>
         </van-tab>
       </van-tabs>
     </div>
     <!-- 分享弹出层 -->
     <div>
-      <van-share-sheet
-        v-model="show"
-        @select="fen"
-        title="立即分享给好友"
-        :options="options"
-      />
+      <van-share-sheet v-model="show" @select="fen" title="立即分享给好友" :options="options" />
     </div>
     <!-- 底部报名 -->
     <div class="foot" v-if="reslist.info">
@@ -84,9 +75,9 @@
   </div>
 </template>
 <script>
-import { getCourBas, getKeCollect, DanPresent, setQushou } from "@/utils/api";
-import { Star, Left, ShareOne } from "@icon-park/vue";
-import { Toast } from "vant";
+import { getCourBas, getKeCollect, DanPresent, setQushou, courseComment } from "@/utils/api"
+import { Star, Left, ShareOne } from "@icon-park/vue"
+import { Toast } from "vant"
 export default {
   components: {
     Star,
@@ -110,7 +101,8 @@ export default {
           { name: "QQ", icon: "qq" },
         ],
       ],
-    };
+      comment: {},
+    }
   },
   methods: {
     //收藏
@@ -120,25 +112,26 @@ export default {
         course_basis_id: this.reslist.info.id,
         type: 1,
       }).then((res) => {
-        // console.log(res);
-        Toast("收藏成功");
-        this.shua()
-      });
+        console.log(res)
+        // window.location()
+        Toast("收藏成功")
+        this.get_info()
+      })
     },
 
     //取消收藏
     quxiao() {
       // console.log(123);
       setQushou(this.reslist.info.collect_id).then((res) => {
-        // console.log(res);
-        Toast("取消收藏成功");
-        this.shua()
-      });
+        console.log(res)
+        Toast("取消收藏成功")
+        this.get_info()
+      })
     },
 
     fen(option) {
       // console.log(option.name);
-      this.$router.push({ path: "/qrCode", query: { name: option.name } });
+      this.$router.push({ path: "/qrCode", query: { name: option.name } })
     },
     dan(id) {
       // this.$router.push({path:"/danPresent"})
@@ -149,26 +142,50 @@ export default {
         type: 10,
         user_coupon_id: 0,
       }).then((res) => {
-        console.log(res);
-        Toast(res.msg);
-      });
+        console.log(res)
+        Toast(res.msg)
+      })
     },
     xue() {
-      this.$router.push({ path: "/myStudy" });
+      this.$router.push({
+        path: "/studyDetail",
+        query: {
+          course_id: this.$route.query.id,
+        },
+      })
     },
 
-    shua() {
+    get_info() {
       getCourBas(this.$route.query.id).then((res) => {
-        console.log(res.data.data);
-        this.reslist = res.data.data;
-      });
+        console.log(res.data.data)
+        this.reslist = res.data.data
+      })
     },
   },
   created() {
     //   console.log(this.$route.query.id);
-    this.shua()
+    // getCourBas(this.$route.query.id).then((res) => {
+    //   console.log(res.data.data)
+    //   this.reslist = res.data.data
+    // })
+
+    this.get_info()
+
+    courseComment({
+      id: "200",
+      limit: 10,
+      page: 1,
+    }).then((res) => {
+      console.log(res)
+      this.comment = res.list
+    })
   },
-};
+  filters: {
+    setTime(val) {
+      return new Date(val * 1000).toLocaleString()
+    },
+  },
+}
 </script>
 <style lang="scss" scoped>
 .courDetail {
@@ -314,6 +331,22 @@ export default {
     border: 1px solid red;
     text-align: center;
     line-height: 2rem;
+  }
+}
+.comment {
+  li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.28rem;
+    margin: 0.2rem;
+    .center {
+      flex-grow: 1;
+      margin: 0 0.2rem;
+    }
+    img {
+      width: 0.6rem;
+      height: 0.6rem;
+    }
   }
 }
 </style>

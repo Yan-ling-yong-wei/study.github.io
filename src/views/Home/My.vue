@@ -23,7 +23,7 @@
         </div>
         <div class="mine">
           <div class="my-study item" @click="$router.push('/myStudy')">
-            <p class="count">0</p>
+            <p class="count">{{ info.courses }}</p>
             <p class="name">我的课程</p>
             <p class="note">已购课程学习</p>
           </div>
@@ -129,7 +129,10 @@
     </ul>
 
     <van-overlay :show="show" @click.self="show = false">
-      <img src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png" alt="" />
+      <img
+        src="https://msmk2019.oss-cn-shanghai.aliyuncs.com/uploads/image/20210pfA32rjGC1610612412.png"
+        alt=""
+      />
     </van-overlay>
   </div>
 </template>
@@ -171,9 +174,9 @@ export default {
     onClickCourses() {
       this.$router.push("/Courses")
     },
-    Appointment(){
+    Appointment() {
       this.$router.push("/Appointment")
-    }
+    },
   },
   created() {
     getUCenterInfo().then((res) => {

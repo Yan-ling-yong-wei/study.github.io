@@ -3,32 +3,48 @@
     <!-- 搜索输入框 -->
     <div class="searchBox">
       <div class="back">
-        <left theme="two-tone" size=".44rem" :fill="['#aaa', '#fff']" @click.native="$router.back()" />
+        <left
+          theme="two-tone"
+          size=".44rem"
+          :fill="['#aaa', '#fff']"
+          @click.native="$router.back()"
+        />
       </div>
       <div class="search">
         <search theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" />
-        <input type="text" v-model="value" placeholder="请输入关键字" @keydown.enter="onEnter(value)" />
+        <input
+          type="text"
+          v-model="value"
+          placeholder="请输入关键字"
+          @keydown.enter="onEnter(value)"
+        />
       </div>
-      <div class="text">
+      <!-- <div class="text">
         <span>取消</span>
-      </div>
+      </div> -->
     </div>
     <!-- 历史搜索记录以及删除 -->
     <div class="history" v-if="!showList">
       <h3>
         <span>历史搜索</span>
-        <delete theme="two-tone" size=".28rem" :fill="['#aaa', '#fff']" @click.native="history = []" />
+        <delete
+          theme="two-tone"
+          size=".28rem"
+          :fill="['#aaa', '#fff']"
+          @click.native="history = []"
+        />
       </h3>
       <div class="list">
-        <div v-for="(item, index) in history" :key="index">
+        <div v-for="(item, index) in history" :key="index" @click="click_history(item)">
           {{ item }}
+          <span @click.stop="delFn(index)">x</span>
         </div>
       </div>
     </div>
     <!-- 清空历史记录 -->
-    <div class="btn" @click="hitsory = []" v-if="!showList">
+    <!-- <div class="btn" @click="hitsory = []" v-if="!showList">
       清空历史记录
-    </div>
+    </div> -->
     <!-- 搜索后的页面 -->
     <div class="dataList" v-if="showList">
       <div class="page">
@@ -46,11 +62,11 @@
         </div>
       </div>
     </div>
-    <ul v-if="reslist">
+    <!-- <ul v-if="reslist">
       <li v-for="(item, index) in reslist" :key="index" @click="onEnter(item.title)">
         {{ item.title }}
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 <script>
@@ -76,10 +92,9 @@ export default {
     // 按下搜索事件
     onEnter(val) {
       this.reslist = []
-      this.list=[]
       this.showList = true
       getSearch({
-        limit: 5,
+        limit: 6,
         page: 1,
         course_type: 0,
         keyWords: val,
@@ -92,6 +107,15 @@ export default {
     go(id) {
       this.$router.push({ path: "/courDetail", query: { id } })
     },
+    click_history(item) {
+      // console.log(item)
+      this.value = item
+      this.onEnter(item)
+    },
+    delFn(index){
+      // console.log(index);
+      this.history.splice(index,1)
+    }
   },
   watch: {
     value(val) {
@@ -100,6 +124,7 @@ export default {
         this.list = []
         this.showList = false
       } else {
+        this.showList = true
         this.reslist = this.listData.filter((item) => {
           return item.title.includes(val)
         })
@@ -170,11 +195,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     div {
-      padding: 0.1rem 0.16rem;
+      padding: 0.1rem 0.2rem;
       background-color: #f7f7f7;
       border-radius: 0.2rem;
       margin-bottom: 0.1rem;
       margin-right: 0.2rem;
+      position: relative;
+      span{
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
     }
   }
 }

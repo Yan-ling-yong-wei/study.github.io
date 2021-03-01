@@ -86,17 +86,17 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err)
 }
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title
-  if (!sessionStorage.getItem("token")) {
-    if (to.matched.some((item) => item.meta.needLogin)) {
-      Toast.fail("请先登录！")
-      next("/login")
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   document.title = to.meta.title
+//   if (!sessionStorage.getItem("token")) {
+//     if (to.matched.some((item) => item.meta.needLogin)) {
+//       Toast.fail("请先登录！")
+//       next("/login")
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 export default router

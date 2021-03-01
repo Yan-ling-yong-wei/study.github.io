@@ -21,9 +21,7 @@
         :rules="[{ required: true, message: '密码格式错误' }]"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit"
-          >登录</van-button
-        >
+        <van-button round block type="info" native-type="submit">登录</van-button>
       </div>
     </van-form>
     <div class="foot">
@@ -33,9 +31,9 @@
   </div>
 </template>
 <script>
-import { Toast } from "vant";
-import { mapMutations } from "vuex";
-import { login } from "@/utils/api";
+import { Toast } from "vant"
+import { mapMutations } from "vuex"
+import { login } from "@/utils/api"
 export default {
   data() {
     return {
@@ -44,30 +42,35 @@ export default {
         password: "6666666666",
         type: 1,
       },
-    };
+    }
   },
 
   methods: {
     onClickRegister() {
-      this.$router.push("/Register");
+      this.$router.push("/Register")
     },
-    go(){
-      this.$router.push({path:'/Retrieve'})
+    go() {
+      this.$router.push({ path: "/Retrieve" })
     },
     ...mapMutations(["setUser"]),
     async userLogin() {
-      let { data } = await login(this.user);
+      let { data } = await login(this.user)
       if (data.code === 200) {
-        sessionStorage.setItem("userId", data.data.id);
-        sessionStorage.setItem("token", data.data.remember_token);
-        Toast.success("登录成功！");
+        sessionStorage.setItem("userId", data.data.id)
+        sessionStorage.setItem("token", data.data.remember_token)
+        Toast.success("登录成功！")
         setTimeout(() => {
-          this.$router.push("/");
-        }, 500);
+          if (localStorage.getItem("currentRoute")) {
+            this.$router.push(localStorage.getItem("currentRoute"))
+            localStorage.removeItem('currentRoute')
+          } else {
+            this.$router.push("/")
+          }
+        }, 500)
       }
     },
   },
-};
+}
 </script>
 <style lang="scss" scoped>
 #login {

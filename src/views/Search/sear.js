@@ -29,5 +29,13 @@ export default [{
     meta:{
       title:"确认订单",
     }
+  },
+  {
+    path:'/studyDetail',
+    name:'studyDetail',
+    component:()=>import('./studyDetail.vue'),
+    meta:{
+      title:"立即学习",
+    }
   }
 ]

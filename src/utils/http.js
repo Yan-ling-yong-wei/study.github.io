@@ -1,5 +1,5 @@
 import axios from "axios"
-import vueRouter from "vue-router"
+import vueRouter from "../router/index"
 import { Guid } from "@/utils/guid.js"
 import { Toast } from "vant"
 const http = axios.create({
@@ -40,8 +40,15 @@ http.interceptors.response.use(
     if (res.data.code === 200) {
       reqCount--
       if (reqCount === 0) Toast.clear()
+    } else if (res.data.code == 202 ) {
+      Toast.clear()
+      reqCount = 0
+      Toast.fail(res.data.msg)
+      localStorage.setItem("currentRoute", vueRouter.currentRoute.path)
+      vueRouter.push("/login")
     } else {
       Toast.clear()
+      reqCount = 0
       Toast.fail(res.data.msg)
     }
     return res

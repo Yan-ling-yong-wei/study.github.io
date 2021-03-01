@@ -1,8 +1,8 @@
 <template>
     <div class="qrCode">
         <Header :title="$route.query.name+'分享'" back></Header>
-        <qriously class="dv" :value="initQCode" :size="138"/>
-        <!-- <div class="image_contaner"><img src="../../assets/img/二维码.jpg" alt=""></div> -->
+        <!-- <qriously class="dv" :value="initQCode" :size="138"/> -->
+        <div class="image_contaner"><img src="../../assets/img/二维码.jpg" alt=""></div>
     </div>
 </template>
 <script>

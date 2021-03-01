@@ -66,7 +66,7 @@ export const getCourBas = (id) => http.get("/courseInfo/basis_id=" + id)
 export const getKeCollect = (data) => http.post("/collect", data)
 
 //课程取消收藏
-// export const setQushou =(data)=>http.put("/collect/cancel",data)
+// export const setQushou = (data) => http.post("/collect/cancel", data)
 export const setQushou = (id) => {
   return http.put("/collect/cancel/" + id + "/1")
 }
@@ -87,13 +87,27 @@ export const getSearch = (data) => {
 export const myStudy = (type) => http.get("/myStudy/" + type)
 
 //立即报名
-export const DanPresent = (data)=>http.post("/downOrder",data)
+export const DanPresent = (data) => http.post("/order/downOrder", data)
 
 //设置更改密码
-export const setPaswd = (data)=>http.post("/password",data)
+export const setPaswd = (data) => http.post("/password", data)
 
 //获取三级联动
-export const setSJ = (id)=>http.get("/sonArea/"+id)
+export const setSJ = (id) => http.get("/sonArea/" + id)
 
-//意见反馈
-export const getYi = (cont)=>http.post("/feedback",cont)
+//获取课程评价
+export const courseComment = async (data) => {
+  let { data: res } = await http.post("/courseComment", data)
+  return res.data
+}
+
+// myStudy/comment/200
+export const getComment = async (id) => {
+  let { data: res } = await http.get("/myStudy/comment/" + id)
+  return res.data
+}
+
+export const setComment = async (obj) => {
+  let { data: res } = await http.post("/myStudy/comment/", obj)
+  return res.data
+}
